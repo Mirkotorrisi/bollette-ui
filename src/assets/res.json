@@ -1,0 +1,52 @@
+{
+  "rootUrl": "https://bollette-server.herokuapp.com/",
+  "faClasses": {
+    "won": "fas fa-check-circle",
+    "lost": "fas fa-times",
+    "ongoing": "fas fa-clock"
+  },
+  "colorClasses": {
+    "won": "green",
+    "lost": "red",
+    "ongoing": "white"
+  },
+  "colorNames": {
+    "won": "#26b821",
+    "lost": "#ff0000",
+    "ongoing": "#ff5100"
+  },
+  "marketNames": {
+    "premier_league": "PREMIER LEAGUE",
+    "serie_a": "SERIE A",
+    "serie_b": "SERIE B",
+    "ligamax": "LIGA MX",
+    "bundesliga": "BUNDESLIGA",
+    "eredivisie": "EREDIVISIE",
+    "primeira_liga": "PRIMEIRA LIGA",
+    "la_liga": "LA LIGA",
+    "ligue_one": "LIGUE ONE",
+    "champions_league": "CHAMPIONS LEAGUE",
+    "europa_league": "EUROPA LEAGUE"
+  },
+  "flags": {
+    "premier_league": "eng.png",
+    "serie_a": "ita.png",
+    "serie_b": "ita.png",
+    "ligamax": "mexico.png",
+    "bundesliga": "germany.png",
+    "eredivisie": "netherlands.png",
+    "primeira_liga": "portugal.png",
+    "la_liga": "spain.png",
+    "ligue_one": "france.png",
+    "champions_league": "european-union.png",
+    "europa_league": "european-union.png"
+  },
+  "tech_stack_img": {
+    "react": "react.png",
+    "redux": "redux.png",
+    "node": "node.png",
+    "mysql": "mysql.png",
+    "htmlcss": "htmlcss.png",
+    "python": "python.png"
+  }
+}
