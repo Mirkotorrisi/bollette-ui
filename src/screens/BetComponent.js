@@ -1,5 +1,6 @@
 import { BetListView } from "../components/betListView";
 import { TotalComponent } from "../components/totalComponent";
+import { RankingComponent } from "../components/RankingComponent";
 import { useState } from "react";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import { marketNames, flags } from "../assets/res.json";
@@ -51,7 +52,10 @@ export const BetComponent = () => {
         )}
 
         <BetListView champhionsip={championship} />
-        <TotalComponent />
+        <>
+          <TotalComponent />
+          <RankingComponent />
+        </>
       </div>
     </section>
   );

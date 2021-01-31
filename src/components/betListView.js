@@ -46,30 +46,33 @@ export const BetListView = ({ champhionsip }) => {
         closeModal={() => setmodal({ show: false })}
       />
       <div className="betlist_container">
-        <caption className="market_type_buttons">
-          <button
-            className={
-              market === "totals"
-                ? "market_button_focused"
-                : "market_buttons_button"
-            }
-            onClick={() => setMarket("totals")}
-          >
-            Over/under 2.5
-          </button>
-          <button
-            className={
-              market === "h2h"
-                ? "market_button_focused"
-                : "market_buttons_button"
-            }
-            onClick={() => setMarket("h2h")}
-          >
-            Final result (1,X,2)
-          </button>
-        </caption>
         <table className="bet_buttons">
+          <caption className="market_type_buttons">
+            <button
+              className={
+                market === "totals"
+                  ? "market_button_focused"
+                  : "market_buttons_button"
+              }
+              style={{ borderRadius: "15px 0 0 0" }}
+              onClick={() => setMarket("totals")}
+            >
+              Over/under 2.5
+            </button>
+            <button
+              className={
+                market === "h2h"
+                  ? "market_button_focused"
+                  : "market_buttons_button"
+              }
+              style={{ borderRadius: "0 15px 0 0" }}
+              onClick={() => setMarket("h2h")}
+            >
+              Final result (1,X,2)
+            </button>
+          </caption>
           <thead className="bet_buttons_head">
+            <tr className="market_type_buttons"></tr>
             <tr>
               <th>Event</th>
               <th>Start</th>
@@ -88,6 +91,7 @@ export const BetListView = ({ champhionsip }) => {
                 </>
               )}
             </tr>
+            <caption className="market_type_buttons"></caption>
           </thead>
 
           <tbody>

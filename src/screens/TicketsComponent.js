@@ -49,19 +49,34 @@ export const TicketsComponent = () => {
         <h1 className="login_title">{user.username} Tickets</h1>
         <div className="filter_buttons">
           <button
-            className="market_buttons_button"
+            key={"ongoing"}
+            className={
+              "ongoing" === filtered[0].bolletta_status
+                ? "market_button_focused"
+                : "market_buttons_button"
+            }
             onClick={() => filterTickets("ongoing")}
           >
             OPEN
           </button>
           <button
-            className="market_buttons_button"
+            key={"won"}
+            className={
+              "won" === filtered[0].bolletta_status
+                ? "market_button_focused"
+                : "market_buttons_button"
+            }
             onClick={() => filterTickets("won")}
           >
             WON
           </button>
           <button
-            className="market_buttons_button"
+            key={"lost"}
+            className={
+              "lost" === filtered[0].bolletta_status
+                ? "market_button_focused"
+                : "market_buttons_button"
+            }
             onClick={() => filterTickets("lost")}
           >
             LOST

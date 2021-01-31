@@ -103,3 +103,17 @@ export const getAccountSum = async (token) => {
   });
   return res;
 };
+export const getRankingWins = async () => {
+  const res = await axiosInstance({
+    method: "get",
+    url: rootUrl + "ranking/multiplier",
+  });
+  return res;
+};
+export const getRankingBalance = async () => {
+  const res = await axiosInstance({
+    method: "get",
+    url: rootUrl + "ranking/",
+  });
+  return res;
+};

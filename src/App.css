@@ -1,6 +1,27 @@
 * {
   font-family: Nunito;
 }
+/*SCROLLBAR*/
+html {
+  --scrollbarBG: #38383800;
+  --thumbBG: #ff5100;
+}
+body::-webkit-scrollbar {
+  width: 15px;
+}
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+
 a {
   text-decoration: none;
   color: #ff5100;
@@ -59,9 +80,6 @@ section {
   transition: all 0.5s;
 }
 
-.showMarkets:hover {
-}
-
 .flag_icon {
   width: 20px;
 }
@@ -72,7 +90,11 @@ section {
 }
 .market_type_buttons {
   position: relative;
-  top: 0;
+  left: 20%;
+}
+.market_type_buttons button {
+  display: inline;
+  width: 100px;
 }
 .market_buttons_button,
 .login_submit {
@@ -814,4 +836,86 @@ section {
   .login_title {
     margin-top: 20%;
   }
+}
+/*RANKING CONTAINER*/
+.ranking_container {
+  color: #f2f2f2;
+  font-weight: 900;
+}
+.ranking_container {
+  max-height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.ranking_container table td:first-child {
+  color: #5a5a5a;
+  border-bottom: 1px solid #ff5100;
+  font-weight: 900;
+}
+.ranking_container::-webkit-scrollbar {
+  width: 15px;
+}
+.ranking_container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+.ranking_container::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+.ranking_container::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+.ranking_container::-webkit-scrollbar-arrow {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+/* Scrollbar style for Chrome */
+/* Buttons */
+::-webkit-scrollbar-button {
+  border-style: solid;
+  height: 16px;
+  width: 16px;
+}
+
+/* Up */
+::-webkit-scrollbar-button:vertical:decrement {
+  border-width: 0 7px 14px 7px;
+  border-color: transparent transparent #404040 transparent;
+}
+
+::-webkit-scrollbar-button:vertical:decrement:hover {
+  border-color: transparent transparent #505050 transparent;
+}
+
+/* Down */
+::-webkit-scrollbar-button:vertical:increment {
+  border-width: 14px 7px 0 7px;
+  border-color: #404040 transparent transparent transparent;
+}
+
+::-webkit-scrollbar-button:vertical:increment:hover {
+  border-color: #505050 transparent transparent transparent;
+}
+
+/* Left */
+::-webkit-scrollbar-button:horizontal:decrement {
+  border-width: 7px 14px 7px 0;
+  border-color: transparent #404040 transparent transparent;
+}
+
+::-webkit-scrollbar-button:horizontal:decrement:hover {
+  border-color: transparent #505050 transparent transparent;
+}
+
+/* Right */
+::-webkit-scrollbar-button:horizontal:increment {
+  border-width: 7px 0 7px 14px;
+  border-color: transparent transparent transparent #404040;
+}
+
+::-webkit-scrollbar-button:horizontal:increment:hover {
+  border-color: transparent transparent transparent #505050;
 }
