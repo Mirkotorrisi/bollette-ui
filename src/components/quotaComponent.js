@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { RemoveBolletta, GetBolletta } from "../redux/actions";
-export const QuotaComponent = ({ betQuota, matchNumber, start }) => {
+export const QuotaComponent = ({ market, betQuota, matchNumber, start }) => {
   const data = useSelector((state) => state.ticketReducer.data);
   const ticketSelected = data.ticket?.find(
     ({ teams }) =>
@@ -11,8 +11,6 @@ export const QuotaComponent = ({ betQuota, matchNumber, start }) => {
   const submitOrRemoveBet = (sign) => {
     if (ticketSelected) {
       if (ticketSelected.result === sign) {
-        console.log(ticketSelected);
-        console.log(data.ticket.indexOf(ticketSelected));
         RemoveBolletta(
           data.ticket.indexOf(ticketSelected),
           data.checkout?.ticket_id
@@ -39,22 +37,39 @@ export const QuotaComponent = ({ betQuota, matchNumber, start }) => {
         {start.replace("LIVE", "")}{" "}
         {start.includes("LIVE") && <span className="live_tick">'</span>}
       </td>
-      {["1", "X", "2"].map((sign, index) => (
-        <td id={`${sign}-${index}`}>
-          <button
-            className={
-              ticketSelected?.result === sign
-                ? "button_odd_clicked"
-                : "button_odd"
-            }
-            onClick={() => {
-              submitOrRemoveBet(sign);
-            }}
-          >
-            {betQuota.odds[sign]}
-          </button>
-        </td>
-      ))}
+      {market === "h2h"
+        ? ["1", "X", "2"].map((sign, index) => (
+            <td id={`${sign}-${index}`}>
+              <button
+                className={
+                  ticketSelected?.result === sign
+                    ? "button_odd_clicked"
+                    : "button_odd"
+                }
+                onClick={() => {
+                  submitOrRemoveBet(sign);
+                }}
+              >
+                {betQuota.odds[sign]}
+              </button>
+            </td>
+          ))
+        : ["over", "under"].map((sign, index) => (
+            <td id={`${sign}-${index}`}>
+              <button
+                className={
+                  ticketSelected?.result === sign
+                    ? "button_odd_clicked"
+                    : "button_odd"
+                }
+                onClick={() => {
+                  submitOrRemoveBet(sign);
+                }}
+              >
+                {betQuota.odds[sign]}
+              </button>
+            </td>
+          ))}
     </tr>
   );
 };

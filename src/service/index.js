@@ -39,8 +39,10 @@ export const removeBet = async (match, ticket_id) => {
   return res;
 };
 
-export const fetchBetList = async (market) => {
-  const res = await axios.get(rootUrl + "championships/" + market);
+export const fetchBetList = async (championship, market) => {
+  const res = await axios.get(
+    rootUrl + "championships/" + championship + "/" + market
+  );
 
   return res.data;
 };
