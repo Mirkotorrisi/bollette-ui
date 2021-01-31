@@ -48,39 +48,22 @@ export const TicketsComponent = () => {
       <section className="tickets_component">
         <h1 className="login_title">{user.username} Tickets</h1>
         <div className="filter_buttons">
-          <button
-            key={"ongoing"}
-            className={
-              "ongoing" === filtered[0].bolletta_status
-                ? "market_button_focused"
-                : "market_buttons_button"
-            }
-            onClick={() => filterTickets("ongoing")}
-          >
-            OPEN
-          </button>
-          <button
-            key={"won"}
-            className={
-              "won" === filtered[0].bolletta_status
-                ? "market_button_focused"
-                : "market_buttons_button"
-            }
-            onClick={() => filterTickets("won")}
-          >
-            WON
-          </button>
-          <button
-            key={"lost"}
-            className={
-              "lost" === filtered[0].bolletta_status
-                ? "market_button_focused"
-                : "market_buttons_button"
-            }
-            onClick={() => filterTickets("lost")}
-          >
-            LOST
-          </button>
+          {["ongoing", "lost", "won"].map((i) => {
+            return (
+              <button
+                key={i}
+                className={
+                  filtered[0]?.bolletta_status &&
+                  filtered[0]?.bolletta_status === i
+                    ? "market_button_focused"
+                    : "market_buttons_button"
+                }
+                onClick={() => filterTickets(i)}
+              >
+                {i}
+              </button>
+            );
+          })}
         </div>
         <div className="tickets_container">
           {filtered &&
