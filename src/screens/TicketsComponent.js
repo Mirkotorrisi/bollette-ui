@@ -53,8 +53,7 @@ export const TicketsComponent = () => {
               <button
                 key={i}
                 className={
-                  filtered[0]?.bolletta_status &&
-                  filtered[0]?.bolletta_status === i
+                  filtered && filtered[0]?.bolletta_status === i
                     ? "market_button_focused"
                     : "market_buttons_button"
                 }
