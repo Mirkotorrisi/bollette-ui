@@ -8,6 +8,7 @@ export const TicketsComponent = () => {
   const [filtered, setFiltered] = useState();
   const [modal, setmodal] = useState({ show: false, content: "" });
   const user = useSelector((state) => state.userReducer);
+
   const filterTickets = async (status) => {
     try {
       const res = await getTickets();

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Modal from "./Modal";
+import useWindowDimensions from "../utils/useWindowDimensions";
 
 import {
   RemoveBolletta,
@@ -11,7 +12,8 @@ import { submitCheckout } from "../service";
 
 export const TotalComponent = () => {
   const user = useSelector((state) => state.userReducer);
-
+  const { height, width } = useWindowDimensions();
+  const [showTotalContainer, setShowTotalContainer] = useState(false);
   const data = useSelector((state) => state.ticketReducer.data);
   let ticket_id = data.checkout ? data.checkout.ticket_id : null;
   const [sum, setSum] = useState(2);
@@ -53,7 +55,22 @@ export const TotalComponent = () => {
         status={modal.status}
         closeModal={() => setmodal({ show: false })}
       />
-      <div className="total_container">
+
+      <div
+        className="total_container"
+        style={width < 720 ? (showTotalContainer ? {} : { height: 25 }) : {}}
+      >
+        {width < 960 && (
+          <button
+            className="show_total_container_btn"
+            onClick={() => setShowTotalContainer(!showTotalContainer)}
+            style={{
+              animation: `superglow ${data.ticket?.length}s`,
+            }}
+          >
+            Checkout
+          </button>
+        )}
         {data.ticket?.map((bet, index) => {
           return (
             <div className="total_item" key={bet.teams[0] + "-" + bet.teams[1]}>
