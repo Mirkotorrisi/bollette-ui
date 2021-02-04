@@ -139,8 +139,8 @@ export const CreditsComponent = () => {
       </div>
       <div className="tech_cont">
         <h1 className="white">
-          Click <a href="https://github.com/Mirkotorrisi/bollette">here</a> to
-          see source code
+          Click <a href="https://github.com/Mirkotorrisi/bollette-ui">here</a>{" "}
+          to see source code
         </h1>
       </div>
     </section>
