@@ -1,12 +1,12 @@
 import { placeBet, removeBet } from "../service";
 import store from "../store";
-export const GetBolletta = async (matchNumber, result, ticket_id) => {
+export const GetBolletta = (matchNumber, result, ticket_id) => {
   store.dispatch({
     type: "BOLLETTA",
     payload: placeBet(matchNumber, result, ticket_id),
   });
 };
-export const RemoveBolletta = async (matchNumber, ticket_id) => {
+export const RemoveBolletta = (matchNumber, ticket_id) => {
   store.dispatch({
     type: "BOLLETTA",
     payload: removeBet(matchNumber, ticket_id),

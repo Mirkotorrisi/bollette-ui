@@ -139,8 +139,9 @@ export const CreditsComponent = () => {
       </div>
       <div className="tech_cont">
         <h1 className="white">
-          Click <a href="https://github.com/Mirkotorrisi/bollette-ui">here</a>{" "}
-          to see source code
+          Take a look at source code: <a href="https://github.com/Mirkotorrisi/bollette-ui">React App (UI)</a> -
+          <a href="https://github.com/Mirkotorrisi/bollette-server">Express Server</a>
+          
         </h1>
       </div>
     </section>
