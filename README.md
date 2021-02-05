@@ -1,6 +1,5 @@
 # bollette-ui
 React UI for my betting web app
-#BOLLETTE UI
 
 User Interface made with React and Redux in JavaScript.
 
