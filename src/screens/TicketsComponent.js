@@ -11,6 +11,7 @@ export const TicketsComponent = () => {
 
   const filterTickets = async (status) => {
     try {
+      setFiltered();
       const res = await getTickets();
       setFiltered(
         res.data
@@ -66,7 +67,7 @@ export const TicketsComponent = () => {
           })}
         </div>
         <div className="tickets_container">
-          {filtered &&
+          {filtered ? (
             filtered.map(
               ({ ticket_id, bolletta_status, max_win, bet_import, ticket }) => {
                 return (
@@ -110,7 +111,10 @@ export const TicketsComponent = () => {
                   </table>
                 );
               }
-            )}
+            )
+          ) : (
+            <i className="fas fa-futbol infinite"></i>
+          )}
         </div>
       </section>
     </>

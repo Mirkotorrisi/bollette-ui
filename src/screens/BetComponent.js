@@ -7,13 +7,15 @@ import { marketNames, flags } from "../assets/res.json";
 export const BetComponent = () => {
   const [championship, setChampionship] = useState("serie_a");
   const [showMarkets, setshowMarkets] = useState(false);
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   return (
     <section className="bet_component_container">
       <h1 className="login_title">{championship}</h1>
       <div className="bet_component">
-        <div className={width < 980 ? "market_buttons fixed" : ""}>
+        <div
+          className={width < 980 ? "market_buttons fixed" : "market_buttons"}
+        >
           <div className={width < 980 ? (showMarkets ? "show" : "hide") : ""}>
             {Object.keys(marketNames).map((key) => {
               return (
@@ -52,10 +54,9 @@ export const BetComponent = () => {
         )}
 
         <BetListView champhionsip={championship} />
-        <>
-          <TotalComponent />
-          <RankingComponent />
-        </>
+        <TotalComponent />
+
+        <RankingComponent />
       </div>
     </section>
   );

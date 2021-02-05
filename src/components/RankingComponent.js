@@ -6,23 +6,26 @@ export const RankingComponent = () => {
   const [ranktype, setRankType] = useState("balance");
   const [modal, setmodal] = useState({ show: false, content: "" });
 
-  useEffect(async () => {
-    try {
-      const res =
-        ranktype === "balance"
-          ? await getRankingBalance()
-          : await getRankingWins();
-      setRanking(res.data);
-    } catch (err) {
-      if (err.response) {
-        setmodal({
-          title: "ERROR",
-          show: true,
-          status: `${err.response.status}`,
-          error: `${err.response.data}`,
-        });
+  useEffect(() => {
+    const fetchRanking = async () => {
+      try {
+        const res =
+          ranktype === "balance"
+            ? await getRankingBalance()
+            : await getRankingWins();
+        setRanking(res.data);
+      } catch (err) {
+        if (err.response) {
+          setmodal({
+            title: "ERROR",
+            show: true,
+            status: `${err.response.status}`,
+            error: `${err.response.data}`,
+          });
+        }
       }
-    }
+    };
+    fetchRanking();
   }, [ranktype]);
   return (
     <>
@@ -36,7 +39,7 @@ export const RankingComponent = () => {
         status={modal.status}
         closeModal={() => setmodal({ show: false })}
       />
-      <div className="ranking_container">
+      <div className="ranking_container" style={{ marginTop: "10%" }}>
         <table className="bet_buttons">
           <caption className="market_type_buttons">
             {["balance", "max win"].map((i) => {
@@ -47,6 +50,7 @@ export const RankingComponent = () => {
                       ? "market_button_focused"
                       : "market_buttons_button"
                   }
+                  style={{ display: "inline", width: 80 }}
                   onClick={() => setRankType(i)}
                 >
                   {i}
@@ -55,14 +59,16 @@ export const RankingComponent = () => {
             })}
           </caption>
           <thead>
-            <th>username</th>
-            <th>{ranktype}</th>
+            <tr>
+              <th>username</th>
+              <th>{ranktype}</th>
+            </tr>
           </thead>
           <tbody>
             {ranking &&
-              ranking?.map(({ username, account_sum, max_win }) => {
+              ranking?.map(({ username, account_sum, max_win }, index) => {
                 return (
-                  <tr>
+                  <tr key={username + index}>
                     <td>{username}</td>
                     <td>
                       {account_sum}

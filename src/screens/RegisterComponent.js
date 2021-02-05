@@ -10,6 +10,7 @@ export const RegisterComponent = () => {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [loading, setloading] = useState(false);
   const user = useSelector((state) => state.userReducer);
   const history = useHistory();
   useEffect(() => {
@@ -17,12 +18,15 @@ export const RegisterComponent = () => {
   }, [user]);
   const handleSubmit = async () => {
     if (password === repeatPassword) {
+      setloading(true);
       try {
         const res = await register(username, email, password);
         localStorage.setItem("token", res.headers["x-auth-token"]);
         GetUser(res.data);
+        setloading(false);
       } catch ({ response }) {
         setErrors(response.data.split("-"));
+        setloading(false);
       }
     } else setErrors(["password mismatch"]);
   };
@@ -31,6 +35,8 @@ export const RegisterComponent = () => {
     <section className="login_component">
       <h1 className="login_title">Register</h1>
       <div className="login_component_container">
+        {loading && <i className="fas fa-futbol infinite"></i>}
+
         <input
           className="emailOrUsername"
           onChange={(e) => setUsername(e.target.value)}
@@ -62,6 +68,9 @@ export const RegisterComponent = () => {
           onFocus={() => setErrors()}
           onChange={(e) => setRepeatPassword(e.target.value)}
           placeholder=" repeat password"
+          onKeyPress={({ key }) => {
+            if (key === "Enter") handleSubmit();
+          }}
           required
         />
         <div className="login_buttons">

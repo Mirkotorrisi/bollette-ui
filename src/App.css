@@ -86,7 +86,7 @@ section {
 .market_buttons {
   display: flex;
   flex-direction: column;
-  width: 150px;
+  margin-right: 5%;
 }
 .market_type_buttons {
   left: 20%;
@@ -120,6 +120,7 @@ section {
   border-left-color: #1a1a1a;
 }
 .betlist_container {
+  margin-right: 5%;
   display: flex;
 }
 
@@ -449,6 +450,26 @@ section {
 }
 .fa-futbol {
   transition: all 1s;
+}
+@keyframes rotate {
+  30% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes background-glow {
+  70% {
+    text-shadow: 4px 4px #ff8e5a5d;
+  }
+}
+.infinite {
+  color: #ff51005e;
+  position: absolute;
+  top: 35%;
+  left: 40%;
+  font-size: 15em;
+  font-weight: 100;
+  z-index: 1000;
+  animation: rotate 2s infinite, background-glow 1s infinite;
 }
 .logo:hover .fa-futbol {
   transform: rotate(720deg);
@@ -857,6 +878,16 @@ section {
 
   .login_title {
     margin-top: 20%;
+  }
+  .infinite {
+    position: fixed;
+    top: 40%;
+    left: 15%;
+  }
+  .modal_content {
+    border-radius: 10px;
+    background-color: #2e2e2e81;
+    backdrop-filter: blur(10px);
   }
 }
 /*RANKING CONTAINER*/

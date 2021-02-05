@@ -39,35 +39,43 @@ export const QuotaComponent = ({ market, betQuota, matchNumber, start }) => {
       </td>
       {market === "h2h"
         ? ["1", "X", "2"].map((sign, index) => (
-            <td id={`${sign}-${index}`}>
-              <button
-                className={
-                  ticketSelected?.result === sign
-                    ? "button_odd_clicked"
-                    : "button_odd"
-                }
-                onClick={() => {
-                  submitOrRemoveBet(sign);
-                }}
-              >
-                {betQuota.odds[sign]}
-              </button>
+            <td id={`${sign}-${index}`} key={`${sign}-${index}`}>
+              {betQuota.odds[sign] ? (
+                <button
+                  className={
+                    ticketSelected?.result === sign
+                      ? "button_odd_clicked"
+                      : "button_odd"
+                  }
+                  onClick={() => {
+                    submitOrRemoveBet(sign);
+                  }}
+                >
+                  {betQuota.odds[sign]}
+                </button>
+              ) : (
+                <i className="fas fa-futbol infinite"></i>
+              )}
             </td>
           ))
         : ["over", "under"].map((sign, index) => (
             <td id={`${sign}-${index}`}>
-              <button
-                className={
-                  ticketSelected?.result === sign
-                    ? "button_odd_clicked"
-                    : "button_odd"
-                }
-                onClick={() => {
-                  submitOrRemoveBet(sign);
-                }}
-              >
-                {betQuota.odds[sign]}
-              </button>
+              {betQuota.odds[sign] ? (
+                <button
+                  className={
+                    ticketSelected?.result === sign
+                      ? "button_odd_clicked"
+                      : "button_odd"
+                  }
+                  onClick={() => {
+                    submitOrRemoveBet(sign);
+                  }}
+                >
+                  {betQuota.odds[sign]}
+                </button>
+              ) : (
+                <i className="fas fa-futbol infinite"></i>
+              )}
             </td>
           ))}
     </tr>

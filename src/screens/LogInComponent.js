@@ -9,7 +9,7 @@ export const LogInComponent = () => {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [focused, setFocused] = useState();
-
+  const [loading, setloading] = useState(false);
   const [errors, setErrors] = useState([]);
   const user = useSelector((state) => state.userReducer);
   const history = useHistory();
@@ -17,16 +17,20 @@ export const LogInComponent = () => {
     if (user.id) history.replace("/");
   }, [user]);
   const handleSubmit = async () => {
+    setloading(true);
     try {
       const res = await login(usernameOrEmail, password);
       localStorage.setItem("token", res.headers["x-auth-token"]);
       GetUser(res.data);
+      setloading(false);
     } catch (error) {
       setErrors(error.response.data.split("-"));
+      setloading(false);
     }
   };
   return (
     <section className="login_component">
+      {loading && <i className="fas fa-futbol infinite"></i>}
       <h1 className="login_title">Log in</h1>
       <div className="login_component_container">
         <label
@@ -60,6 +64,9 @@ export const LogInComponent = () => {
             setErrors();
           }}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyPress={({ key }) => {
+            if (key === "Enter") handleSubmit();
+          }}
           placeholder="password"
         />
         <div className="login_buttons">

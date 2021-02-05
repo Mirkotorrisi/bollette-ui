@@ -12,7 +12,7 @@ import { submitCheckout } from "../service";
 
 export const TotalComponent = () => {
   const user = useSelector((state) => state.userReducer);
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const [showTotalContainer, setShowTotalContainer] = useState(false);
   const data = useSelector((state) => state.ticketReducer.data);
   let ticket_id = data.checkout ? data.checkout.ticket_id : null;
@@ -55,74 +55,81 @@ export const TotalComponent = () => {
         status={modal.status}
         closeModal={() => setmodal({ show: false })}
       />
-
-      <div
-        className="total_container"
-        style={width < 720 ? (showTotalContainer ? {} : { height: 25 }) : {}}
-      >
-        {width < 960 && (
-          <button
-            className="show_total_container_btn"
-            onClick={() => setShowTotalContainer(!showTotalContainer)}
-            style={{
-              animation: `superglow ${data.ticket?.length}s`,
-            }}
-          >
-            Checkout
-          </button>
-        )}
-        {data.ticket?.map((bet, index) => {
-          return (
-            <div className="total_item" key={bet.teams[0] + "-" + bet.teams[1]}>
-              <div className="total_item_match">
-                <span>
-                  {bet.teams[0]}-{bet.teams[1]}
-                </span>
-                <i className="bet_item_dates">
-                  {new Date(bet.start * 1000).toString().slice(0, 21)}
-                </i>
-              </div>
-              <span className="result">{bet.result}</span>
-              <span className="odd">{bet.odd}</span>
-              <button
-                className="del_button"
-                onClick={() => {
-                  RemoveBolletta(index, ticket_id);
-                }}
-              >
-                <i className="fas fa-trash"></i>
-              </button>
-            </div>
-          );
-        })}
-        <div className="checkout">
-          {data.ticket && (
-            <button onClick={() => emptyTicket()}>Empty your ticket</button>
-          )}
-
-          <h3 className="bet_mutliplier">
-            MULTIPLIER :{data.checkout?.multiplier.toFixed(2)}
-          </h3>
-
-          {data.checkout?.multiplier > 0 && (
-            <h3 className="max_win">
-              Max win : {(sum * data.checkout?.multiplier).toFixed(2)} $
-            </h3>
-          )}
-          <span className="input_section">
-            <input
-              className="input_number"
-              type="number"
-              min="2"
-              value={sum}
-              onChange={(e) => setSum(e.target.value)}
-            />
-            <button className="place_bet_button" onClick={() => handleSubmit()}>
-              Submit
+      {data.ticket && (
+        <div
+          className="total_container"
+          style={width < 720 ? (showTotalContainer ? {} : { height: 25 }) : {}}
+        >
+          {width < 960 && (
+            <button
+              className="show_total_container_btn"
+              onClick={() => setShowTotalContainer(!showTotalContainer)}
+              style={{
+                animation: `superglow ${data.ticket?.length}s`,
+              }}
+            >
+              Checkout
             </button>
-          </span>
+          )}
+          {data.ticket?.map((bet, index) => {
+            return (
+              <div
+                className="total_item"
+                key={bet.teams[0] + "-" + bet.teams[1]}
+              >
+                <div className="total_item_match">
+                  <span>
+                    {bet.teams[0]}-{bet.teams[1]}
+                  </span>
+                  <i className="bet_item_dates">
+                    {new Date(bet.start * 1000).toString().slice(0, 21)}
+                  </i>
+                </div>
+                <span className="result">{bet.result}</span>
+                <span className="odd">{bet.odd}</span>
+                <button
+                  className="del_button"
+                  onClick={() => {
+                    RemoveBolletta(index, ticket_id);
+                  }}
+                >
+                  <i className="fas fa-trash"></i>
+                </button>
+              </div>
+            );
+          })}
+          <div className="checkout">
+            {data.ticket && (
+              <button onClick={() => emptyTicket()}>Empty your ticket</button>
+            )}
+
+            <h3 className="bet_mutliplier">
+              MULTIPLIER :{data.checkout?.multiplier.toFixed(2)}
+            </h3>
+
+            {data.checkout?.multiplier > 0 && (
+              <h3 className="max_win">
+                Max win : {(sum * data.checkout?.multiplier).toFixed(2)} $
+              </h3>
+            )}
+            <span className="input_section">
+              <input
+                className="input_number"
+                type="number"
+                min="2"
+                value={sum}
+                onChange={(e) => setSum(e.target.value)}
+              />
+              <button
+                className="place_bet_button"
+                onClick={() => handleSubmit()}
+              >
+                Submit
+              </button>
+            </span>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

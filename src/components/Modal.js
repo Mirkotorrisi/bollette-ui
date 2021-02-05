@@ -8,7 +8,7 @@ const Modal = (props) => {
     display: props.displayModal ? "block" : "none",
   };
   const closeModal = (e) => {
-    if (props.status == 401) {
+    if (props.status === "401") {
       window.location.href = "/login";
     }
     e.stopPropagation();

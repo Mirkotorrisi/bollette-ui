@@ -25,6 +25,7 @@ export const BetListView = ({ champhionsip }) => {
     }
   };
   useEffect(() => {
+    setList(null);
     updateList();
   }, [champhionsip, market]);
   useEffect(() => {
@@ -91,11 +92,10 @@ export const BetListView = ({ champhionsip }) => {
                 </>
               )}
             </tr>
-            <caption className="market_type_buttons"></caption>
           </thead>
 
           <tbody>
-            {list?.length > 0 &&
+            {list?.length > 0 ? (
               list?.map((betQuota, index) => {
                 return (
                   <QuotaComponent
@@ -106,7 +106,10 @@ export const BetListView = ({ champhionsip }) => {
                     start={parseDate(betQuota.start * 1000)}
                   />
                 );
-              })}
+              })
+            ) : (
+              <i className="fas fa-futbol infinite"></i>
+            )}
           </tbody>
         </table>
       </div>
