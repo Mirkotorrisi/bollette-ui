@@ -106,7 +106,7 @@ export const getAccountSum = async (token) => {
 export const getRankingWins = async () => {
   const res = await axiosInstance({
     method: "get",
-    url: rootUrl + "ranking/multiplier",
+    url: rootUrl + "ranking/maxwins",
   });
   return res;
 };
