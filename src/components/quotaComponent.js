@@ -2,7 +2,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { RemoveBolletta, GetBolletta } from "../redux/actions";
-export const QuotaComponent = ({ market, betQuota, matchNumber, start }) => {
+export const QuotaComponent = ({
+  market,
+  betQuota,
+  matchNumber,
+  start,
+  isEven,
+}) => {
   const data = useSelector((state) => state.ticketReducer.data);
   const ticketSelected = data.ticket?.find(
     ({ teams }) =>
@@ -26,7 +32,9 @@ export const QuotaComponent = ({ market, betQuota, matchNumber, start }) => {
   return (
     <tr
       className={
-        "bet_buttons_row" + (start.includes("LIVE") ? " row_live" : "")
+        "bet_buttons_row" +
+        (start.includes("LIVE") ? " row_live" : "") +
+        (isEven ? " even_tab" : "")
       }
     >
       <td className="bet_item_teams">

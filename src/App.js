@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App-light.css";
 
 import { Route, Redirect, Switch } from "react-router-dom";
 import { LogInComponent } from "./screens/LogInComponent";

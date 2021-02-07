@@ -102,6 +102,7 @@ export const BetListView = ({ champhionsip }) => {
                     key={champhionsip + market + index}
                     betQuota={betQuota}
                     matchNumber={index}
+                    isEven={index % 2 === 0}
                     market={market}
                     start={parseDate(betQuota.start * 1000)}
                   />
