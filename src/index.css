@@ -13,3 +13,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.switch-theme {
+  position: fixed;
+  left: 10px;
+  top: 100px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 10px #000000;
+}
+.switch-theme {
+  position: fixed;
+  left: 10px;
+  top: 100px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 10px #000000;
+}
+.switch-theme:hover {
+  box-shadow: 1px 1px 10px #ff5100;
+}

@@ -10,8 +10,12 @@ body::-webkit-scrollbar {
   width: 15px;
 }
 body {
+  background-color: #383838;
   scrollbar-width: thin;
   scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+.switch-theme {
+  color: #ff5100;
 }
 body::-webkit-scrollbar-track {
   background: var(--scrollbarBG);
@@ -127,9 +131,12 @@ section {
 .bet_buttons {
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
 
-  background: linear-gradient(to right bottom, #471c0cce, #72240060);
+  background: #00000038;
   border-radius: 10px;
   width: 100%;
+}
+.even_tab {
+  background-color: #ff4400ce;
 }
 @keyframes coming_from_left {
   0% {
@@ -140,6 +147,7 @@ section {
   }
 }
 .bet_buttons_row td {
+  background: #0e0e0ed0;
   padding-left: 2%;
   padding-right: 2%;
 }
@@ -147,13 +155,13 @@ section {
   color: #ff5100;
 }
 .bet_buttons_row {
-  background-color: #000000;
+  font-weight: 700;
   color: #f2f2f2;
   margin: 0;
 }
 .bet_buttons_row:hover {
-  background-color: #ff5100;
-  color: #000000;
+  background-color: #ffffff67;
+  color: #ff5100;
 }
 .button_odd {
   border: none;

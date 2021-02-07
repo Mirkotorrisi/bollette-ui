@@ -4,6 +4,10 @@
 body {
   background-color: #f2f2f2;
 }
+.switch-theme {
+  background-color: #383838;
+  color: #ff5100;
+}
 /*SCROLLBAR*/
 html {
   --scrollbarBG: #f2f2f2;
