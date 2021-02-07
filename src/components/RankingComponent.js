@@ -39,7 +39,7 @@ export const RankingComponent = () => {
         status={modal.status}
         closeModal={() => setmodal({ show: false })}
       />
-      <div className="ranking_container" style={{ marginTop: "10%" }}>
+      <div className="ranking_container">
         <table className="bet_buttons">
           <caption className="market_type_buttons">
             {["balance", "max win"].map((i) => {

@@ -46,7 +46,7 @@ export const BetListView = ({ champhionsip }) => {
         status={modal.status}
         closeModal={() => setmodal({ show: false })}
       />
-      <div className="betlist_container">
+      <div className="betlist_container" style={{ marginBottom: "10%" }}>
         <table className="bet_buttons">
           <caption className="market_type_buttons">
             <button
