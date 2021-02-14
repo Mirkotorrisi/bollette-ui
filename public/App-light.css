@@ -152,8 +152,6 @@ section {
 }
 .bet_buttons_row td {
   background: linear-gradient(to left top, #ffc3adce, #ff6f2c38);
-  padding-left: 2%;
-  padding-right: 2%;
 }
 .bet_buttons th {
   color: #ff5100;

@@ -13,6 +13,7 @@ export const TicketsComponent = () => {
     try {
       setFiltered();
       const res = await getTickets();
+      console.log(res);
       setFiltered(
         res.data
           ? res.data?.filter(
