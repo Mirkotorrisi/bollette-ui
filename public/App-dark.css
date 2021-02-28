@@ -844,6 +844,13 @@ section {
   font-weight: 900;
 }
 @media screen and (min-width: 320px) and (max-width: 720px) {
+  .navbar{
+    height: fit-content;
+  }
+  .nav_items_list{
+    display: flex;
+    flex-direction: column;
+  }
   .logo {
     font-size: 0.6em;
   }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { LogInComponent } from "../screens/LogInComponent";
 import { BetComponent } from "../screens/BetComponent";
@@ -7,9 +7,12 @@ import { TicketsComponent } from "../screens/TicketsComponent";
 import { CreditsComponent } from "../screens/CreditsComponent";
 import { RemoveUser } from "../redux/actions";
 import { useSelector } from "react-redux";
+import useWindowDimensions from "../utils/useWindowDimensions";
 
 export const NavBar = () => {
   const user = useSelector((state) => state.userReducer);
+  const [showMenu, setShowMenu ] = useState(false)
+  const {width} = useWindowDimensions();
   const handleLogOut = () => {
     RemoveUser();
   };
@@ -23,6 +26,10 @@ export const NavBar = () => {
         </h1>
       </Link>
       <ul className="nav_items_list">
+      {width < 720 && <button onClick={()=>setShowMenu(!showMenu)}><i class="fas fa-bars"></i></button>}
+        
+        {(width < 720 && showMenu || width > 720)  && <>
+
         {user.id ? (
           <>
             <li className="nav_item">
@@ -77,6 +84,7 @@ export const NavBar = () => {
             Credits
           </Link>
         </li>
+        </>}
       </ul>
     </nav>
   );
