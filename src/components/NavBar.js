@@ -5,6 +5,7 @@ import { BetComponent } from "../screens/BetComponent";
 import { RegisterComponent } from "../screens/RegisterComponent";
 import { TicketsComponent } from "../screens/TicketsComponent";
 import { CreditsComponent } from "../screens/CreditsComponent";
+import { SlotComponent } from "../screens/SlotComponent";
 import { RemoveUser } from "../redux/actions";
 import { useSelector } from "react-redux";
 import useWindowDimensions from "../utils/useWindowDimensions";
@@ -41,6 +42,7 @@ export const NavBar = () => {
                 {user?.username} | {user?.account_sum} $
               </Link>
             </li>
+
             <li className="nav_item">
               <Link
                 to="/"
@@ -75,6 +77,15 @@ export const NavBar = () => {
             </li>
           </>
         )}
+        <li className="nav_item">
+              <Link
+                to="/slot"
+                className="nav_item_link"
+                render={() => <SlotComponent />}
+              >
+                Slot
+              </Link>
+        </li>
         <li className="nav_item">
           <Link
             to="/credits"
