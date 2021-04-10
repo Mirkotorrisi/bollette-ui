@@ -7,6 +7,7 @@ import { TicketsComponent } from "./screens/TicketsComponent";
 import { CreditsComponent } from "./screens/CreditsComponent";
 import { AboutMeComponent } from "./screens/AboutMeComponent";
 import { NotFoundComponent } from "./screens/NotFoundComponent";
+import { SlotComponent } from "./screens/SlotComponent";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 
@@ -48,6 +49,7 @@ function App() {
           <Route path="/register" component={RegisterComponent} />
           <Route path="/tickets" component={TicketsComponent} />
           <Route path="/credits" component={CreditsComponent} />
+          <Route path="/slot" component={SlotComponent} />
           <Route path="/aboutme" component={AboutMeComponent} />
           <Route path="/not-found" component={NotFoundComponent} />
           <Redirect to="/not-found" />
