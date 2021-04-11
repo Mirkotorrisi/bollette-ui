@@ -7,6 +7,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
+    console.log(error)
     if (error.response.status === 401) {
       localStorage.setItem("token", null);
     }
@@ -56,6 +57,21 @@ export const submitCheckout = async (betImport, ticket_id) => {
     },
     data: {
       betImport,
+    },
+  });
+  return res.data;
+};
+export const spinSlot = async (betImport, numOfWheels, numOfSymbols) => {
+  const res = await axiosInstance({
+    method: "post",
+    url: rootUrl + "slot",
+    headers: {
+      "x-auth-token": localStorage.getItem("token"),
+    },
+    data: {
+      betImport,
+      numOfWheels, 
+      numOfSymbols
     },
   });
   return res.data;

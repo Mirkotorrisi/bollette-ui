@@ -267,9 +267,21 @@ section {
 .live_tick {
   animation: tick 2s infinite;
 }
+.background_tick {
+  animation: background_tick 2s infinite;
+}
 @keyframes tick {
   0% {
-    color: #f2f2f2;
+    border: 2px solid #ffe600;
+    background-color: #f2f2f200;
+  }
+  50% {
+    border: 2px solid #ffe60000;
+  }
+}
+@keyframes background_tick {
+  0% {
+    background-color: #f2f2f200;
   }
   50% {
     color: #f2f2f200;

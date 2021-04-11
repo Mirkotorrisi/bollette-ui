@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import * as slotresources from "../assets/slotresources";
+import {spinSlot} from '../service/index'
 let prevTime = 0;
-
 export const Slot = () => {
   const {
     background,
@@ -12,20 +12,16 @@ export const Slot = () => {
   } = slotresources.slotresources;
   const [interacted, setInteracted] = useState(false);
   const [repeat, setRepeat] = useState(0);
-  const [counter, setCounter] = useState(-1);
   const [angle, setAngle] = useState(0);
   const [wheels, setWheels] = useState(
     Array.from({ length: numOfWheels }, () =>
       Math.floor(Math.random() * assets.length)
     )
   );
+  const [final, setFinal] = useState([])
   const [win, setwin] = useState(null);
   const [sum, setsum] = useState(0);
-  const [runningWheels, setRunningWheels] = useState(
-    new Array(numOfWheels).fill(true)
-  );
   const [tick, setTick] = useState(0);
-  const [endGame, setEndGame] = useState(true);
 
   const tz = Math.round(
     carouselStyle.height / 2 / Math.tan(Math.PI / assets.length) 
@@ -37,41 +33,21 @@ export const Slot = () => {
     setTick(time); // this is my frame rate
   });
   useEffect(() => {
-    if (endGame) return;
+    console.log("qua??")
+    if (JSON.stringify(wheels)==JSON.stringify(final)) return;
     setWheels(
-      wheels.map((wheel, i) => {
-        return runningWheels[i] ? wheel + 1 : wheel;
-      })
+      wheels.map((wheel, i) => 
+        wheel%assets.length !== final[i] ? wheel + 1 : wheel)
     );
-    if (!runningWheels.includes(true)) {
-        let values = wheels.map((i) => i % assets.length)
-        console.log(values)
-        let duplicates = values.filter((item, index) => values.indexOf(item) != index)
-        console.log(duplicates)
-        if(duplicates.length > 0){
-            setwin(duplicates[0])
-            setsum(duplicates.length === numOfWheels-1 ? assets[duplicates[0]].points**numOfWheels : assets[duplicates[0]].points * (duplicates.length+1))
-        }
-        else setwin(null)
-        setEndGame(true);
-    }
   }, [tick]);
   const handleSpin = () => {
-    setwin(null);
-    if (endGame) {
-      setCounter(0);
-      setRunningWheels(new Array(numOfWheels).fill(true));
-      setEndGame(false);
-    } else {
-      !interacted && setInteracted(true);
-
-      setCounter(counter + 1);
-      setTimeout(() => {
-        let runningCopy = runningWheels;
-        runningCopy[counter] = false;
-        setRunningWheels(runningCopy);
-      }, Math.random() * 2000);
-    }
+    setwin(null);  
+    setFinal([])
+    !interacted && setInteracted(true);
+    setTimeout(async ()=>{
+      const res = await spinSlot(2, numOfWheels, assets.length)
+      if(res){ setFinal(res.results); res.duplicates.length>0 && setwin(res.duplicates[0]); res.sum && setsum(res.sum)}
+    }, Math.random()*5000)
   };
 
   useEffect(() => {
@@ -92,17 +68,32 @@ export const Slot = () => {
   return (
       <div
         style={{
-          background:"#f0f0f0",
           perspective: "500px",
         display:"flex",
         }}
       >   
-            <button onClick={() => handleSpin()} style={spin} >{!interacted || endGame ? "SPIN" :"STOP"}</button>
-{ (win || win === 0) &&    <h1 style={{position: "absolute", top: 327, left:201,background: "#f2f2f2", border : "2px solid "+assets[win].color , borderRadius: "10px",fontSize: 48, color: assets[win].color, zIndex:1000100}}>
+            <button onClick={() => handleSpin()} style={spin} >{"SPIN"}</button>
+            { (win || win === 0) &&    
+            <h1 style={{  position: "absolute", 
+                          top: 327, left:201,
+                          background: "#f2f2f2", 
+                          border : "2px solid "+assets[win].color , 
+                          borderRadius: "10px",
+                          fontSize: 48, 
+                          color: assets[win].color, 
+                          zIndex:1000100}}>
                {assets[win].src.split(".")[0]}
             </h1>
             }
-{ (win || win === 0) &&           <h1 style={{position: "absolute",top:-100,left:"20vw", fontSize: 72,background: "#f2f2f2", border : "2px solid "+assets[win].color, borderRadius: "10px",color: assets[win].color, zIndex:1000100}}>
+            { (win || win === 0) &&           
+            <h1 style={{  position: "absolute",
+                          top:-100,left:"20vw", 
+                          fontSize: 72,
+                          background: "#f2f2f2", 
+                          border : "2px solid "+assets[win].color, 
+                          borderRadius: "10px",
+                          color: assets[win].color, 
+                          zIndex:1000100}}>
                {sum}$
             </h1>}
          <img
@@ -117,7 +108,7 @@ export const Slot = () => {
               style={{
                 position: "absolute",
                 left: carouselStyle.left + i*25  + "%",
-                
+
                 transform: `translateZ(-${tz}px) rotateX(${
                   !interacted ? angle : (360 / assets.length) * wheel * -1
                 }deg)`,
@@ -128,7 +119,7 @@ export const Slot = () => {
                 top: background.style.height/3
               }}
             >
-              {assets &&
+               {assets &&
                 assets.map((img, wheel) => {
                   return (
                     <img
