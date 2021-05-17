@@ -33,7 +33,6 @@ export const Slot = () => {
     setTick(time); // this is my frame rate
   });
   useEffect(() => {
-    console.log("qua??")
     if (JSON.stringify(wheels)==JSON.stringify(final)) return;
     setWheels(
       wheels.map((wheel, i) => 
