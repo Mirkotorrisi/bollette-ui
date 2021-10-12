@@ -41,7 +41,7 @@ function App() {
           title={`turn ${darkTheme ? "on" : "off"} lights!`}
           onClick={() => handleButtonClick()}
         >
-          <i class={`fas fa-${darkTheme ? "moon" : "sun"}`}></i>
+          <i className={`fas fa-${darkTheme ? "moon" : "sun"}`}></i>
         </button>
         <Switch>
           <Route path="/" exact component={BetComponent} />

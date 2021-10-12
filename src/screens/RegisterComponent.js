@@ -15,7 +15,7 @@ export const RegisterComponent = () => {
   const history = useHistory();
   useEffect(() => {
     if (user.id) history.replace("/");
-  }, [user]);
+  }, [user, history]);
   const handleSubmit = async () => {
     if (password === repeatPassword) {
       setloading(true);

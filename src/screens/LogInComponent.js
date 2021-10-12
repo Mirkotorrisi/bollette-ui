@@ -15,7 +15,7 @@ export const LogInComponent = () => {
   const history = useHistory();
   useEffect(() => {
     if (user.id) history.replace("/");
-  }, [user]);
+  }, [user, history]);
   const handleSubmit = async () => {
     setloading(true);
     try {

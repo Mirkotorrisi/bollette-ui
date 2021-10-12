@@ -1,7 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import * as slotresources from "../assets/slotresources";
 import { spinSlot } from "../service/index";
+
 let prevTime = 0;
+const FRAME_RATE = 100;
+const MAX_SECONDS_WAITING = 10000;
+const ANIM_ANGLE = 0.4;
+
 export const Slot = () => {
   const { background, assets, carouselStyle, numOfWheels, spin } =
     slotresources.slotresources;
@@ -22,19 +27,22 @@ export const Slot = () => {
     carouselStyle.height / 2 / Math.tan(Math.PI / assets.length)
   );
   const basicAngle = 360 / assets.length;
+
   useFrameLoop((time) => {
-    if (time - prevTime < 100) return;
+    if (time - prevTime < FRAME_RATE) return;
     prevTime = time;
     setTick(time); // this is my frame rate
   });
+
   useEffect(() => {
-    if (JSON.stringify(wheels) == JSON.stringify(final)) return;
+    if (JSON.stringify(wheels) === JSON.stringify(final)) return;
     setWheels(
       wheels.map((wheel, i) =>
         wheel % assets.length !== final[i] ? wheel + 1 : wheel
       )
     );
   }, [tick]);
+
   const handleSpin = () => {
     setwin(null);
     setFinal([]);
@@ -43,18 +51,18 @@ export const Slot = () => {
       const res = await spinSlot(2, numOfWheels, assets.length);
       if (res) {
         setFinal(res.results);
-        res.duplicates.length > 0 && setwin(res.duplicates[0]);
+        res.duplicates.length && setwin(res.duplicates[0]);
         res.sum && setsum(res.sum);
       }
-    }, Math.random() * 10000);
+    }, Math.random() * MAX_SECONDS_WAITING);
   };
 
   useEffect(() => {
     if (!interacted) {
       setTimeout(() => {
-        setAngle((360 / assets.length) * 0.4 * -1);
+        setAngle((360 / assets.length) * ANIM_ANGLE * -1);
         setTimeout(() => {
-          setAngle((360 / assets.length) * -0.4 * -1);
+          setAngle((360 / assets.length) * -ANIM_ANGLE * -1);
           setTimeout(() => {
             setAngle((360 / assets.length) * 0 * -1);
             setRepeat(repeat + 1);
@@ -63,7 +71,7 @@ export const Slot = () => {
       }, 2000);
     }
   }, [interacted, repeat]);
-
+  console.log("ciao");
   return (
     <div
       style={{
@@ -113,10 +121,12 @@ export const Slot = () => {
         style={{
           ...background.style,
         }}
+        alt="background"
       />
       {wheels.map((wheel, i) => {
         return (
           <div
+            key={`${wheel}-${i}`}
             style={{
               position: "absolute",
               left: carouselStyle.left + i * 25 + "%",
@@ -135,7 +145,9 @@ export const Slot = () => {
               assets.map((img, wheel) => {
                 return (
                   <img
+                    key={img.src}
                     src={"img/" + img.src}
+                    alt={img.src}
                     style={{
                       transform: `rotateX(${
                         basicAngle * wheel
@@ -160,7 +172,7 @@ export const Slot = () => {
   );
 };
 
-const useFrameLoop = (callback, setDungeon) => {
+const useFrameLoop = (callback) => {
   const requestID = useRef();
   const previousTime = useRef();
 
