@@ -1,8 +1,4 @@
 export const slotresources = {
-  carouselStyle: {
-    width: "20vw",
-    height: 110,
-    zIndex: -1,export const slotresources = {
       carouselStyle: {
         width: "20vw",
         height: 110,
