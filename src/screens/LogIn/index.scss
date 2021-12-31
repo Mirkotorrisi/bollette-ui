@@ -1,0 +1,77 @@
+.login_component {
+  width: 100%;
+  height: 100vh;
+}
+.login_component_container {
+  height: 70%;
+  display: grid;
+  place-items: center;
+}
+.login_title {
+  animation: coming_from_left 0.5s linear;
+
+  border-top: 1px solid #ff5100;
+  font-size: larger;
+  font-weight: 700;
+  color: #ff5100;
+  text-align: left;
+  padding-left: 10%;
+  width: 90%;
+}
+
+.login_component input {
+  color: #ff5100;
+  height: 50px;
+  width: 250px;
+  border: 1px solid #ff510096;
+  font-size: 1.5em;
+}
+@keyframes appear {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.label {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font-weight: 900;
+  top: 20px;
+  animation: appear linear 0.2s;
+  display: block;
+  color: #ff5100;
+}
+.hidden {
+  display: none;
+}
+.login_component input:focus {
+  box-shadow: #ff5100 0px 0px 10px;
+  height: 50px;
+  width: 250px;
+}
+.login_buttons {
+  width: 250px;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.login_submit {
+  height: 25px;
+}
+.register_link {
+  color: #ff5100;
+}
+.errors {
+  text-align: center;
+  padding: 0;
+}
+.errors li {
+  font-weight: 700;
+  font-size: 1.3em;
+  padding: 0;
+  color: #ff0000;
+  list-style: none;
+}

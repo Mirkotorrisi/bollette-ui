@@ -1,0 +1,60 @@
+.tickets_component {
+  width: 100%;
+}
+.filter_buttons {
+  display: flex;
+  justify-content: center;
+}
+.tickets_container {
+  width: 80%;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  display: grid;
+  grid-gap: 1rem;
+  place-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.ticket_table {
+  border-radius: 10px;
+  box-shadow: #000000 0px 0px 20px 1px;
+
+  border: 3px solid #ff5100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &--won {
+    background-color: #26b821;
+  }
+  &--lost {
+    background-color: #ff0000;
+  }
+  &--ongoing {
+    background-color: bisque;
+  }
+}
+.ticket_table tbody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bet_item {
+  color: #ff5100;
+}
+
+.green {
+  font-weight: bolder;
+  color: #26b821;
+}
+.red {
+  font-weight: bolder;
+  color: #ff0000;
+}
+.white {
+  font-weight: bolder;
+  color: #f2f2f2;
+}
+.ticket_checkout {
+  background-color: #ff5100;
+}

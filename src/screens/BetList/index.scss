@@ -1,0 +1,43 @@
+.bet_component_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.bet_component {
+  min-height: 70vh;
+  padding: 4%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.market_buttons {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5%;
+  &button:hover {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ff5100;
+    font-weight: 900;
+    width: 150px;
+    color: #383838;
+    border-top-color: #ff5100;
+    border-left-color: #1a1a1a;
+  }
+}
+.flag_icon {
+  width: 20px;
+}
+.showMarkets {
+  position: fixed;
+  transform: translateY(100px);
+  text-orientation: mixed;
+  transition: all 1s;
+  padding: 10px;
+  font-size: 1.2em;
+  border-radius: 0px 20px 20px 0px;
+  background-color: #ff5100;
+  color: #383838;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+}

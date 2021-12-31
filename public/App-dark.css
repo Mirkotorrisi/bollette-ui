@@ -42,18 +42,7 @@ section {
   padding-top: 5%;
 }
 /* BET COMPONENT */
-.bet_component_container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-.bet_component {
-  min-height: 70vh;
-  padding: 4%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+
 /* BETLISTVIEW */
 .show {
   position: fixed;
@@ -68,30 +57,11 @@ section {
   position: fixed;
   top: 30%;
 }
-.showMarkets {
-  position: fixed;
-  transform: translateY(100px);
-  text-orientation: mixed;
-  transition: all 1s;
-  padding: 10px;
-  font-size: 1.2em;
-  border-radius: 0px 20px 20px 0px;
-  background-color: #ff5100;
-  color: #383838;
-  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-}
+
 .fa-arrow-left {
   transition: all 0.5s;
 }
 
-.flag_icon {
-  width: 20px;
-}
-.market_buttons {
-  display: flex;
-  flex-direction: column;
-  margin-right: 5%;
-}
 .market_type_buttons {
   left: 20%;
 }
@@ -112,17 +82,6 @@ section {
 }
 .market_button_focused,
 .login_submit:hover,
-.market_buttons button:hover {
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  background-color: #ff5100;
-  font-weight: 900;
-  width: 150px;
-  color: #383838;
-  border-top-color: #ff5100;
-  border-left-color: #1a1a1a;
-}
 .betlist_container {
   margin-right: 5%;
   display: flex;
@@ -361,84 +320,6 @@ section {
 }
 
 /* LOGIN COMPONENT */
-
-.login_component {
-  width: 100%;
-  height: 100vh;
-}
-.login_component_container {
-  height: 70%;
-  display: grid;
-  place-items: center;
-}
-.login_title {
-  animation: coming_from_left 0.5s linear;
-
-  border-top: 1px solid #ff5100;
-  font-size: larger;
-  font-weight: 700;
-  color: #ff5100;
-  text-align: left;
-  padding-left: 10%;
-  width: 90%;
-}
-
-.login_component input {
-  color: #ff5100;
-  height: 50px;
-  width: 250px;
-  border: 1px solid #ff510096;
-  font-size: 1.5em;
-}
-@keyframes appear {
-  from {
-    transform: translateY(20px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-.label {
-  padding: 0;
-  margin: 0;
-  text-align: left;
-  font-weight: 900;
-  top: 20px;
-  animation: appear linear 0.2s;
-  display: block;
-  color: #ff5100;
-}
-.hidden {
-  display: none;
-}
-.login_component input:focus {
-  box-shadow: #ff5100 0px 0px 10px;
-  height: 50px;
-  width: 250px;
-}
-.login_buttons {
-  width: 250px;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-}
-.login_submit {
-  height: 25px;
-}
-.register_link {
-  color: #ff5100;
-}
-.errors {
-  text-align: center;
-  padding: 0;
-}
-.errors li {
-  font-weight: 700;
-  font-size: 1.3em;
-  padding: 0;
-  color: #ff0000;
-  list-style: none;
-}
 /* NAVBAR COMPONENT */
 .navbar {
   position: fixed;
@@ -543,65 +424,6 @@ section {
 }
 
 /* YOUR TICKETS COMPONENT */
-.tickets_component {
-  width: 100%;
-}
-.filter_buttons {
-  display: flex;
-  justify-content: center;
-}
-.tickets_container {
-  width: 80%;
-  margin: auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  display: grid;
-  grid-gap: 1rem;
-  place-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.ticket_table {
-  border-radius: 10px;
-  box-shadow: #000000 0px 0px 20px 1px;
-
-  border: 3px solid #ff5100;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.ticket_table tbody {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.bet_item {
-  color: #ff5100;
-}
-.ongoing {
-  background-color: bisque;
-}
-.lost {
-  background-color: #ff0000;
-}
-.won {
-  background-color: #26b821;
-}
-.green {
-  font-weight: bolder;
-  color: #26b821;
-}
-.red {
-  font-weight: bolder;
-  color: #ff0000;
-}
-.white {
-  font-weight: bolder;
-  color: #f2f2f2;
-}
-.ticket_checkout {
-  background-color: #ff5100;
-}
 /* MODAL */
 .modal {
   z-index: 1;
@@ -748,118 +570,13 @@ section {
   color: #ff5100;
 }
 /* CREDITS COMPONENT */
-.credits_component {
-  width: 100%;
-}
-
-.credits_card {
-  overflow: show;
-  margin: 10px;
-  padding: 10px;
-  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-  background-color: #2e2e2e81;
-  border-left: 1px solid #5e5e5e;
-  border-top: 1px solid #2e2e2e;
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
-  max-width: 300px;
-  height: fit-content;
-}
-.tech_cont {
-  position: relative;
-}
-.tech_logo {
-  max-width: 250px;
-  max-height: 250px;
-  position: absolute;
-  top: -25%;
-  left: -15%;
-  z-index: -1;
-  opacity: 0.7;
-}
-.tech_cont a,
-.tech_cont a:visited {
-  font-size: 1.5em;
-  color: #ff5100;
-  text-decoration: none;
-}
-.tech_cont a:hover {
-  font-size: 1.5em;
-  color: #ff5100;
-  animation: glow 1s infinite;
-}
-.tech_cont p {
-  color: #f2f2f2;
-  font-weight: 700;
-}
 /* ABOUT ME */
-.profile_pic {
-  overflow: hidden;
-  border-radius: 100%;
-  height: 300px;
-  width: 300px;
-  float: left;
-  shape-outside: circle(50%);
-}
 
-.profile_pic:hover .flip-card-inner,
-.profile_pic:focus .flip-card-inner {
-  transform: rotateY(180deg);
-}
-.flip-card-inner {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-}
-.flip-card-front,
-.flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-.flip-card-front {
-  z-index: 2;
-}
-
-.flip-card-back {
-  transform: rotateY(180deg);
-  z-index: 1;
-}
-
-.about_me {
-  margin: auto;
-  width: 70%;
-}
-.about_me h1 {
-  color: #ff5100;
-  font-size: 1.5em;
-  width: 70%;
-}
-.about_me h1:before {
-  position: absolute;
-  transform: translateX(-8.5em) translateY(1em);
-  z-index: -1;
-  content: "";
-  height: 2px;
-  width: 200px;
-  background-color: #ff5100;
-}
-.about_me p {
-  text-align: left;
-  color: #f2f2f2;
-  font-weight: 900;
-}
 @media screen and (min-width: 320px) and (max-width: 720px) {
-  .navbar{
+  .navbar {
     height: fit-content;
   }
-  .nav_items_list{
+  .nav_items_list {
     display: flex;
     flex-direction: column;
   }

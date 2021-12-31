@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
   return {
+    isSmallScreen: width < 980,
     width,
     height,
   };

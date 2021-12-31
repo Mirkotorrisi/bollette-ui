@@ -4,7 +4,11 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { setAxiosInstance } from "./service/getAxiosInstance";
 import store from "./store";
+
+setAxiosInstance(store.dispatch);
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

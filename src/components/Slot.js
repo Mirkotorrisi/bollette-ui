@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import * as slotresources from "../assets/slotresources";
-import { spinSlot } from "../service/index";
+import { spinSlot } from "../service";
 let prevTime = 0;
 export const Slot = () => {
   const { background, assets, carouselStyle, numOfWheels, spin } =
