@@ -25,28 +25,36 @@ export const LogIn = () => {
     dispatch(logInUser({ emailOrUsername, password }));
   };
   return (
-    <section className="login_component">
-      <h1 className="login_title">Log in</h1>
-      <div className="login_component_container">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="emailOrUsername">Email or Username</label>
+    <section className="login flex flex-col items-center justify-center">
+      <h1 className="login__title">Log in</h1>
+      <div className="flex-grow py-16">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="form flex flex-col p-8  items-center gap-4"
+        >
+          <label htmlFor="emailOrUsername" className="form__label">
+            Email or Username
+          </label>
           <input
             id="emailOrUsername"
             placeholder="username or email"
+            className="form__input px-2 py-4"
             {...register("emailOrUsername", { required: true })}
           />
-          <label htmlFor="password">Password</label>
+          <label className="form__label" htmlFor="password">
+            Password
+          </label>
           <input
             id="password"
-            className="password"
+            className="form__input px-2 py-4"
             type="password"
             placeholder="password"
             {...register("password", { required: true })}
           />
-          <div className="login_buttons">
-            <input className="login_submit" type="submit" value="Log in" />
-            <Link className="register_link" to="/register">
-              Sign in
+          <div className="login_buttons mt-8">
+            <input className="form__submit p-4" type="submit" value="Log in" />
+            <Link className="form__redirect p-4" to="/register">
+              Sign up
             </Link>
           </div>
         </form>

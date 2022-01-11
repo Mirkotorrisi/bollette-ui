@@ -6,20 +6,32 @@ export interface Bet {
   teams: string[];
   result: string;
   odd: number;
-  start: string;
+  start: number;
   won: boolean;
 }
 export interface Ticket {
   ticket: Bet[];
   checkout?: {
-    ticket_id: string;
+    ticket_id: number;
     multiplier: number;
   };
   isLoading?: boolean;
 }
 
 const initialStateBoll: Ticket = {
-  ticket: [],
+  ticket: [
+    {
+      teams: ["Bologna", "Inter Milan"],
+      start: 1641468600,
+      result: "1",
+      odd: 6.25,
+      won: false,
+    },
+  ],
+  checkout: {
+    ticket_id: 19808,
+    multiplier: 6.25,
+  },
 };
 
 const ticketSlice = createSlice({

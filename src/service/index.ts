@@ -4,7 +4,7 @@ import { getAxiosInstance } from "./getAxiosInstance";
 export const placeBet = async (
   match: number,
   odd: string,
-  ticket_id?: string
+  ticket_id?: number
 ) => {
   const res = await getAxiosInstance().request({
     method: "post",
@@ -18,7 +18,7 @@ export const placeBet = async (
 
   return res;
 };
-export const removeBet = async (match: number, ticket_id: string) => {
+export const removeBet = async (match: number, ticket_id: number) => {
   const res = await getAxiosInstance().request({
     method: "delete",
     url: "/bets",
@@ -30,10 +30,27 @@ export const removeBet = async (match: number, ticket_id: string) => {
   return res;
 };
 
+export enum SIGN {
+  HOME = "1",
+  VISITOR = "2",
+  DRAW = "X",
+  OVER = "over",
+  UNDER = "under",
+}
+
+export type Odds = {
+  [key in SIGN]?: number;
+};
+export interface Match {
+  teams: string[];
+  start: number;
+  odds: Odds;
+}
+
 export const fetchBetList = async (
   championship: CHAMPIONSHIPS,
   market: MARKETS
-) => {
+): Promise<Match[]> => {
   const res = await getAxiosInstance().request({
     method: "get",
     url: `/championships/${championship}/${market}`,
@@ -42,7 +59,7 @@ export const fetchBetList = async (
   return res.data;
 };
 
-export const submitCheckout = async (betImport: number, ticket_id: string) => {
+export const submitCheckout = async (betImport: number, ticket_id: number) => {
   const res = await getAxiosInstance().request({
     method: "post",
     url: `/bets/checkout/${ticket_id}`,

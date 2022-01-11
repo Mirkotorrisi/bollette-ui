@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import "./index.scss";
 import { Route, Redirect, Switch } from "react-router-dom";
+import useLocalStorage from "use-local-storage";
 
 import { NavBar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
@@ -7,43 +8,40 @@ import { routes } from "./routes";
 import Modal from "./components/Modal";
 import { selectLoader } from "./redux/loader";
 import { useSelector } from "react-redux";
+import { Loader } from "./components/Loader";
+import { useUserStorage } from "./utils/useUserStorage";
 
 function App() {
-  const [darkTheme, setDarkTheme] = useState(false);
+  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [theme, setTheme] = useLocalStorage(
+    "theme",
+    defaultDark ? "dark" : "light"
+  );
   const { show } = useSelector(selectLoader);
+  const isLight = theme === "light";
   const handleButtonClick = () => {
-    setDarkTheme(!darkTheme);
+    setTheme(isLight ? "dark" : "light");
   };
 
-  useEffect(() => {
-    var head = document.head;
-    var link = document.createElement("link");
-
-    link.type = "text/css";
-    link.rel = "stylesheet";
-    link.href = `./App-${darkTheme ? "dark" : "light"}.css`;
-
-    head.appendChild(link);
-
-    return () => {
-      head.removeChild(link);
-    };
-  }, [darkTheme]);
+  useUserStorage();
   return (
-    <div>
+    <div
+      className="main flex flex-col justify-between min-h-screen"
+      data-theme={theme}
+    >
       <NavBar />
-      <div className="App">
-        {show && <i className="fas fa-futbol infinite"></i>}
+      <div className="lg:px-8">
+        {show && <Loader />}
         <button
-          className="switch-theme"
-          title={`turn ${darkTheme ? "on" : "off"} lights!`}
+          className="switch-theme px-1"
+          title={`turn ${isLight ? "off" : "on"} lights!`}
           onClick={() => handleButtonClick()}
         >
-          <i className={`fas fa-${darkTheme ? "moon" : "sun"}`}></i>
+          <i className={`fas fa-${isLight ? "moon" : "sun"}`}></i>
         </button>
         <Switch>
-          {routes.map(({ path, component, exact }) => (
-            <Route path={path} component={component} exact={exact} />
+          {routes.map(({ path, component, exact }, i) => (
+            <Route path={path} component={component} exact={exact} key={i} />
           ))}
           <Redirect to="/not-found" />
         </Switch>

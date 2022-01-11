@@ -3,55 +3,42 @@ import { useState } from "react";
 import { Table } from "./Table";
 import { Checkout } from "./Checkout";
 import { Ranking } from "./Ranking";
-import useWindowDimensions from "../../utils/useWindowDimensions";
 import { markets } from "../../consts/markets";
 import { CHAMPIONSHIPS } from "../../consts";
+import useWindowDimensions from "../../utils/useWindowDimensions";
 
 export const BetList = () => {
   const [championship, setChampionship] = useState(CHAMPIONSHIPS.SERIE_A);
-  const [showMarkets, setshowMarkets] = useState(false);
-  const { isSmallScreen } = useWindowDimensions();
-
+  const { width } = useWindowDimensions();
+  const isSmallScreen = width < 640;
   return (
-    <section className="bet_component_container">
-      <h1 className="login_title">{championship}</h1>
-      <div className="bet_component">
-        <div className={`market_buttons ${isSmallScreen ? "fixed" : ""}`}>
-          <div className={isSmallScreen ? (showMarkets ? "show" : "hide") : ""}>
-            {markets.map(({ key, label, flag }) => (
-              <button
-                id={key}
-                key={key}
-                className={
-                  key === championship
-                    ? "market_button_focused"
-                    : "market_buttons_button"
-                }
-                onClick={() => setChampionship(key)}
-              >
-                {label}
-                <img src={`/flags/${flag}`} alt={flag} className="flag_icon" />
-              </button>
-            ))}
+    <section className="py-16">
+      <div className="bet_component flex flex-wrap">
+        <div className="flex flex-col ">
+          <div className="league_buttons mb-4 lg:mb-0">
+            <h2 className="mb-4 hidden lg:block league_buttons__title">
+              Football leagues
+            </h2>
+            <div className="flex lg:flex-col overflow-scroll checkout">
+              {markets.map(({ key, label, flag }) => (
+                <button
+                  id={key}
+                  key={key}
+                  className={`${flag} p-3 flex justify-between league_button${
+                    key === championship ? "--focused" : ""
+                  }`}
+                  onClick={() => setChampionship(key)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
+          {!isSmallScreen && <Ranking />}
         </div>
-        {isSmallScreen && (
-          <button
-            onClick={() => setshowMarkets(!showMarkets)}
-            className="showMarkets"
-            style={showMarkets ? { left: 150 } : { left: 0 }}
-          >
-            <i
-              className="fas fa-arrow-left"
-              style={showMarkets ? {} : { transform: "rotate(180deg)" }}
-            ></i>
-          </button>
-        )}
-
         <Table championship={championship} />
         <Checkout />
-
-        <Ranking />
+        {isSmallScreen && <Ranking />}
       </div>
     </section>
   );

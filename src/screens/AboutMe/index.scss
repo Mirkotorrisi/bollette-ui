@@ -1,31 +1,38 @@
 .about_me {
   margin: auto;
   width: 70%;
-  &h1 {
-    color: #ff5100;
-    font-size: 1.5em;
-    width: 70%;
+  &__title {
+    color: var(--primary-accent);
+    font-size: 2.5em;
+    transform: translateX(15%);
     &:before {
       position: absolute;
-      transform: translateX(-8.5em) translateY(1em);
+      transform: translateX(-100%) translateY(1em);
       z-index: -1;
       content: "";
       height: 2px;
       width: 200px;
-      background-color: #ff5100;
+      background-color: var(--primary-accent);
     }
   }
-  &p {
+  &__paragraph {
     text-align: left;
-    color: #f2f2f2;
-    font-weight: 900;
+    color: var(--font-primary);
+    font-weight: var(--bolder);
+    font-size: 1.5em;
+    a {
+      color: var(--primary-accent);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 .profile_pic {
   overflow: hidden;
   border-radius: 100%;
-  height: 300px;
-  width: 300px;
+  height: 30vw;
+  width: 30vw;
   float: left;
   shape-outside: circle(50%);
 }

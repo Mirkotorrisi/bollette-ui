@@ -1,43 +1,71 @@
-.bet_component_container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-.bet_component {
-  min-height: 70vh;
-  padding: 4%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.market_buttons {
-  display: flex;
-  flex-direction: column;
-  margin-right: 5%;
-  &button:hover {
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    background-color: #ff5100;
-    font-weight: 900;
-    width: 150px;
-    color: #383838;
-    border-top-color: #ff5100;
-    border-left-color: #1a1a1a;
+.league_buttons {
+  &__title {
+    font-size: 1.5em;
+    font-weight: var(--bold);
   }
 }
-.flag_icon {
-  width: 20px;
+.league_button {
+  border: 1px solid var(--primary-accent-100);
+  font-weight: var(--bold);
+  background-size: 25%;
+  min-width: 10em;
+  background-position: 100% 30%;
+  background-repeat: no-repeat;
+  white-space: nowrap;
+  &--focused {
+    background-color: var(--primary-accent);
+    background-size: 30%;
+    min-width: 10em;
+    background-position: 110% 10%;
+    font-weight: var(--bold);
+
+    background-repeat: no-repeat;
+    white-space: nowrap;
+    color: var(--secondary-accent);
+  }
+
+  &:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  &:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: var(--primary-accent-100);
+    color: var(--font-primary);
+    background-size: 30%;
+    background-repeat: no-repeat;
+    white-space: nowrap;
+  }
 }
-.showMarkets {
-  position: fixed;
-  transform: translateY(100px);
-  text-orientation: mixed;
-  transition: all 1s;
-  padding: 10px;
-  font-size: 1.2em;
-  border-radius: 0px 20px 20px 0px;
-  background-color: #ff5100;
-  color: #383838;
-  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+
+.premierLeague {
+  background-image: url("../../assets/flags/premier_league.png");
+}
+.serieA {
+  background-image: url("../../assets/flags/serie_a.png");
+}
+.serieB {
+  background-image: url("../../assets/flags/seerie_b.png");
+}
+.primeiraLiga {
+  background-image: url("../../assets/flags/primeira_liga.png");
+}
+.laLiga {
+  background-image: url("../../assets/flags/la_liga.png");
+}
+.europaLeague {
+  background-image: url("../../assets/flags/europa_league.png");
+}
+.championsLeague {
+  background-image: url("../../assets/flags/champions_league.png");
+}
+.ligaMax {
+  background-image: url("../../assets/flags/liga_max.svg");
+}
+.bundesliga {
+  background-image: url("../../assets/flags/bundesliga.png");
 }

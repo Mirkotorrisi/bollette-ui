@@ -20,10 +20,17 @@ const userSlice = createSlice({
   initialState: initialStateUser,
   reducers: {
     setUser(state, action) {
-      state = action.payload;
+      state.account_sum = action.payload.account_sum;
+      state.id = action.payload.id;
+      state.email = action.payload.email;
+      state.username = action.payload.username;
     },
     logOut(state) {
       localStorage.removeItem("token");
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("account_sum");
+      localStorage.removeItem("email");
+      localStorage.removeItem("username");
       state.account_sum = initialStateUser.account_sum;
       state.username = initialStateUser.username;
       state.id = initialStateUser.id;
@@ -39,18 +46,26 @@ const userSlice = createSlice({
       state.account_sum = action.payload.account_sum;
       state.email = action.payload.email;
       state.id = action.payload.id;
+      saveUserToStorage(action.payload);
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.username = action.payload.username;
       state.account_sum = action.payload.account_sum;
       state.email = action.payload.email;
       state.id = action.payload.id;
+      saveUserToStorage(action.payload);
     });
   },
 });
 
+const saveUserToStorage = (payload: User) => {
+  localStorage.setItem("user_id", payload.id);
+  localStorage.setItem("username", payload.username);
+  localStorage.setItem("email", payload.email);
+  localStorage.setItem("account_sum", String(payload.account_sum));
+};
 export const {
-  actions: { logOut, updateAccountSum },
+  actions: { logOut, updateAccountSum, setUser },
   reducer: userReducer,
 } = userSlice;
 

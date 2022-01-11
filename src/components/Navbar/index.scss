@@ -1,0 +1,46 @@
+.navbar {
+  background-color: var(--primary-accent-200);
+  backdrop-filter: blur(5px);
+  transition: 0.25s ease-in;
+  &__item {
+    background: rgba(53, 53, 53, 0);
+    background: linear-gradient(0deg, var(--background) 50%, transparent 50%);
+    text-shadow: 3px 2px 3px rgba(53, 53, 53, 0.2);
+    background-size: 400% 400%;
+    transition: 0.25s ease-in;
+    font-weight: var(--bolder);
+    white-space: nowrap;
+    &__link {
+      color: var(--font-primary);
+      text-decoration: none;
+      transition: 0.25s ease-in;
+    }
+    &:hover {
+      background-position: 0% 100%;
+      .navbar__item__link {
+        color: var(--primary-accent);
+      }
+    }
+  }
+}
+
+.logo {
+  text-decoration: none;
+  color: var(--primary-accent);
+  font-weight: 1100;
+  font-size: 1.5em;
+}
+
+.fa-sticky-note {
+  color: var(--font-primary);
+
+  position: absolute;
+  z-index: -1;
+  font-size: 1.5em;
+  top: 0;
+  transform: rotate(-150deg) translateX(0.8em) translateY(-0.5em);
+}
+.fas.fa-sticky-note {
+  font-size: 1.2em;
+  transform: rotate(-60deg) translateY(-0.2em) translateX(-0.2em);
+}

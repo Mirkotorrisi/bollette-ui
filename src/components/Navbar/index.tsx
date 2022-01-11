@@ -1,3 +1,4 @@
+import "./index.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { logOut, selectUser } from "../../redux/user";
@@ -14,64 +15,76 @@ export const NavBar = () => {
     dispatch(logOut());
   };
   return (
-    <nav className="navbar" id="navbar">
-      <Link className="logo" to="/">
+    <nav className="navbar flex justify-between w-full items-between flex-wrap bg-teal-500">
+      <Link className="navbar__logo mx-6 flex items-center" to="/">
         <h1>
           B<i className="fas fa-futbol"></i>LLETTE
           <i className="far fa-sticky-note"></i>
           <i className="fas fa-sticky-note"></i>
         </h1>
       </Link>
-      <ul className="nav_items_list">
-        {width < 720 && (
-          <button onClick={() => setShowMenu(!showMenu)}>
-            <i className="fas fa-bars"></i>
-          </button>
-        )}
+      <button
+        className="block lg:hidden p-6"
+        onClick={() => setShowMenu(!showMenu)}
+      >
+        <i className="fas fa-bars"></i>
+      </button>
+      <div className="w-full block lg:w-auto">
+        <ul className="text-sm  flex items-between">
+          {((width < 720 && showMenu) || width > 720) && (
+            <>
+              {user.id ? (
+                <>
+                  <li className="navbar__item">
+                    <Link
+                      to="/tickets"
+                      className="navbar__item__link block p-4 lg:inline-block lg:mt-0 mr-4"
+                    >
+                      {user?.username} | {user?.account_sum} $
+                    </Link>
+                  </li>
 
-        {((width < 720 && showMenu) || width > 720) && (
-          <>
-            {user.id ? (
-              <>
-                <li className="nav_item">
-                  <Link to="/tickets" className="nav_item_link">
-                    {user?.username} | {user?.account_sum} $
-                  </Link>
-                </li>
-
-                <li className="nav_item">
-                  <button className="nav_item_link" onClick={handleLogOut}>
-                    Log Out
-                  </button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="nav_item">
-                  <Link to="/login" className="nav_item_link">
-                    Log In
-                  </Link>
-                </li>
-                <li className="nav_item">
-                  <Link to="/register" className="nav_item_link">
-                    Register
-                  </Link>
-                </li>
-              </>
-            )}
-            <li className="nav_item">
-              <Link to="/slot" className="nav_item_link">
-                Slot
-              </Link>
-            </li>
-            <li className="nav_item">
-              <Link to="/credits" className="nav_item_link">
-                Credits
-              </Link>
-            </li>
-          </>
-        )}
-      </ul>
+                  <li className="navbar__item">
+                    <button
+                      className="navbar__item__link block p-4 lg:inline-block lg:mt-0 mr-4"
+                      onClick={handleLogOut}
+                    >
+                      Log Out
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="navbar__item">
+                    <Link
+                      to="/login"
+                      className="navbar__item__link block p-4 lg:inline-block lg:mt-0 mr-4"
+                    >
+                      Log In
+                    </Link>
+                  </li>
+                  <li className="navbar__item">
+                    <Link
+                      to="/register"
+                      className="navbar__item__link block p-4 lg:inline-block lg:mt-0 mr-4"
+                    >
+                      Register
+                    </Link>
+                  </li>
+                </>
+              )}
+              <li className="navbar__item">
+                <Link
+                  to="/slot"
+                  className="navbar__item__link block p-4 lg:inline-block lg:mt-0 mr-4"
+                >
+                  Slot
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </div>
     </nav>
   );
 };

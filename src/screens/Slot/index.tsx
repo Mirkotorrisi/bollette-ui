@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import * as slotresources from "../../assets/slotresources";
 import { spinSlot } from "../../service";
+import "./index.scss";
 
 let prevTime = 0;
 export const Slot = () => {
-  const { background, assets, carouselStyle, numOfWheels, spin } =
+  const { background, assets, carouselStyle, numOfWheels } =
     slotresources.slotresources;
   const [interacted, setInteracted] = useState(false);
   const [repeat, setRepeat] = useState(0);
@@ -23,18 +24,20 @@ export const Slot = () => {
     carouselStyle.height / 2 / Math.tan(Math.PI / assets.length)
   );
   const basicAngle = 360 / assets.length;
-  useFrameLoop((time: number) => {
-    if (time - prevTime < 100) return;
+  useFrameLoop((time) => {
+    if (!time) return;
+    if (time - prevTime < 50) return;
     prevTime = time;
     setTick(time); // this is my frame rate
   });
   useEffect(() => {
-    if (JSON.stringify(wheels) == JSON.stringify(final)) return;
+    if (JSON.stringify(wheels) === JSON.stringify(final)) return;
     setWheels(
       wheels.map((wheel, i) =>
         wheel % assets.length !== final[i] ? wheel + 1 : wheel
       )
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tick]);
   const handleSpin = () => {
     setwin(null);
@@ -63,38 +66,20 @@ export const Slot = () => {
         }, 500);
       }, 2000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [interacted, repeat]);
 
   return (
-    <div
-      style={{
-        background: "#e0e0e0",
-        alignItems: "center",
-        width: "100%",
-        maxWidth: "960px",
-        height: "50vh",
-      }}
-    >
-      <div
-        style={{
-          perspective: "500px",
-          display: "flex",
-        }}
-      >
-        <button onClick={() => handleSpin()}>SPIN</button>
+    <div className="flex items-center w-screen justify-center">
+      <div className="flex flex-col slot justify-between">
+        <button onClick={handleSpin}>SPIN</button>
         {(win || win === 0) && (
           <h1
             style={{
-              position: "absolute",
-              top: 327,
-              left: 201,
-              background: "#f2f2f2",
               border: "2px solid " + assets[win].color,
-              borderRadius: "10px",
-              fontSize: 48,
               color: assets[win].color,
-              zIndex: 1000100,
             }}
+            className="slot__name"
           >
             {assets[win].src.split(".")[0]}
           </h1>
@@ -102,74 +87,57 @@ export const Slot = () => {
         {(win || win === 0) && (
           <h1
             style={{
-              position: "absolute",
-              top: -100,
-              left: "20vw",
-              fontSize: 72,
-              background: "#f2f2f2",
               border: "2px solid " + assets[win].color,
-              borderRadius: "10px",
               color: assets[win].color,
-              zIndex: 1000100,
             }}
+            className="slot__sum"
           >
             {sum}$
           </h1>
         )}
         <img
           src={"img/" + background.src}
-          style={{
-            ...background.style,
-          }}
+          className="slot__background"
+          alt="slot_bg"
         />
-        {wheels.map((wheel, i) => {
-          return (
-            <div
-              style={{
-                position: "absolute",
-                left: carouselStyle.left + i * 25 + "%",
+        {wheels.map((wheel, i) => (
+          <div
+            className="slot__wheel"
+            style={{
+              left: 16 + i * 25 + "%",
 
-                transform: `translateZ(-${tz}px) rotateX(${
-                  !interacted ? angle : (360 / assets.length) * wheel * -1
-                }deg)`,
-                transformStyle: "preserve-3d",
-                height: carouselStyle.height,
-
-                transition: "transform 1s",
-                top: background.style.height / 3,
-              }}
-            >
-              {assets &&
-                assets.map((img, wheel) => {
-                  return (
-                    <img
-                      src={"img/" + img.src}
-                      style={{
-                        transform: `rotateX(${
-                          basicAngle * wheel
-                        }deg) translateZ(${tz}px)`,
-                        background:
-                          win === wheel && Math.round(tick) % 2 === 0
-                            ? assets[wheel].color
-                            : "#f2f2f2",
-                        width: carouselStyle.width,
-                        maxWidth: 192,
-                        height: carouselStyle.height,
-                        position: "absolute",
-                        zIndex: 10001,
-                      }}
-                    />
-                  );
-                })}
-            </div>
-          );
-        })}
+              transform: `translateZ(-${tz}px) rotateX(${
+                !interacted ? angle : (360 / assets.length) * wheel * -1
+              }deg)`,
+            }}
+          >
+            {assets &&
+              assets.map((img, wheel) => (
+                <img
+                  src={"img/" + img.src}
+                  className="slot__wheel__img"
+                  alt="wheel_img"
+                  style={{
+                    transform: `rotateX(${
+                      basicAngle * wheel
+                    }deg) translateZ(${tz}px)`,
+                    background:
+                      win === wheel && Math.round(tick) % 2 === 0
+                        ? assets[wheel].color
+                        : "#f2f2f2",
+                  }}
+                />
+              ))}
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-const useFrameLoop = (callback: (time: number, deltaTime: number) => void) => {
+const useFrameLoop = (
+  callback: (time?: number, deltaTime?: number) => void
+) => {
   const requestID = useRef<number>();
   const previousTime = useRef<number>();
 
@@ -182,10 +150,11 @@ const useFrameLoop = (callback: (time: number, deltaTime: number) => void) => {
     previousTime.current = time;
     requestID.current = requestAnimationFrame(loop);
   };
-  // useEffect(() => {
-  //   requestID.current = requestAnimationFrame(loop);
-  //   return () => {
-  //     callback(undefined);
-  //   };
-  // }, []);
+  useEffect(() => {
+    requestID.current = requestAnimationFrame(loop);
+    return () => {
+      callback(undefined);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };

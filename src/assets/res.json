@@ -13,7 +13,7 @@
   "colorNames": {
     "won": "#26b821",
     "lost": "#ff0000",
-    "ongoing": "#ff5100"
+    "ongoing": "var(--primary-accent)"
   },
   "tech_stack_img": {
     "react": "react.png",

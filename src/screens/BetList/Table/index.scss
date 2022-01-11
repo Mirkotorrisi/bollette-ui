@@ -1,0 +1,84 @@
+.table__header {
+  &__title {
+    font-size: 1.5em;
+    font-weight: var(--bold);
+    color: var(--primary-accent);
+  }
+  &__button {
+    border: 1px solid var(--primary-accent);
+    font-weight: var(--bold);
+
+    border-radius: 10px;
+    &--focused {
+      border-radius: 10px;
+      font-weight: var(--bold);
+      border: 1px solid var(--font-primary);
+      background-color: var(--primary-accent);
+      color: var(--secondary-accent);
+    }
+  }
+}
+
+.bet_buttons {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.164);
+  background: linear-gradient(
+    to right bottom,
+    var(--primary-accent-300),
+    var(--primary-accent-200)
+  );
+  font-weight: var(--bold);
+  border-radius: 10px;
+}
+.even_tab {
+  background-color: var(--primary-accent-400);
+}
+
+.bet_buttons th {
+  color: var(--primary-accent);
+}
+.bet_buttons_row {
+  color: var(--font-primary);
+  margin: 0;
+}
+
+.button_odd {
+  background: var(--grey-300);
+  &_clicked,
+  &:hover {
+    border: none;
+    color: var(--secondary-accent);
+
+    cursor: pointer;
+    background: var(--primary-accent-100);
+  }
+  &__text {
+    font-weight: var(--bolder);
+    font-size: 1.2em;
+  }
+}
+
+.live {
+  color: var(--red);
+  font-weight: 600;
+  border-radius: 10px;
+  background-color: var(--primary-accent-200);
+  animation: glow 2500ms linear infinite 2000ms;
+  max-width: 4em;
+}
+.fa-circle {
+  font-size: 0.5em;
+  animation: pulse 1500ms infinite;
+}
+@keyframes glow {
+  40% {
+    text-shadow: 0 0 8px var(--primary-accent);
+  }
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0px var(--red);
+  }
+  55% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}

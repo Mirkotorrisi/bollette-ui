@@ -1,0 +1,40 @@
+.slot {
+  perspective: 2000px;
+  &__background {
+    height: 480px;
+    z-index: 100;
+    position: relative;
+  }
+
+  &__name,
+  &__sum {
+    position: absolute;
+    border-radius: 10px;
+    z-index: 1000100;
+  }
+  &__name {
+    top: 327px;
+    left: 201px;
+    font-size: 48px;
+  }
+  &__sum {
+    top: -100px;
+    left: 20vw;
+    font-size: 72px;
+  }
+  &__wheel {
+    position: absolute;
+    transform-style: preserve-3d;
+    height: 110px;
+
+    transition: transform 1s;
+    top: 180px;
+    &__img {
+      width: 20vw;
+      max-width: 192px;
+      height: 110px;
+      position: absolute;
+      z-index: 10001;
+    }
+  }
+}

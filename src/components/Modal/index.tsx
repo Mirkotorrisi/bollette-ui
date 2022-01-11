@@ -20,27 +20,27 @@ const Modal = () => {
     e.stopPropagation();
   };
   return (
-    <div className={`modal--${show ? "show" : "hide"}`} onClick={closeModal}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+    <div className={` modal ${show ? "fixed" : "hidden"}`} onClick={closeModal}>
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <h5 className="close" onClick={closeModal}>
           &times;
         </h5>
-        <h2>{title}</h2>
-        <div className="modal_content">
+        <h2 className="modal__title">{title}</h2>
+        <div className="modal_content flex flex-col gap-4">
           {!error && (
             <>
               {maxWin && (
-                <p>
+                <p className="modal__paragraph mt-12 mx-auto">
                   Max win <span>{maxWin}</span>$
                 </p>
               )}
               {ticket_id && (
-                <p>
+                <p className="modal__paragraph mt-12 mx-auto">
                   Ticket id <span>{ticket_id}</span>
                 </p>
               )}
               {account_sum && (
-                <p>
+                <p className="modal__paragraph mt-12 mx-auto">
                   Your balance <span>{account_sum}</span>$
                 </p>
               )}
@@ -48,8 +48,8 @@ const Modal = () => {
           )}
           {error && (
             <>
-              <h4 className="modal_error_status">{status}</h4>
-              <p>{error}</p>
+              <h4 className="modal__error-status">{status}</h4>
+              <p className="modal__paragraph mt-12 mx-auto">{error}</p>
             </>
           )}
         </div>

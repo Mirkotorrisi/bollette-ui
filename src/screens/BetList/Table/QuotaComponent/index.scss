@@ -1,0 +1,13 @@
+.bet_item {
+  &__teams {
+    font-size: 1.2em;
+    &__date {
+      font-size: 0.8em;
+      font-style: italic;
+      color: var(--font-primary);
+    }
+  }
+  &__odd {
+    font-size: 1.5em;
+  }
+}
