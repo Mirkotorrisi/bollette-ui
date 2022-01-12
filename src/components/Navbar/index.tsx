@@ -1,5 +1,5 @@
 import "./index.scss";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { logOut, selectUser } from "../../redux/user";
 import { useSelector } from "react-redux";

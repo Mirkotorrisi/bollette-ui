@@ -8,26 +8,21 @@
 
   &__name,
   &__sum {
-    position: absolute;
     border-radius: 10px;
+    text-shadow: 1px 1px var(--primary-accent);
     z-index: 1000100;
   }
   &__name {
-    top: 327px;
-    left: 201px;
-    font-size: 48px;
+    font-size: 3em;
   }
   &__sum {
-    top: -100px;
-    left: 20vw;
-    font-size: 72px;
+    font-size: 4em;
   }
   &__wheel {
     position: absolute;
     transform-style: preserve-3d;
     height: 110px;
-
-    transition: transform 1s;
+    transition: all 0.5s;
     top: 180px;
     &__img {
       width: 20vw;
@@ -35,6 +30,11 @@
       height: 110px;
       position: absolute;
       z-index: 10001;
+      background-color: var(--background);
+
+      &.animate {
+        animation: bgAnimate 0.5s infinite;
+      }
     }
   }
   &__spin {
@@ -42,10 +42,20 @@
     font-size: 3.3em;
     position: absolute;
     z-index: 1001;
-    bottom: 1em;
+    bottom: 2.3em;
+    border-radius: 10px;
     left: 6em;
     &:hover {
       box-shadow: inset 1px 1px 50px var(--primary-accent);
     }
+  }
+}
+
+@keyframes bgAnimate {
+  from {
+    background-color: var(--background);
+  }
+  to {
+    background-color: var(--primary-accent);
   }
 }

@@ -1,5 +1,5 @@
 import "./index.scss";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Table } from "./Table";
 import { Checkout } from "./Checkout";
 import { Ranking } from "./Ranking";

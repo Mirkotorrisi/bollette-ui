@@ -17,6 +17,7 @@
   &__input {
     border-radius: 10px;
     border: 1px solid var(--font-primary);
+    color: #000000;
     &:focus {
       border-color: var(--primary-accent);
       box-shadow: inset -5px -5px 7px var(--primary-accent-400),
