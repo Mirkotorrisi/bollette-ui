@@ -19,19 +19,7 @@ export interface Ticket {
 }
 
 const initialStateBoll: Ticket = {
-  ticket: [
-    {
-      teams: ["Bologna", "Inter Milan"],
-      start: 1641468600,
-      result: "1",
-      odd: 6.25,
-      won: false,
-    },
-  ],
-  checkout: {
-    ticket_id: 19808,
-    multiplier: 6.25,
-  },
+  ticket: [],
 };
 
 const ticketSlice = createSlice({

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import * as slotresources from "../../assets/slotresources";
 import { spinSlot } from "../../service";
 import "./index.scss";
@@ -72,7 +72,9 @@ export const Slot = () => {
   return (
     <div className="flex items-center w-screen justify-center">
       <div className="flex flex-col slot justify-between">
-        <button onClick={handleSpin}>SPIN</button>
+        <button className="slot__spin px-8" onClick={handleSpin}>
+          SPIN
+        </button>
         {(win || win === 0) && (
           <h1
             style={{

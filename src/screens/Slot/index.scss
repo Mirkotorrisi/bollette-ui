@@ -37,4 +37,15 @@
       z-index: 10001;
     }
   }
+  &__spin {
+    color: transparent;
+    font-size: 3.3em;
+    position: absolute;
+    z-index: 1001;
+    bottom: 1em;
+    left: 6em;
+    &:hover {
+      box-shadow: inset 1px 1px 50px var(--primary-accent);
+    }
+  }
 }
