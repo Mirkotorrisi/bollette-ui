@@ -10,6 +10,7 @@ import {
 } from "../../../redux/tickets";
 import { useAppDispatch } from "../../../store";
 import { parseDate } from "../../../utils/betStartParser";
+import { showModal } from "../../../redux/modals";
 
 export const Checkout = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ export const Checkout = () => {
     const res = await submitCheckout(sum, ticket_id!);
     dispatch(clearTicket());
     dispatch(updateAccountSum(res.account_sum));
+    dispatch(showModal(res));
   };
   return (
     <section

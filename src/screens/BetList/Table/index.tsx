@@ -1,5 +1,5 @@
 import "./index.scss";
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { QuotaComponent } from "./QuotaComponent";
 import { fetchBetList, Match } from "../../../service";
 // import mock from "../../../assets/mock.json";

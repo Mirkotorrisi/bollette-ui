@@ -1,3 +1,4 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { hideModal, selectModal } from "../../redux/modals";
@@ -25,25 +26,21 @@ const Modal = () => {
         <h5 className="close" onClick={closeModal}>
           &times;
         </h5>
-        <h2 className="modal__title">{title}</h2>
+        <h2 className="modal__title">{title || "Bet Placed"}</h2>
         <div className="modal_content flex flex-col gap-4">
           {!error && (
             <>
-              {maxWin && (
-                <p className="modal__paragraph mt-12 mx-auto">
-                  Max win <span>{maxWin}</span>$
-                </p>
-              )}
-              {ticket_id && (
-                <p className="modal__paragraph mt-12 mx-auto">
-                  Ticket id <span>{ticket_id}</span>
-                </p>
-              )}
-              {account_sum && (
-                <p className="modal__paragraph mt-12 mx-auto">
-                  Your balance <span>{account_sum}</span>$
-                </p>
-              )}
+              <h4 className="modal__error-status">
+                <i className="fas fa-futbol"></i>
+              </h4>
+
+              <p className="modal__paragraph mt-12 mx-auto">
+                Max win: {maxWin}$
+              </p>
+              <p className="modal__paragraph mx-auto">Ticket id: {ticket_id}</p>
+              <p className="modal__paragraph mx-auto">
+                Your balance: {account_sum}$
+              </p>
             </>
           )}
           {error && (
