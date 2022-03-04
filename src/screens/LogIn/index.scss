@@ -1,0 +1,67 @@
+.login {
+  &__title {
+    font-size: 2.5em;
+    color: var(--primary-accent);
+    font-weight: var(--bold);
+  }
+}
+
+.form {
+  border-radius: 10px;
+  background-color: var(--primary-accent-200);
+
+  backdrop-filter: blur(5px);
+  box-shadow: inset -5px -5px 7px rgba(255, 255, 255, 0.352),
+    inset 2px 2px 2px rgba(232, 232, 232, 0.5);
+
+  &__input {
+    border-radius: 10px;
+    border: 1px solid var(--font-primary);
+    color: #000000;
+    &:focus {
+      border-color: var(--primary-accent);
+      box-shadow: inset -5px -5px 7px var(--primary-accent-400),
+        inset 2px 2px 2px var(--primary-accent-100);
+    }
+  }
+  &__label {
+    &--focused {
+      color: var(--primary-accent);
+    }
+    font-weight: var(--bold);
+  }
+  &__submit {
+    border-radius: 14px;
+    font-weight: var(--bold);
+    font-size: 1.5em;
+    background-color: var(--primary-accent-100);
+    color: var(--secondary-accent);
+    border-top: 1px solid var(--primary-accent-200);
+    border-left: 1px solid var(--primary-accent-200);
+    box-shadow: 2px 2px 3px rgba(93, 93, 93, 0.5),
+      -2px -2px 7px rgba(142, 142, 142, 0.352);
+    &:hover {
+      cursor: pointer;
+      box-shadow: inset 2px 2px 3px rgba(82, 82, 82, 0.5),
+        inset -2px -2px 7px rgba(159, 159, 159, 0.352);
+    }
+  }
+  &__redirect {
+    font-size: 1.5em;
+    color: var(--font-primary);
+    font-weight: var(--bold);
+    text-shadow: 2px -2px 2px rgba(255, 255, 255, 0.352);
+  }
+}
+
+.errors {
+  text-align: center;
+  padding: 0;
+}
+.errors li {
+  font-weight: var(--bold);
+  font-size: 1.3em;
+  padding: 0;
+  color: var(--red);
+  list-style: none;
+}

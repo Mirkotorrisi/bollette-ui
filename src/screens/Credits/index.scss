@@ -1,0 +1,50 @@
+.tech_cont {
+  position: relative;
+}
+
+.credits {
+  &__title {
+    color: var(--primary-accent);
+    font-weight: var(--bold);
+    font-size: 2.5em;
+  }
+  &__card {
+    overflow: show;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    background-color: var(--grey-200);
+    border-left: 1px solid var(--grey-300);
+    border-top: 1px solid var(--font-primary);
+    backdrop-filter: blur(25px);
+    max-width: 30em;
+    border-radius: 10px;
+    &__title {
+      font-size: 2em;
+      color: var(--primary-accent);
+      text-decoration: none;
+      &:hover {
+        animation: glow 1s infinite;
+      }
+    }
+    &__paragraph {
+      color: var(--secondary-accent);
+      font-size: 1.3em;
+
+      font-weight: var(--bold);
+    }
+    &__link {
+      color: var(--primary-accent);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.tech_logo {
+  max-width: 350px;
+  max-height: 350px;
+  position: absolute;
+  top: -25%;
+  left: -15%;
+  opacity: 0.7;
+}

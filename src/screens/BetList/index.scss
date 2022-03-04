@@ -1,0 +1,71 @@
+.league_buttons {
+  &__title {
+    font-size: 1.5em;
+    font-weight: var(--bold);
+  }
+}
+.league_button {
+  border: 1px solid var(--primary-accent-100);
+  font-weight: var(--bold);
+  background-size: 25%;
+  min-width: 10em;
+  background-position: 100% 30%;
+  background-repeat: no-repeat;
+  white-space: nowrap;
+  &--focused {
+    background-color: var(--primary-accent);
+    background-size: 30%;
+    min-width: 10em;
+    background-position: 110% 10%;
+    font-weight: var(--bold);
+
+    background-repeat: no-repeat;
+    white-space: nowrap;
+    color: var(--secondary-accent);
+  }
+
+  &:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  &:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: var(--primary-accent-100);
+    color: var(--font-primary);
+    background-size: 30%;
+    background-repeat: no-repeat;
+    white-space: nowrap;
+  }
+}
+
+.premierLeague {
+  background-image: url("../../assets/flags/premier_league.png");
+}
+.serieA {
+  background-image: url("../../assets/flags/serie_a.png");
+}
+.serieB {
+  background-image: url("../../assets/flags/seerie_b.png");
+}
+.primeiraLiga {
+  background-image: url("../../assets/flags/primeira_liga.png");
+}
+.laLiga {
+  background-image: url("../../assets/flags/la_liga.png");
+}
+.europaLeague {
+  background-image: url("../../assets/flags/europa_league.png");
+}
+.championsLeague {
+  background-image: url("../../assets/flags/champions_league.png");
+}
+.ligaMax {
+  background-image: url("../../assets/flags/liga_max.svg");
+}
+.bundesliga {
+  background-image: url("../../assets/flags/bundesliga.png");
+}

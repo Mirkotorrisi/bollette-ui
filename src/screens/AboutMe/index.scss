@@ -1,0 +1,68 @@
+.about_me {
+  margin: auto;
+  width: 70%;
+  &__title {
+    color: var(--primary-accent);
+    font-size: 2.5em;
+    transform: translateX(15%);
+    &:before {
+      position: absolute;
+      transform: translateX(-100%) translateY(1em);
+      z-index: -1;
+      content: "";
+      height: 2px;
+      width: 200px;
+      background-color: var(--primary-accent);
+    }
+  }
+  &__paragraph {
+    text-align: left;
+    color: var(--font-primary);
+    font-weight: var(--bolder);
+    font-size: 1.5em;
+    a {
+      color: var(--primary-accent);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.profile_pic {
+  overflow: hidden;
+  border-radius: 100%;
+  height: 30vw;
+  width: 30vw;
+  float: left;
+  shape-outside: circle(50%);
+}
+
+.profile_pic:hover .flip-card-inner,
+.profile_pic:focus .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-inner {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  z-index: 2;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}

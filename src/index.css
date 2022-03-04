@@ -1,8 +1,45 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,600&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bolder: 900;
+  --bolder: 700;
+  --background: #ffffff;
+  --primary-accent: #ff5100;
+  --primary-accent-100: #ff5100a3;
+  --primary-accent-200: #ff51004a;
+  --primary-accent-300: #ffc3adce;
+  --primary-accent-400: #fe98735f;
+  --secondary-accent: #ffffff;
+  --red: #ff2200;
+  --green: #3aae00;
+  --grey-100: #5d5d5d;
+  --grey-200: #72727283;
+  --grey-300: #f6f6f654;
+  --font-primary: #232323;
+}
+[data-theme="dark"] {
+  --bolder: 700;
+  --bold: 500;
+  --background: #4b4b4b;
+  --primary-accent: #ff5100;
+  --primary-accent-100: #9b1e00;
+  --primary-accent-200: #c6280062;
+  --primary-accent-300: #ff613943;
+  --primary-accent-400: #c628003b;
+  --secondary-accent: #ffffff;
+  --red: #ff2200;
+  --green: #3aae00;
+  --grey-100: #ababab;
+  --grey-200: #39393983;
+  --grey-300: #343434b2;
+  --font-primary: #ffffff;
+}
 
 body {
   margin: 0;
-
   font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -28,5 +65,5 @@ code {
   box-shadow: 1px 1px 10px #000000;
 }
 .switch-theme:hover {
-  box-shadow: 1px 1px 10px #ff5100;
+  box-shadow: 1px 1px 10px var(--primary-accent);
 }
