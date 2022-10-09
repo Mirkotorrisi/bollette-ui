@@ -39,12 +39,13 @@
   }
   &__spin {
     color: transparent;
-    font-size: 3.3em;
+    width: 25%;
+    height: 72px;
     position: absolute;
     z-index: 1001;
-    bottom: 2.3em;
+    bottom: 22%;
     border-radius: 10px;
-    left: 6em;
+    left: 40%;
     &:hover {
       box-shadow: inset 1px 1px 50px var(--primary-accent);
     }
