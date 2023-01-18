@@ -34,7 +34,7 @@ export const Slot = () => {
   };
 
   return (
-    <div className="flex items-center w-screen justify-center">
+    <div className="flex items-center w-full justify-center">
       <div className="flex flex-col slot justify-between">
         <button className="slot__spin px-8" onClick={handleSpin}>
           SPIN
