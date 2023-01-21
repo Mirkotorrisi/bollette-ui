@@ -4,6 +4,7 @@ import { getTickets } from "../../service";
 import { useSelector } from "react-redux";
 import { faClasses } from "../../assets/res.json";
 import { selectUser } from "../../redux/user";
+import React from "react";
 
 type betStatus = "won" | "lost" | "ongoing";
 interface Ticket {
@@ -11,7 +12,7 @@ interface Ticket {
   bolletta_status: string;
   max_win: number;
   bet_import: number;
-  ticket: {
+  tickets: {
     team_1: string;
     team_2: string;
     bet_status: betStatus;
@@ -57,7 +58,7 @@ export const UserTickets = () => {
       </div>
       <div className="tickets_container w-full py-8 md:p-16">
         {filtered?.map(
-          ({ ticket_id, bolletta_status, max_win, bet_import, ticket }) => (
+          ({ ticket_id, bolletta_status, max_win, bet_import, tickets }) => (
             <div className="tickets" key={ticket_id}>
               <table key={ticket_id} className={`tickets__item p-4`}>
                 <caption className="tickets__caption">
@@ -66,7 +67,7 @@ export const UserTickets = () => {
                   </h4>
                 </caption>
                 <tbody className={` tickets__item__body--${bolletta_status}`}>
-                  {ticket.map(
+                  {tickets.map(
                     ({ team_1, team_2, bet_status, result, odd }, i) => (
                       <tr className="bet_item " key={i}>
                         <td className="px-4 py-1">{team_1}</td>

@@ -2,33 +2,18 @@ import "./index.scss";
 import React, { useState, useEffect, useCallback } from "react";
 import { QuotaComponent } from "./QuotaComponent";
 import { fetchBetList, Match } from "../../../service";
-// import mock from "../../../assets/mock.json";
+import mock from "../../../assets/mock.js";
 import { CHAMPIONSHIPS, MARKETS } from "../../../consts";
 import { TableHead } from "./TableHead";
+import { useQueryBetList } from "./hooks/useQueryBetList";
 
 interface Props {
   championship: CHAMPIONSHIPS;
 }
 export const Table = ({ championship }: Props) => {
-  const [list, setList] = useState<Match[]>();
   const [market, setMarket] = useState<MARKETS>(MARKETS.H2H);
 
-  const updateList = useCallback(async () => {
-    const res = await fetchBetList(championship, market);
-    setList(res);
-    // setList(mock);
-  }, [market, championship]);
-
-  useEffect(() => {
-    updateList();
-  }, [updateList]);
-
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      updateList();
-    }, 60000);
-    return () => clearInterval(interval);
-  }, [updateList]);
+  const list = useQueryBetList({ market, championship, delay: 60000 });
 
   return (
     <div className="flex flex-grow flex-col">
@@ -55,13 +40,12 @@ export const Table = ({ championship }: Props) => {
       </div>
       {list?.length ? (
         <table className="bet_buttons lg:mx-8">
-          <TableHead market={market} setMarket={setMarket} />
+          <TableHead market={market} />
           <tbody>
             {list?.map((betQuota: Match, index: number) => (
               <QuotaComponent
                 key={championship + market + index}
                 betQuota={betQuota}
-                matchNumber={index}
                 isEven={index % 2 === 0}
                 market={market}
                 start={betQuota.start}
@@ -69,11 +53,7 @@ export const Table = ({ championship }: Props) => {
             ))}
           </tbody>
         </table>
-      ) : (
-        <h2 className="px-8 text-lg">
-          Something went wrong while fetching odds
-        </h2>
-      )}
+      ) : null}
     </div>
   );
 };

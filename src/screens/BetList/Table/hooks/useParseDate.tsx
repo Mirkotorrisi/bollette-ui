@@ -1,7 +1,6 @@
 import moment from "moment";
 
-export const useParseDate = (datetime: number) => {
-  datetime *= 1000;
+export const useParseDate = (datetime: string) => {
   const isLive = moment(datetime).isBefore(moment());
   const isTomorrow = moment(datetime).isSame(moment().add(1, "day"), "day");
   const isToday = moment(datetime).isSame(moment(), "day");
@@ -20,7 +19,7 @@ export const useParseDate = (datetime: number) => {
   };
 };
 
-const parseMinutes = (date: number) => {
+const parseMinutes = (date: string) => {
   let minutes = moment.duration(moment().diff(date)).asMinutes();
   if (minutes < 45) return minutes.toFixed(0);
   else if (minutes < 60) return "Half Time";

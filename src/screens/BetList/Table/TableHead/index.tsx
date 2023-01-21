@@ -1,11 +1,11 @@
+import React from "react";
 import { MARKETS } from "../../../../consts";
 import "./index.scss";
 interface Props {
   market: MARKETS;
-  setMarket: (market: MARKETS) => void;
 }
 
-export const TableHead = ({ market, setMarket }: Props) => (
+export const TableHead = ({ market }: Props) => (
   <thead className="bet_buttons_head">
     <tr>
       <th className="py-2">Event</th>

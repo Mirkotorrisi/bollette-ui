@@ -31,8 +31,8 @@ const setupAxiosInstance = ({
       const modal = {
         show: true,
         title: "Something went wrong",
-        error: error.response?.data,
-        status: error.response?.status,
+        error: error.response?.data?.message || error.response?.data?.error,
+        status: error.response?.data?.statusCode,
       };
       dispatch(hideLoader());
       dispatch(showModal(modal));

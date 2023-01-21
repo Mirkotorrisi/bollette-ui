@@ -1,3 +1,5 @@
+import React from "react";
+
 interface Props {
   sign: string;
   index: number;
@@ -17,17 +19,11 @@ export const BetButton = ({
     <td
       id={`${sign}-${index}`}
       key={`${sign}-${index}`}
-      className={
-        isSelected
-          ? "p-2 text-center button_odd_clicked"
-          : "p-2 text-center button_odd"
-      }
+      className={`text-center button_odd${isSelected ? "_clicked" : ""}`}
     >
       <button
-        className="py-2 button_odd__text"
-        onClick={() => {
-          submitOrRemoveBet(sign);
-        }}
+        className="w-full py-4 button_odd__text"
+        onClick={() => submitOrRemoveBet(sign)}
       >
         {odd}
       </button>

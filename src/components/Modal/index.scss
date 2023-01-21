@@ -8,12 +8,10 @@
     height: clamp(300px, 40vh, 20em);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     background-color: var(--primary-accent-200);
-    border-top: 1px solid var(--primary-accent);
-    border-left: 1px solid var(--primary-accent);
     backdrop-filter: blur(40px);
     transition: 0.5s;
     border-radius: 20px;
-    animation: coming_from_top cubic-bezier(0.8, 0.1, 0.5, 1.21) 1.8s;
+    animation: coming_from_top cubic-bezier(0.8, 0.1, 0.5, 1.21) 0.5s;
   }
   &__title {
     font-size: 3.5em;
@@ -32,8 +30,10 @@
     animation: glow 3s infinite;
     z-index: -2;
     position: absolute;
-    right: -0.2em;
-    font-size: clamp(4.5em, 15vw, 25em);
+    right: -0.1em;
+    bottom: 0;
+    font-size: clamp(4.5em, 10vw, 12.5em);
+    line-height: 0.5em;
     color: var(--primary-accent);
   }
 }
@@ -46,19 +46,19 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-12%);
+    transform: translateY(-5%);
   }
   60% {
     transform: translateY(0);
   }
   70% {
-    transform: translateY(-4%);
+    transform: translateY(-3%);
   }
   80% {
     transform: translateY(0);
   }
   90% {
-    transform: translateY(-2%);
+    transform: translateY(-1%);
   }
   100% {
     transform: translateY(0%);

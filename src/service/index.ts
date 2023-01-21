@@ -2,28 +2,28 @@ import { CHAMPIONSHIPS, MARKETS } from "./../consts/index";
 import { getAxiosInstance } from "./getAxiosInstance";
 
 export const placeBet = async (
-  match: number,
-  odd: string,
+  matchId: string,
+  result: string,
   ticket_id?: number
 ) => {
   const res = await getAxiosInstance().request({
     method: "post",
     url: "/bets",
     data: {
-      match,
-      odd,
+      matchId,
+      result,
       ticket_id,
     },
   });
 
   return res;
 };
-export const removeBet = async (match: number, ticket_id: number) => {
+export const removeBet = async (matchId: string, ticket_id: number) => {
   const res = await getAxiosInstance().request({
     method: "delete",
     url: "/bets",
     data: {
-      match,
+      matchId,
       ticket_id,
     },
   });
@@ -31,9 +31,9 @@ export const removeBet = async (match: number, ticket_id: number) => {
 };
 
 export enum SIGN {
-  HOME = "1",
-  VISITOR = "2",
-  DRAW = "X",
+  HOME = "home",
+  VISITOR = "away",
+  DRAW = "draw",
   OVER = "over",
   UNDER = "under",
 }
@@ -42,8 +42,9 @@ export type Odds = {
   [key in SIGN]?: number;
 };
 export interface Match {
+  matchId: string;
   teams: string[];
-  start: number;
+  start: string;
   odds: Odds;
 }
 

@@ -33,7 +33,7 @@ export const Checkout = () => {
       <h2 className="mb-4 checkout__title hidden lg:block">Your ticket</h2>
       <div className="checkout p-8">
         <button
-          className="block flex justify-between mb-4 w-full lg:hidden checkout__show-btn"
+          className="flex justify-between mb-4 w-full lg:hidden checkout__show-btn"
           onClick={() => setShowTotalContainer(!showTotalContainer)}
           style={{
             animation: `superglow ${ticket.length}s`,
@@ -45,25 +45,23 @@ export const Checkout = () => {
           ></i>
         </button>
         {ticket_id &&
-          ticket?.map((bet, index) => (
+          ticket?.map(({ teams, matchId, start, result, odd }, index) => (
             <div className="checkout__item flex justify-between" key={index}>
               <div className="checkout__item__match flex flex-col">
                 <span>
-                  {bet.teams[0]}-{bet.teams[1]}
+                  {teams[0]}-{teams[1]}
                 </span>
-                <i className="checkout__item__dates">
-                  {parseDate(+bet.start * 1000)}
-                </i>
+                <i className="checkout__item__dates">{parseDate(start)}</i>
               </div>
               <div className="flex text-right">
                 <div className="flex flex-col justify-between mx-4">
-                  <span className="checkout__item__result ">{bet.result}</span>
-                  <span className="checkout__item__odd">{bet.odd}</span>
+                  <span className="checkout__item__result ">{result}</span>
+                  <span className="checkout__item__odd">{odd}</span>
                 </div>
                 <button
                   className="checkout__item__del"
                   onClick={() => {
-                    dispatch(removeBetFromTicket({ matchNumber: index }));
+                    dispatch(removeBetFromTicket({ matchId }));
                   }}
                 >
                   <i className="fas fa-trash"></i>

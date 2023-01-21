@@ -5,30 +5,21 @@ import { usePlaceBet } from "../hooks/usePlaceBet";
 import { BetButton } from "./BetButton";
 import { useParseDate } from "../hooks/useParseDate";
 import { Match, SIGN } from "../../../../service";
+import React from "react";
 
 interface Props {
   market: MARKETS;
   betQuota: Match;
-  matchNumber: number;
-  start: number;
+  start: string;
   isEven: boolean;
 }
 
-export const QuotaComponent = ({
-  market,
-  betQuota,
-  matchNumber,
-  start,
-  isEven,
-}: Props) => {
+export const QuotaComponent = ({ market, betQuota, start, isEven }: Props) => {
   const signs =
     market === MARKETS.H2H
       ? [SIGN.HOME, SIGN.DRAW, SIGN.VISITOR]
       : [SIGN.OVER, SIGN.UNDER];
-  const { submitOrRemoveBet, isSelected } = usePlaceBet(
-    betQuota.teams,
-    matchNumber
-  );
+  const { submitOrRemoveBet, isSelected } = usePlaceBet(betQuota.matchId);
   const { date, time, isLive } = useParseDate(start);
   return (
     <tr

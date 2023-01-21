@@ -21,27 +21,29 @@ const Modal = () => {
     e.stopPropagation();
   };
   return (
-    <div className={` modal ${show ? "fixed" : "hidden"}`} onClick={closeModal}>
+    <div className={`modal ${show ? "fixed" : "hidden"}`} onClick={closeModal}>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <h5 className="close" onClick={closeModal}>
           &times;
         </h5>
-        <h2 className="modal__title">{title || "Bet Placed"}</h2>
+        <h2 className="px-4 modal__title">{title || "Bet Placed"}</h2>
         <div className="modal_content flex flex-col gap-4">
-          {!error && (
-            <>
-              <h4 className="modal__error-status">
-                <i className="fas fa-futbol"></i>
-              </h4>
+          {maxWin && ticket_id && (
+            <h4 className="modal__error-status">
+              <i className="fas fa-futbol"></i>
+            </h4>
+          )}
 
-              <p className="modal__paragraph mt-12 mx-auto">
-                Max win: {maxWin}$
-              </p>
-              <p className="modal__paragraph mx-auto">Ticket id: {ticket_id}</p>
-              <p className="modal__paragraph mx-auto">
-                Your balance: {account_sum}$
-              </p>
-            </>
+          {maxWin && (
+            <p className="modal__paragraph mt-12 mx-auto">Max win: {maxWin}$</p>
+          )}
+          {ticket_id && (
+            <p className="modal__paragraph mx-auto">Ticket id: {ticket_id}</p>
+          )}
+          {account_sum && (
+            <p className="modal__paragraph mx-auto">
+              Your balance: {account_sum}$
+            </p>
           )}
           {error && (
             <>

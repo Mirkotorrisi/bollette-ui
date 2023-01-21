@@ -1,5 +1,5 @@
 {
-  "rootUrl": "https://bollette-server.herokuapp.com/",
+  "rootUrl": "https://bollette-server-v2.mirkotorrisi1.repl.co/",
   "faClasses": {
     "won": "fas fa-check-circle",
     "lost": "fas fa-times",

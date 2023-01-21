@@ -3,10 +3,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { placeBet, removeBet } from "../service";
 
 export interface Bet {
+  matchId: string;
   teams: string[];
   result: string;
   odd: number;
-  start: number;
+  start: string;
   won: boolean;
 }
 export interface Ticket {
@@ -52,22 +53,22 @@ export default ticketReducer;
 
 export const addBetToTicket = createAsyncThunk<
   Ticket,
-  { matchNumber: number; result: string },
+  { matchId: string; result: string },
   { state: RootState }
->("tickets/add", async ({ matchNumber, result }, thunkAPI) => {
+>("tickets/add", async ({ matchId, result }, thunkAPI) => {
   const state = thunkAPI.getState();
   const ticket_id = selectTicket(state).checkout?.ticket_id;
-  const response = await placeBet(matchNumber, result, ticket_id);
+  const response = await placeBet(matchId, result, ticket_id);
   return response.data;
 });
 
 export const removeBetFromTicket = createAsyncThunk<
   Ticket,
-  { matchNumber: number },
+  { matchId: string },
   { state: RootState }
->("tickets/remove", async ({ matchNumber }, thunkAPI) => {
+>("tickets/remove", async ({ matchId }, thunkAPI) => {
   const state = thunkAPI.getState();
   const ticket_id = selectTicket(state).checkout?.ticket_id;
-  const response = await removeBet(matchNumber, ticket_id!);
+  const response = await removeBet(matchId, ticket_id!);
   return response.data;
 });

@@ -23,11 +23,15 @@ export const Slot = () => {
       setWheels((prev) => prev.map((i) => i + 1));
     }, 50);
     setTimeout(async () => {
-      const res = await spinSlot(2, numOfWheels, assets.length);
-      if (res) {
-        setWheels(res.results);
-        res.duplicates.length && setwin(res.duplicates[0]);
-        res.sum && setsum(res.sum);
+      try {
+        const res = await spinSlot(2, numOfWheels, assets.length);
+        if (res) {
+          setWheels(res.results);
+          res.duplicates.length && setwin(res.duplicates[0]);
+          res.sum && setsum(res.sum);
+        }
+      } catch (error) {
+        clearInterval(interval);
       }
       clearInterval(interval);
     }, Math.random() * 5000);
