@@ -18,6 +18,7 @@
   --grey-100: #5d5d5d;
   --grey-200: #72727283;
   --grey-300: #f6f6f654;
+  --grey-400: #ffe8df;
   --font-primary: #232323;
 }
 [data-theme="dark"] {
@@ -34,7 +35,8 @@
   --green: #3aae00;
   --grey-100: #ababab;
   --grey-200: #39393983;
-  --grey-300: #343434b2;
+  --grey-300: #4646465d;
+  --grey-400: #4b3d3d;
   --font-primary: #ffffff;
 }
 

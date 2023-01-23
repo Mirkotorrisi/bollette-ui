@@ -1,21 +1,21 @@
 import { RootState } from "./../store";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { placeBet, removeBet } from "../service";
+import { createSlice } from "@reduxjs/toolkit";
+import { Match } from "../service";
 
 export interface Bet {
+  id: string;
   matchId: string;
   teams: string[];
   result: string;
   odd: number;
   start: string;
-  won: boolean;
+  won?: boolean;
+  prevOdd?: number;
 }
 export interface Ticket {
   ticket: Bet[];
-  checkout?: {
-    ticket_id: number;
-    multiplier: number;
-  };
+  multiplier?: number;
+
   isLoading?: boolean;
 }
 
@@ -28,47 +28,57 @@ const ticketSlice = createSlice({
   initialState: initialStateBoll,
   reducers: {
     clearTicket(state) {
-      state.checkout = undefined;
+      state.multiplier = undefined;
+      state.ticket = [];
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(addBetToTicket.fulfilled, (state, action) => {
-      state.ticket = action.payload.ticket;
-      state.checkout = action.payload.checkout;
-    });
-    builder.addCase(removeBetFromTicket.fulfilled, (state, action) => {
-      state.ticket = action.payload.ticket;
-      state.checkout = action.payload.checkout;
-    });
+    addBetToTicket(state, action) {
+      const { odds, ...match } = action.payload.match;
+      const oddRes = action.payload.result;
+      const bet = { result: oddRes, odd: odds[oddRes], ...match };
+      const filtered = state.ticket.filter(
+        (bet) => bet.matchId !== action.payload.match.matchId
+      );
+
+      state.ticket = [...filtered, bet];
+      state.multiplier = [...filtered, bet].reduce(
+        (acc, match) => (acc *= match.odd),
+        1
+      );
+    },
+    removeBetFromTicket(state, action) {
+      const filtered = state.ticket.filter(
+        (bet) => bet.matchId !== action.payload.matchId
+      );
+      state.ticket = filtered;
+      state.multiplier = filtered?.length
+        ? filtered.reduce((acc, match) => (acc *= match.odd), 1)
+        : 0;
+    },
+    updateTicketOdds(state, action) {
+      const newTicket = state.ticket.map((bet) => {
+        const updatedBet = action.payload.find(
+          (b: Bet) => b.matchId === bet.matchId
+        );
+        return updatedBet ?? bet;
+      });
+      state.ticket = newTicket;
+      state.multiplier = newTicket.reduce(
+        (acc, match) => (acc *= match.odd),
+        1
+      );
+    },
   },
 });
 export const selectTicket = (state: RootState) => state.ticket;
 
 export const {
-  actions: { clearTicket },
+  actions: {
+    clearTicket,
+    addBetToTicket,
+    removeBetFromTicket,
+    updateTicketOdds,
+  },
   reducer: ticketReducer,
 } = ticketSlice;
 
 export default ticketReducer;
-
-export const addBetToTicket = createAsyncThunk<
-  Ticket,
-  { matchId: string; result: string },
-  { state: RootState }
->("tickets/add", async ({ matchId, result }, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const ticket_id = selectTicket(state).checkout?.ticket_id;
-  const response = await placeBet(matchId, result, ticket_id);
-  return response.data;
-});
-
-export const removeBetFromTicket = createAsyncThunk<
-  Ticket,
-  { matchId: string },
-  { state: RootState }
->("tickets/remove", async ({ matchId }, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const ticket_id = selectTicket(state).checkout?.ticket_id;
-  const response = await removeBet(matchId, ticket_id!);
-  return response.data;
-});

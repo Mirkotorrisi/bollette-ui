@@ -14,10 +14,9 @@
 }
 
 .checkout {
-  background-color: var(--grey-300);
-  box-shadow: inset -2px -2px 7px rgba(255, 255, 255, 0.229),
-    inset 0px 1px 1px rgba(232, 232, 232, 0.322),
-    1px 1px 1px rgba(0, 0, 0, 0.103);
+  background-color: var(--grey-400);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.164);
+
   backdrop-filter: blur(50px);
   border-radius: 10px;
   height: fit-content;
@@ -105,6 +104,25 @@
   animation: tick 2s infinite;
 }
 
+.odds_changed {
+  font-size: 1.5em;
+  border-radius: 4px;
+  background-color: var(--primary-accent);
+  color: var(--secondary-accent);
+  font-weight: 700;
+}
+.decrement_odd {
+  color: var(--red);
+  font-weight: 700;
+}
+.increment_odd {
+  color: var(--green);
+  font-weight: 700;
+}
+.canc_odd {
+  color: var(--gre-100y);
+  text-decoration: line-through;
+}
 @media (max-width: 1025px) {
   .checkout {
     width: 100vw;

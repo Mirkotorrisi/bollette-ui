@@ -9,18 +9,17 @@ import React from "react";
 
 interface Props {
   market: MARKETS;
-  betQuota: Match;
-  start: string;
+  match: Match;
   isEven: boolean;
 }
 
-export const QuotaComponent = ({ market, betQuota, start, isEven }: Props) => {
+export const QuotaComponent = ({ market, match, isEven }: Props) => {
   const signs =
     market === MARKETS.H2H
       ? [SIGN.HOME, SIGN.DRAW, SIGN.VISITOR]
       : [SIGN.OVER, SIGN.UNDER];
-  const { submitOrRemoveBet, isSelected } = usePlaceBet(betQuota.matchId);
-  const { date, time, isLive } = useParseDate(start);
+  const { submitOrRemoveBet, isSelected } = usePlaceBet(match);
+  const { date, time, isLive } = useParseDate(match.start);
   return (
     <tr
       className={` bet_buttons_row${isLive ? " row_live" : ""}${
@@ -28,9 +27,9 @@ export const QuotaComponent = ({ market, betQuota, start, isEven }: Props) => {
       }`}
     >
       <td className="pl-4 py-4 bet_item__teams flex flex-col lg:flex-row">
-        <span>{betQuota.teams[0]}</span>
+        <span>{match.teams[0]}</span>
         <span className="hidden lg:block"> - </span>
-        <span>{betQuota.teams[1]}</span>
+        <span>{match.teams[1]}</span>
         {isLive && (
           <span className="live px-2 lg:ml-3 flex items-center">
             Live<i className="fas fa-circle ml-2"></i>
@@ -51,7 +50,7 @@ export const QuotaComponent = ({ market, betQuota, start, isEven }: Props) => {
         <BetButton
           sign={sign}
           index={index}
-          odd={betQuota.odds[sign]}
+          odd={match.odds[sign]}
           isSelected={isSelected(sign)}
           submitOrRemoveBet={submitOrRemoveBet}
         />

@@ -1,21 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
 import mock from "../../../../assets/mock";
-import { CHAMPIONSHIPS, MARKETS } from "../../../../consts";
+import { CHAMPIONSHIPS } from "../../../../consts";
 import { fetchBetList, Match } from "../../../../service";
+import { parseMinutes } from "./useParseDate";
 
 interface Props {
-  market: MARKETS;
   championship: CHAMPIONSHIPS;
   delay: number;
 }
 
-export const useQueryBetList = ({ market, championship, delay }: Props) => {
+export const useQueryBetList = ({ championship, delay }: Props) => {
   const [list, setList] = useState<Match[]>();
 
   const updateList = useCallback(async () => {
-    const res = await fetchBetList(championship, market);
+    const res = await fetchBetList(championship);
     setList(res);
-  }, [market, championship]);
+  }, [championship]);
 
   useEffect(() => {
     updateList();
@@ -26,7 +26,10 @@ export const useQueryBetList = ({ market, championship, delay }: Props) => {
       updateList();
     }, delay);
     return () => clearInterval(interval);
-  }, [updateList]);
+  }, [updateList, delay]);
 
-  return list;
+  return list?.filter((match) => {
+    const minutes = parseMinutes(match.start);
+    return isNaN(+minutes) || +minutes < 95;
+  });
 };

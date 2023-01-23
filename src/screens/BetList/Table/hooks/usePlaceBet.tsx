@@ -5,13 +5,14 @@ import {
   removeBetFromTicket,
   selectTicket,
 } from "../../../../redux/tickets";
+import { Match } from "../../../../service";
 import { useAppDispatch } from "../../../../store";
 
-export const usePlaceBet = (selectedMatchId: string) => {
+export const usePlaceBet = (match: Match) => {
   const { ticket } = useSelector(selectTicket);
   const dispatch = useAppDispatch();
   const selectedBet = ticket.find(
-    ({ matchId }: Bet) => matchId === selectedMatchId
+    ({ matchId }: Bet) => matchId === match.matchId
   );
   const isSelected = (result: string) => selectedBet?.result === result;
 
@@ -19,13 +20,13 @@ export const usePlaceBet = (selectedMatchId: string) => {
     if (isSelected(result)) {
       dispatch(
         removeBetFromTicket({
-          matchId: selectedMatchId,
+          matchId: match.matchId,
         })
       );
       return;
     }
 
-    dispatch(addBetToTicket({ matchId: selectedMatchId, result }));
+    dispatch(addBetToTicket({ match, result }));
   };
 
   return { submitOrRemoveBet, isSelected };

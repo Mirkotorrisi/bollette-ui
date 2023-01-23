@@ -1,3 +1,4 @@
+import React from "react";
 import "./index.scss";
 
 export const AboutMe = () => (
@@ -19,27 +20,30 @@ export const AboutMe = () => (
       </div>
       <h1 className="about_me__title">Mirko Torrisi </h1>
 
-      <p className="about_me__paragraph">
-        Born and raised in Catania, I've earned a Bachelor's Degree in Economics
-        in the University of my city.
+      <p className="about_me__paragraph mb-4">
+        Based in Catania, Italy, I began learning to code in Python in early
+        2019 and later transitioned to Java after completing a professional
+        course.
       </p>
-      <p className="about_me__paragraph">
-        After that, I decided that Economics was not my path and I tried to
-        study computer science on my own.
+      <p className="about_me__paragraph mb-4">
+        From 2019 to 2021, I studied Development and Data Analysis at the
+        <a href="https://stevejobs.academy/" target="_blank" rel="noreferrer">
+          {" "}
+          Steve Jobs Academy
+        </a>{" "}
+        and earned a diploma with a score of 99/100.
       </p>
-      <p className="about_me__paragraph">
-        The first programming language I started with was Python, then I
-        switched to Java after attending on a professional course.
+
+      <p className="about_me__paragraph mb-4">
+        Since 2020, I have worked as a developer for various companies,
+        specializing in React, Angular, and Nest.js.
       </p>
-      <p className="about_me__paragraph">
-        From 2019 to 2021 I studied at the
-        <a href="https://stevejobs.academy/">Steve Jobs Academy</a> for
-        development and Data Analysis, and I earned dyploma with 99/100.
+      <p className="about_me__paragraph mb-4">
+        I am passionate about full-stack development and also have an interest
+        in UX/UI design. Note that my skills in design are limited so if you're
+        a designer don't blame me for this site!
       </p>
-      <p className="about_me__paragraph">
-        Since 2020 I work at <a href="https://paradigma.me/">Paradigma</a> as
-        React developer
-      </p>
+
       <h1 className="about_me__title">
         <a className="pl-2" href="https://github.com/Mirkotorrisi">
           <i className="fab fa-github"></i>

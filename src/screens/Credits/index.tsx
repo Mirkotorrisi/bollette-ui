@@ -1,3 +1,4 @@
+import React from "react";
 import "./index.scss";
 
 export const Credits = () => (
@@ -12,37 +13,23 @@ export const Credits = () => (
         />
 
         <div className="credits__card p-8">
-          <a href="https://the-odds-api.com/">
+          <a href="https://the-odds-api.com/" target="_blank" rel="noreferrer">
             <h1 className="credits__card__title mb-4">The odds api</h1>
           </a>
           <p className="credits__card__paragraph">
             A well-structured API which provides any kind of sport odds updated
-            in real time. Try it by clicking
-            <a
-              href="https://the-odds-api.com/"
-              className="pl-1 credits__card__link"
-            >
-              here
-            </a>
-            .
+            in real time.
           </p>
         </div>
       </div>
       <div className="tech_cont my-8 lg:m-8">
         <div className="credits__card p-8">
-          <a href="https://www.livescore.cz/">
+          <a href="https://www.livescore.cz/" target="_blank" rel="noreferrer">
             <h1 className="credits__card__title mb-4">Livescore.cz</h1>
           </a>
           <p className="credits__card__paragraph">
             Reliable site which gives real time updates about soccer match
-            results, see it{" "}
-            <a
-              href="https://www.livescore.cz/"
-              className="pl-1 credits__card__link"
-            >
-              here
-            </a>
-            .
+            results.
           </p>
         </div>
       </div>
@@ -52,7 +39,7 @@ export const Credits = () => (
       <div className="tech_cont my-8 lg:m-8">
         <img src="/img/react.png" alt="react logo" className="tech_logo" />
         <div className="credits__card p-8">
-          <a href="https://reactjs.org/">
+          <a href="https://reactjs.org/" target="_blank" rel="noreferrer">
             <h1 className="credits__card__title mb-4">React.js</h1>
           </a>
 
@@ -67,7 +54,7 @@ export const Credits = () => (
         <img src="/img/redux.png" alt="redux logo" className="tech_logo" />
 
         <div className="credits__card p-8">
-          <a href="https://redux.js.org/">
+          <a href="https://redux.js.org/" target="_blank" rel="noreferrer">
             <h1 className="credits__card__title mb-4">Redux</h1>
           </a>
 
@@ -79,18 +66,17 @@ export const Credits = () => (
       </div>
       <div className="tech_cont my-8 lg:m-8">
         <img
-          src="/img/htmlcss.png"
+          src="/img/tailwind.png"
           alt="html and css logo"
           className="tech_logo"
         />
         <div className="credits__card p-8">
-          <a href="https://www.w3.org/">
-            <h1 className="credits__card__title mb-4">Html and Css</h1>
+          <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">
+            <h1 className="credits__card__title mb-4">Tailwind CSS</h1>
           </a>
 
           <p className="credits__card__paragraph">
-            I've choose to not use Bootstrap purposely to test my skills on
-            building a responsive UI without "shortcuts".
+            My favorite CSS library. Lightweight and easy to use
           </p>
         </div>
       </div>
@@ -99,16 +85,15 @@ export const Credits = () => (
 
     <div className="flex flex-col lg:flex-row justify-between w-full px-8">
       <div className="tech_cont my-8 lg:m-8">
-        <img src="/img/node.png" alt="node.js logo" className="tech_logo" />
+        <img src="/img/nestjs.svg" alt="nest.js logo" className="tech_logo" />
         <div className="credits__card p-8">
-          <a href="https://nodejs.org/">
-            <h1 className="credits__card__title mb-4">
-              Node.js and Express.js
-            </h1>
+          <a href="https://nestjs.com/" target="_blank" rel="noreferrer">
+            <h1 className="credits__card__title mb-4">Nest.js</h1>
           </a>
           <p className="credits__card__paragraph">
-            The standard technologies designed for building web applications and
-            APIs with JavaScript.
+            Since I discovered this back-end framework based on Express (or
+            Fastify if needed) I refused to try any other framework or language
+            to build APIs. It is really powerful and easy to use.
           </p>
         </div>
       </div>
@@ -116,7 +101,7 @@ export const Credits = () => (
         <img src="/img/mysql.png" alt="mysql logo" className="tech_logo" />
 
         <div className="credits__card p-8">
-          <a href="https://www.mysql.com/">
+          <a href="https://www.mysql.com/" target="_blank" rel="noreferrer">
             <h1 className="credits__card__title mb-4">MySql</h1>
           </a>
 
@@ -129,7 +114,7 @@ export const Credits = () => (
         <img src="/img/redis.png" alt="redis logo" className="tech_logo" />
 
         <div className="credits__card p-8">
-          <a href="https://redis.io/">
+          <a href="https://redis.io/" target="_blank" rel="noreferrer">
             <h1 className="credits__card__title mb-4">Redis</h1>
           </a>
 
@@ -140,28 +125,58 @@ export const Credits = () => (
         </div>
       </div>
       <div className="tech_cont my-8 lg:m-8">
-        <img src="/img/python.png" alt="python logo" className="tech_logo" />
+        <img src="/img/flask.png" alt="flask logo" className="tech_logo" />
 
         <div className="credits__card p-8">
-          <a href="https://www.python.org/">
-            <h1 className="credits__card__title mb-4">Python</h1>
+          <a
+            href="https://flask.palletsprojects.com/en/2.2.x/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <h1 className="credits__card__title mb-4">Flask</h1>
           </a>
           <p className="credits__card__paragraph">
-            An interpreted, high-level and general-purpose programming language.
-            I used its library BeautifulSoup to scrape livescore.cz
+            A Python micro-framework useful to build web applications. I used it
+            to create a web scraper (with BeautifulSoup) that provides me every
+            day soccer results that I use to update user's bets.
           </p>
         </div>
       </div>
     </div>
     <div className="tech_cont my-8 lg:m-8">
-      <h1 className="credits__card__title">
-        Take a look at source code:{" "}
-        <a href="https://github.com/Mirkotorrisi/bollette-ui">React App (UI)</a>{" "}
-        -
-        <a href="https://github.com/Mirkotorrisi/bollette-server">
-          Express Server
-        </a>
-      </h1>
+      <div className="text-center">
+        <p className="credits__card__paragraph"> Take a look at source code:</p>
+        <p>
+          <a
+            href="https://github.com/Mirkotorrisi/bollette-ui"
+            className="credits__card__title"
+            target="_blank"
+            rel="noreferrer"
+          >
+            React App (UI)
+          </a>
+        </p>
+        <p>
+          <a
+            href="https://github.com/Mirkotorrisi/bollette-server-v2"
+            className="credits__card__title"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Nest Server
+          </a>
+        </p>
+        <p>
+          <a
+            href="https://github.com/Mirkotorrisi/soccer_results_scraper"
+            className="credits__card__title"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Flask web scraper
+          </a>
+        </p>
+      </div>
     </div>
   </section>
 );

@@ -1,4 +1,5 @@
-import { CHAMPIONSHIPS, MARKETS } from "./../consts/index";
+import { Bet } from "../redux/tickets";
+import { CHAMPIONSHIPS } from "./../consts/index";
 import { getAxiosInstance } from "./getAxiosInstance";
 
 export const placeBet = async (
@@ -42,6 +43,7 @@ export type Odds = {
   [key in SIGN]?: number;
 };
 export interface Match {
+  id: string;
   matchId: string;
   teams: string[];
   start: string;
@@ -49,23 +51,28 @@ export interface Match {
 }
 
 export const fetchBetList = async (
-  championship: CHAMPIONSHIPS,
-  market: MARKETS
+  championship: CHAMPIONSHIPS
 ): Promise<Match[]> => {
   const res = await getAxiosInstance().request({
     method: "get",
-    url: `/championships/${championship}/${market}`,
+    url: `/championships/${championship}`,
   });
 
   return res.data;
 };
 
-export const submitCheckout = async (betImport: number, ticket_id: number) => {
+export const submitCheckout = async (
+  betImport: number,
+  ticket: Bet[],
+  multiplier: number
+) => {
   const res = await getAxiosInstance().request({
     method: "post",
-    url: `/bets/checkout/${ticket_id}`,
+    url: `/bets/checkout`,
     data: {
       betImport,
+      ticket,
+      multiplier,
     },
   });
   return res.data;
