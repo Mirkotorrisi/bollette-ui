@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import mock from "../../../../assets/mock";
+// import mock from "../../../../assets/mock";
 import { CHAMPIONSHIPS } from "../../../../consts";
 import { fetchBetList, Match } from "../../../../service";
 import { parseMinutes } from "./useParseDate";

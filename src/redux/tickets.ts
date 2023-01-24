@@ -1,6 +1,5 @@
 import { RootState } from "./../store";
 import { createSlice } from "@reduxjs/toolkit";
-import { Match } from "../service";
 
 export interface Bet {
   id: string;
