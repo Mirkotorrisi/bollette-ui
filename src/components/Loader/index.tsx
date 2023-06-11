@@ -1,4 +1,6 @@
 import "./index.scss";
+import React from "react";
+
 export const Loader = () => (
   <div className="lds-ring">
     <div className="lds-ring__first"></div>

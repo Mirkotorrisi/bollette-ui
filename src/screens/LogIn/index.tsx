@@ -1,27 +1,22 @@
 import "./index.scss";
 import { useEffect } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { logInUser, selectUser } from "../../redux/user";
 import { useAppDispatch } from "../../store";
+import React from "react";
 
 export const LogIn = () => {
   const { register, handleSubmit } = useForm();
   const user = useSelector(selectUser);
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (user.id) history.replace("/");
-  }, [user, history]);
-  const onSubmit = async ({
-    emailOrUsername,
-    password,
-  }: {
-    emailOrUsername: string;
-    password: string;
-  }) => {
+    if (user.id) navigate("/");
+  }, [user, navigate]);
+  const onSubmit = async ({ emailOrUsername, password }: FieldValues) => {
     dispatch(logInUser({ emailOrUsername, password }));
   };
   return (

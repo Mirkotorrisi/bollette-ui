@@ -1,5 +1,5 @@
-import "./index.scss";
-import { Route, Redirect, Switch } from "react-router-dom";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import useLocalStorage from "use-local-storage";
 
 import { NavBar } from "./components/Navbar";
@@ -24,6 +24,7 @@ function App() {
   };
 
   useUserStorage();
+
   return (
     <div
       className="main flex flex-col justify-between min-h-screen"
@@ -39,12 +40,12 @@ function App() {
         >
           <i className={`fas fa-${isLight ? "moon" : "sun"}`}></i>
         </button>
-        <Switch>
-          {routes.map(({ path, component, exact }, i) => (
-            <Route path={path} component={component} exact={exact} key={i} />
+        <Routes>
+          {routes.map(({ path, component }, i) => (
+            <Route path={path} Component={component} key={i} />
           ))}
-          <Redirect to="/not-found" />
-        </Switch>
+        </Routes>
+        {/* <Navigate to="/not-found" replace={true} /> */}
       </div>
       <Modal />
       <Footer />

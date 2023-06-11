@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { login } from "../service";
 import { Link } from "react-router-dom";
@@ -12,10 +12,10 @@ export const LogInComponent = () => {
   const [loading, setloading] = useState(false);
   const [errors, setErrors] = useState([]);
   const user = useSelector((state) => state.userReducer);
-  const history = useHistory();
+  const navigate = useNavigate();
   useEffect(() => {
-    if (user.id) history.replace("/");
-  }, [user, history]);
+    if (user.id) navigate.replace("/");
+  }, [user, navigate]);
   const handleSubmit = async () => {
     setloading(true);
     try {

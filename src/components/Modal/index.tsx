@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { hideModal, selectModal } from "../../redux/modals";
 import { logOut } from "../../redux/user";
 import { useAppDispatch } from "../../store";
@@ -9,12 +9,12 @@ import "./index.scss";
 const Modal = () => {
   const modal = useSelector(selectModal);
   const dispatch = useAppDispatch();
-  const history = useHistory();
+  const navigation = useNavigate();
   const { error, status, show, title, maxWin, ticket_id, account_sum } = modal;
 
   const closeModal = (e: { stopPropagation: () => void }) => {
     if (status === 401) {
-      history.replace("/login");
+      navigation("/login");
       dispatch(logOut());
     }
     dispatch(hideModal());
