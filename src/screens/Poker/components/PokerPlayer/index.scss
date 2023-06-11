@@ -1,0 +1,98 @@
+@import "../../cards.scss";
+
+.player {
+  position: absolute;
+
+  &.position1 {
+    left: 25%;
+    .player__bet {
+      left: 25%;
+    }
+  }
+
+  &.position2 {
+    left: 50%;
+    .player__bet {
+      left: 50%;
+    }
+  }
+
+  &.position3 {
+    left: 75%;
+    top: 35%;
+    .player__bet {
+      left: 75%;
+      top: 35%;
+    }
+  }
+
+  &.position4 {
+    left: 50%;
+    top: 60%;
+    .player__bet {
+      left: 50%;
+      top: 60%;
+    }
+  }
+
+  &.position5 {
+    top: 60%;
+    left: 25%;
+    .player__bet {
+      top: 60%;
+      left: 25%;
+    }
+  }
+  &.position6 {
+    top: 35%;
+    .player__bet {
+      top: 35%;
+    }
+  }
+
+  background-color: var(--primary-accent-200);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  width: 15rem;
+  height: 5rem;
+  box-shadow: 1px 1px 1px var(--font-primary),
+    inset 1px 1px 1px var(--secondary-accent);
+  &__avatar {
+    box-shadow: 2px 2px 2px var(--font-primary);
+  }
+  &__name {
+    color: var(--secondary-accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  &__chips {
+    color: var(--secondary-accent);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  &__action {
+    color: var(--primary-accent);
+    text-shadow: var(--font-primary);
+    font-weight: 900;
+    font-size: 2rem;
+  }
+  &__card {
+    background-size: 400%;
+    // background-repeat: no-repeat;
+    width: 2rem;
+    height: 4rem;
+  }
+  &__bet {
+    span {
+      color: var(--secondary-accent);
+      font-weight: 900;
+      font-size: 1.25rem;
+    }
+    &__chips {
+      background-image: url(../../../../../public/img/chips.png);
+      width: 2rem;
+      height: 3rem;
+      background-size: contain;
+    }
+  }
+}

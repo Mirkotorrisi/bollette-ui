@@ -5,12 +5,12 @@ import { UserTickets } from "../screens/UserTickets";
 import { Credits } from "../screens/Credits";
 import { AboutMe } from "../screens/AboutMe";
 import { Slot } from "../screens/Slot";
+import Poker from "../screens/Poker";
 
 export const routes = [
   {
     path: "/",
     component: BetList,
-    exact: true,
   },
   {
     path: "/login",
@@ -35,5 +35,9 @@ export const routes = [
   {
     path: "/slot",
     component: Slot,
+  },
+  {
+    path: "/poker",
+    component: Poker,
   },
 ];
