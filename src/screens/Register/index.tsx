@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router";
+import React, { useEffect } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { registerUser, selectUser } from "../../redux/user";
 import { useAppDispatch } from "../../store";
@@ -20,21 +20,13 @@ export const Register = () => {
   } = useForm();
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.id) history.replace("/");
-  }, [user, history]);
+    if (user.id) navigate("/");
+  }, [user, navigate]);
 
-  const onSubmit = async ({
-    username,
-    email,
-    password,
-  }: {
-    username: string;
-    email: string;
-    password: string;
-  }) => {
+  const onSubmit = async ({ username, email, password }: FieldValues) => {
     dispatch(registerUser({ username, email, password }));
   };
 
@@ -51,14 +43,14 @@ export const Register = () => {
             {...register("username", { required: true, ...username() })}
             placeholder="username"
           />
-          <span>{errors?.username?.message}</span>
+          <span>{errors?.username?.message as string}</span>
           <input
             className="form__input px-2 py-4"
             {...register("email", { required: true, ...emailDomain() })}
             placeholder="email"
             type="email"
           />
-          <span>{errors?.email?.message}</span>
+          <span>{errors?.email?.message as string}</span>
 
           <input
             className="form__input px-2 py-4"
@@ -66,7 +58,7 @@ export const Register = () => {
             {...register("password", { required: true, ...password() })}
             placeholder="password"
           />
-          <span>{errors?.password?.message}</span>
+          <span>{errors?.password?.message as string}</span>
 
           <input
             className="form__input px-2 py-4"
@@ -77,7 +69,7 @@ export const Register = () => {
               ...repeatPassword(watch("password")),
             })}
           />
-          <span>{errors?.repeatPassword?.message}</span>
+          <span>{errors?.repeatPassword?.message as string}</span>
 
           <div className="login__buttons ">
             <input

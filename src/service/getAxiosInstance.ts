@@ -1,7 +1,7 @@
 import { AppDispatch } from "../store";
 import axios, { AxiosInstance } from "axios";
 import { showModal } from "../redux/modals";
-import { rootUrl } from "../assets/res.json";
+import { rootUrl } from "../assets/res";
 import { hideLoader, showLoader } from "../redux/loader";
 
 let baseInstance: AxiosInstance;

@@ -2,7 +2,7 @@ import "./index.scss";
 import { useCallback, useEffect, useState } from "react";
 import { getTickets } from "../../service";
 import { useSelector } from "react-redux";
-import { faClasses } from "../../assets/res.json";
+import { faClasses } from "../../assets/res";
 import { selectUser } from "../../redux/user";
 import React from "react";
 
