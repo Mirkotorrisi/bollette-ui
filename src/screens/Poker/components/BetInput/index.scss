@@ -1,0 +1,22 @@
+.bet-input {
+  background-color: var(--background);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.233);
+}
+.amount_chip {
+  border: 1px solid var(--primary-accent);
+  font-weight: var(--bold);
+  color: var(--font-primary);
+  border-radius: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.amount_input {
+  font-weight: var(--bolder);
+  border-radius: 10px;
+  color: var(--primary-accent);
+  text-align: end;
+  font-size: 1.5em;
+}

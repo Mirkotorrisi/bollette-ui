@@ -3,10 +3,10 @@ import "./index.scss";
 import { PokerTable } from "./components/PokerTable";
 import { usePokerTable } from "./hooks/usePokerTable";
 import { useSocket } from "./hooks/useSocket";
+import NewWindow from "react-new-window";
 
 const Poker = () => {
   const { socket, player } = useSocket();
-  console.log("🚀 ~ file: index.tsx:9 ~ Poker ~ player:", player);
   const {
     handleCreateTable,
     tablesArray,
@@ -41,13 +41,20 @@ const Poker = () => {
       <p>Player: {player?.name}</p>
       <p>Chips: {player?.chips}</p>
       {Array.from(userTables || []).map(([_, table]) => (
-        <PokerTable
+        <NewWindow
+          features={{ width: 1250, height: 800 }}
+          onUnload={() => handleLeave(table.id)}
+          onBlock={() => handleLeave(table.id)}
           key={table.id}
-          table={table}
-          socket={socket}
-          playerId={player?.id}
-          handleLeave={handleLeave}
-        />
+        >
+          <PokerTable
+            key={table.id}
+            table={table}
+            socket={socket}
+            playerId={player?.id}
+            handleLeave={handleLeave}
+          />
+        </NewWindow>
       ))}
     </div>
   );

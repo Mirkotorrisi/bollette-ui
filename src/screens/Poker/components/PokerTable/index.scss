@@ -2,9 +2,48 @@
   width: 100vw;
   height: 100vh;
   background: url("../../../../../public/img/poker-table.webp");
-  display: flex;
+  display: grid;
+  place-items: center;
+}
+
+.table-id {
+  color: #ffffff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.community {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  &__card {
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 4.5rem;
+    height: 6rem;
+  }
 }
 
 .actions {
-  background-color: var(--primary-accent);
+  button {
+    background-color: var(--primary-accent);
+    color: var(--background);
+    font-weight: 700;
+
+    &.leave-table {
+      color: var(--primary-accent);
+      background-color: var(--background);
+      border: 1px solid var(--primary-accent);
+    }
+  }
+}
+
+.pot {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  color: var(--background);
+  font-size: 2rem;
+  font-weight: 700;
 }

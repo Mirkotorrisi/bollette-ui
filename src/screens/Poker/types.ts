@@ -15,18 +15,18 @@ export enum Actions {
 }
 
 export interface Player {
-  id: string;
-  chips: number;
-  isAllIn: boolean;
-  isSitOut: boolean;
-  name: string;
-  hand?: Card[];
+  bet?: number;
   isCurrentPlayer: boolean;
   isDealer: boolean;
-  bet?: number;
   availableChoices: CHOICE[];
-  isFolded: boolean;
+  chips: number;
+  id: string;
+  name: string;
+  hand?: Card[];
+  state: string;
   position: number;
+  isFolded?: boolean;
+  lastAction?: Actions;
 }
 
 export enum CHOICE {
@@ -39,23 +39,25 @@ export enum CHOICE {
 }
 
 export interface Table {
-  id: string;
+  maxPlayers: number;
+  dealerPosition: number;
+  currentRound: string;
   players: Player[];
-  currentHand: Hand;
-  handsPlayed: number;
-  playerToStartIndex: number;
-  blind: number;
+  pot: number;
+  smallBlind: number;
+  bigBlind: number;
+  communityCards: Card[];
+  deck: Card[];
+  isHandOver: boolean;
+  id: string;
+  currentPlayerPosition: number;
+  highestBet: number;
+  lastPlayerPosition: number;
 }
 
-export interface Hand {
-  players: Player[];
-  communityCards: Card[];
-  currentRound: HandRound;
-  currentPlayer: number;
-  lastPlayer: number;
-  pot: number;
-  highestBet: number;
-  IsHandOver: boolean;
+export interface Card {
+  suit: Suit;
+  rank: Rank;
 }
 
 export enum HandRound {
@@ -64,11 +66,6 @@ export enum HandRound {
   TURN = "TURN",
   RIVER = "RIVER",
   SHOWDOWN = "SHOWDOWN",
-}
-
-export interface Card {
-  suit: Suit;
-  rank: Rank;
 }
 
 export enum Suit {
@@ -93,3 +90,8 @@ export enum Rank {
   King,
   Ace,
 }
+
+export type ChioceObj = {
+  label: string;
+  action: (amt?: number) => void;
+};

@@ -4,11 +4,15 @@ import { Player } from "../../types";
 
 interface Props {
   player: Player;
+  index: number;
+  isDealer: boolean;
 }
-export const PokerPlayer = ({ player }: Props) => {
+export const PokerPlayer = ({ player, index }: Props) => {
   return (
     <div
-      className={`player flex flex-col px-2 py-1 position${player.position}`}
+      className={`player flex flex-col px-2 py-1 position${
+        player.position || index
+      }`}
     >
       <div className="flex items-center gap-2">
         <img
@@ -28,12 +32,15 @@ export const PokerPlayer = ({ player }: Props) => {
             key={player.id + i}
           ></div>
         ))}
-        <div className="player__action">BET</div>
+        <div className="player__action">{player.lastAction}</div>
       </div>
-      <div className="player__bet flex flex-column items-center">
-        <div className="player__bet__chips" /> <span>${player.bet}</span>
-      </div>
-      {player.isDealer && <div className="player__dealer">*</div>}
+      {!!player.bet && (
+        <div className="player__bet flex flex-column items-center">
+          <div className="player__bet__chips" /> <span>${player.bet}</span>
+        </div>
+      )}
+
+      {player.isDealer && <div className="dealer-token" />}
     </div>
   );
 };
