@@ -1,13 +1,14 @@
 import React from "react";
 import "./index.scss";
-import { Player } from "../../types";
+import { Card, Player } from "../../types";
 
 interface Props {
   player: Player;
   index: number;
   isDealer: boolean;
+  userCards?: Card[];
 }
-export const PokerPlayer = ({ player, index }: Props) => {
+export const PokerPlayer = ({ player, index, userCards }: Props) => {
   return (
     <div
       className={`player flex flex-col px-2 py-1 position${
@@ -26,12 +27,18 @@ export const PokerPlayer = ({ player, index }: Props) => {
         </div>
       </div>
       <div className="flex gap-2">
-        {player.hand?.map((c, i) => (
+        {(userCards || player.hand)?.map((c, i) => (
           <div
             className={`player__card ${c.suit.charAt(0)}${c.rank}`}
             key={player.id + i}
           ></div>
         ))}
+        {!userCards && !player?.hand?.length && (
+          <>
+            <div className={`player__card cover`}></div>
+            <div className={`player__card cover`}></div>
+          </>
+        )}
         <div className="player__action">{player.lastAction}</div>
       </div>
       {!!player.bet && (

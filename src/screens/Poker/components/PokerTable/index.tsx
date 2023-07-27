@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, CHOICE, ChioceObj } from "../../types";
+import { Table, CHOICE, ChioceObj, Card } from "../../types";
 import { PokerPlayer } from "../PokerPlayer";
 import { Socket } from "socket.io-client";
 import { usePokerActions } from "../../hooks/usePokerActions";
@@ -11,8 +11,15 @@ interface Props {
   handleLeave: (id: string) => void;
   socket?: Socket;
   playerId?: string;
+  userCards?: Card[];
 }
-export const PokerTable = ({ table, socket, playerId, handleLeave }: Props) => {
+export const PokerTable = ({
+  table,
+  socket,
+  playerId,
+  handleLeave,
+  userCards,
+}: Props) => {
   const { handleBet, handleCheck, handleFold, handleRaise, handleCall } =
     usePokerActions(socket, playerId);
 
@@ -61,6 +68,7 @@ export const PokerTable = ({ table, socket, playerId, handleLeave }: Props) => {
           key={p.id}
           index={index}
           isDealer={p.position === table.dealerPosition}
+          userCards={p.id === playerId ? userCards : undefined}
         />
       ))}
       <div className="flex justify-center items-center gap-3 community">

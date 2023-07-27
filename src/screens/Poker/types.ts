@@ -9,9 +9,11 @@ export enum Actions {
   CREATE_TABLE = "createTable",
   SET_PLAYER = "setPlayer",
   GET_PLAYER = "getPlayer",
+  GET_PLAYER_CARDS = "getPlayerCards",
   GET_TABLE = "table",
   ALL_TABLES = "allTables",
   ALL_USER_TABLES = "allUserTables",
+  ASK_FOR_CARDS = "askForCards",
 }
 
 export interface Player {

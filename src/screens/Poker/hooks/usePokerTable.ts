@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
-import { Actions, Player, Table } from "../types";
+import { Actions, Card, Player, Table } from "../types";
 
 export const usePokerTable = (socket?: Socket, player?: Player) => {
   const [userTables, setUserTables] = useState<Map<string, Table>>(
     new Map<string, Table>([])
+  );
+
+  const [userCards, setUserCards] = useState<Map<string, Card[]>>(
+    new Map<string, Card[]>([])
   );
 
   const [tablesArray, setTablesArray] = useState<
@@ -12,7 +16,7 @@ export const usePokerTable = (socket?: Socket, player?: Player) => {
   >([]);
 
   useEffect(() => {
-    if (!socket) return;
+    if (!socket || !player) return;
 
     socket.on(Actions.ALL_TABLES, (tables) => {
       setTablesArray(tables);
@@ -27,10 +31,12 @@ export const usePokerTable = (socket?: Socket, player?: Player) => {
     socket.on(Actions.CHECK, handleUpdateTable(Actions.CHECK));
     socket.on(Actions.JOIN, handleUpdatePlayers);
     socket.on(Actions.LEAVE, handleUpdatePlayers);
+    socket.on(Actions.GET_PLAYER_CARDS, getUserCards);
+    socket.on(Actions.ASK_FOR_CARDS, askForCards);
     socket.on(Actions.GET_TABLE, (data) => {
       console.log(data);
     });
-  }, [socket]);
+  }, [socket, player]);
 
   const handleUpdateTable = (action: Actions) => (table: Table) => {
     const position = userTables.get(table.id)?.currentPlayerPosition;
@@ -51,6 +57,10 @@ export const usePokerTable = (socket?: Socket, player?: Player) => {
     window?.close();
   };
 
+  const askForCards = (tableId: string) => {
+    socket?.emit(Actions.GET_PLAYER_CARDS, tableId);
+  };
+
   const handleJoinTable = (tableId: string) => {
     socket?.emit(Actions.JOIN, { tableId, playerId: player?.id });
   };
@@ -59,8 +69,19 @@ export const usePokerTable = (socket?: Socket, player?: Player) => {
     socket?.emit(Actions.CREATE_TABLE, player?.id);
   };
 
+  const getUserCards = ({
+    tableId,
+    hand,
+  }: {
+    tableId: string;
+    hand: Card[];
+  }) => {
+    setUserCards(new Map(userCards.set(tableId, hand)));
+  };
+
   return {
     userTables,
+    userCards,
     handleCreateTable,
     handleLeave,
     tablesArray,

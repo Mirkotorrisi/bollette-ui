@@ -13,6 +13,7 @@ const Poker = () => {
     handleJoinTable,
     handleLeave,
     userTables,
+    userCards,
   } = usePokerTable(socket, player);
 
   return (
@@ -52,6 +53,7 @@ const Poker = () => {
             table={table}
             socket={socket}
             playerId={player?.id}
+            userCards={userCards.get(table.id)}
             handleLeave={handleLeave}
           />
         </NewWindow>
