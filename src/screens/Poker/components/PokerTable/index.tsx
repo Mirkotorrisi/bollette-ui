@@ -34,7 +34,7 @@ export const PokerTable = ({
   } = {
     [CHOICE.BET]: {
       label: "Bet",
-      action: (amt) => handleBet(table.id, amt!),
+      action: (amt) => handleBet(table.id, Math.floor(amt || table.bigBlind)),
     },
     [CHOICE.CALL]: {
       label: "Call",
@@ -50,7 +50,8 @@ export const PokerTable = ({
     },
     [CHOICE.RAISE]: {
       label: "Raise",
-      action: (amt) => handleRaise(table.id, amt!),
+      action: (amt) =>
+        handleRaise(table.id, Math.floor(amt! || table.highestBet * 2)),
     },
     [CHOICE.ALL_IN]: {
       label: "ALL IN",
@@ -83,11 +84,11 @@ export const PokerTable = ({
 
       <div className="flex gap-4 mt-auto actions">
         {inGamePlayer?.isCurrentPlayer &&
-          inGamePlayer?.availableChoices.map((choice: CHOICE) =>
+          inGamePlayer?.availableChoices?.map((choice: CHOICE) =>
             [CHOICE.BET, CHOICE.RAISE].includes(choice) ? (
               <BetInput
                 choice={choices[choice]}
-                minimum={table.highestBet}
+                minimum={table.highestBet || table.bigBlind}
                 maximum={inGamePlayer.chips}
                 pot={table.pot}
                 key={choice}

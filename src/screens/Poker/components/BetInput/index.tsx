@@ -42,7 +42,7 @@ const BetInput = ({ choice, pot, minimum, maximum }: Props) => {
           {chips.map((c) => (
             <span
               className="amount_chip px-2 py-1"
-              onClick={() => setAmount(c.value * pot)}
+              onClick={() => setAmount(Math.floor(c.value * pot))}
               key={c.value}
             >
               {c.label}
@@ -58,7 +58,7 @@ const BetInput = ({ choice, pot, minimum, maximum }: Props) => {
           min={minimum}
           max={maximum}
           onChange={(e) => setAmount(+e.target.value)}
-          value={amount}
+          value={Math.floor(amount)}
         />
       </div>
     </div>
