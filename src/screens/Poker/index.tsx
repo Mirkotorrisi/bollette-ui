@@ -2,23 +2,23 @@ import React from "react";
 import "./index.scss";
 import { PokerTable } from "./components/PokerTable";
 import { usePokerTable } from "./hooks/usePokerTable";
-import { useSocket } from "./hooks/useSocket";
 import NewWindow from "react-new-window";
 
 const Poker = () => {
-  const { socket, player } = useSocket();
   const {
-    handleCreateTable,
+    player,
+    createTable,
     tablesArray,
-    handleJoinTable,
+    joinTable,
     handleLeave,
     userTables,
     userCards,
-  } = usePokerTable(socket, player);
+    actions,
+  } = usePokerTable();
 
   return (
     <div>
-      <button className="form__input px-2 py-4" onClick={handleCreateTable}>
+      <button className="form__input px-2 py-4" onClick={createTable}>
         Create table
       </button>
       <p>Tables Array: </p>
@@ -33,7 +33,7 @@ const Poker = () => {
           </p>
           <button
             className="table-picker__button px-4 py-2"
-            onClick={() => handleJoinTable(t.id)}
+            onClick={() => joinTable(t.id)}
           >
             Join
           </button>
@@ -51,10 +51,10 @@ const Poker = () => {
           <PokerTable
             key={table.id}
             table={table}
-            socket={socket}
             playerId={player?.id}
             userCards={userCards.get(table.id)}
             handleLeave={handleLeave}
+            {...actions}
           />
         </NewWindow>
       ))}

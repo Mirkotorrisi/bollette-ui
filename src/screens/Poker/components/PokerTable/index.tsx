@@ -2,27 +2,34 @@ import React from "react";
 import { Table, CHOICE, ChioceObj, Card } from "../../types";
 import { PokerPlayer } from "../PokerPlayer";
 import { Socket } from "socket.io-client";
-import { usePokerActions } from "../../hooks/usePokerActions";
 import "./index.scss";
 import BetInput from "../BetInput";
 
+type PlayerAction = (id: string) => void;
+type PlayerActionWithAmount = (id: string, amt: number) => void;
 interface Props {
   table: Table;
   handleLeave: (id: string) => void;
   socket?: Socket;
   playerId?: string;
   userCards?: Card[];
+  bet: PlayerActionWithAmount;
+  call: PlayerAction;
+  check: PlayerAction;
+  raise: PlayerActionWithAmount;
+  fold: PlayerAction;
 }
 export const PokerTable = ({
   table,
-  socket,
   playerId,
   handleLeave,
   userCards,
+  bet,
+  call,
+  check,
+  raise,
+  fold,
 }: Props) => {
-  const { handleBet, handleCheck, handleFold, handleRaise, handleCall } =
-    usePokerActions(socket, playerId);
-
   const inGamePlayer = table.players.find((p) => p.id === playerId);
 
   const leaveTable = () => {
@@ -34,24 +41,24 @@ export const PokerTable = ({
   } = {
     [CHOICE.BET]: {
       label: "Bet",
-      action: (amt) => handleBet(table.id, Math.floor(amt || table.bigBlind)),
+      action: (amt) => bet(table.id, Math.floor(amt || table.bigBlind)),
     },
     [CHOICE.CALL]: {
       label: "Call",
-      action: () => handleCall(table.id),
+      action: () => call(table.id),
     },
     [CHOICE.CHECK]: {
       label: "Check",
-      action: () => handleCheck(table.id),
+      action: () => check(table.id),
     },
     [CHOICE.FOLD]: {
       label: "Fold",
-      action: () => handleFold(table.id),
+      action: () => fold(table.id),
     },
     [CHOICE.RAISE]: {
       label: "Raise",
       action: (amt) =>
-        handleRaise(table.id, Math.floor(amt! || table.highestBet * 2)),
+        raise(table.id, Math.floor(amt! || table.highestBet * 2)),
     },
     [CHOICE.ALL_IN]: {
       label: "ALL IN",

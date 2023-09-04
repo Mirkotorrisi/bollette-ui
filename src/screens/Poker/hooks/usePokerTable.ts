@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
-import { Socket } from "socket.io-client";
+import { Socket, io } from "socket.io-client";
 import { Actions, Card, Player, Table } from "../types";
+import { useSelector } from "react-redux";
+import { rootUrl } from "../../../assets/res";
+import { selectUser } from "../../../redux/user";
 
-export const usePokerTable = (socket?: Socket, player?: Player) => {
+export const usePokerTable = () => {
+  const user = useSelector(selectUser);
+  const [socket, setSocket] = useState<Socket | undefined>();
+  const [player, setPlayer] = useState<Player>();
   const [userTables, setUserTables] = useState<Map<string, Table>>(
     new Map<string, Table>([])
   );
@@ -16,8 +22,20 @@ export const usePokerTable = (socket?: Socket, player?: Player) => {
   >([]);
 
   useEffect(() => {
-    if (!socket || !player) return;
+    if (!user) return;
 
+    const socket = io(rootUrl, {
+      auth: {
+        name: user.username,
+      },
+    });
+
+    socket.on(Actions.SET_PLAYER, (player: Player) => {
+      setPlayer(player);
+    });
+    socket.on(Actions.ALL_TABLES, (tables) => {
+      console.log(tables);
+    });
     socket.on(Actions.ALL_TABLES, (tables) => {
       setTablesArray(tables);
     });
@@ -36,7 +54,13 @@ export const usePokerTable = (socket?: Socket, player?: Player) => {
     socket.on(Actions.GET_TABLE, (data) => {
       console.log(data);
     });
-  }, [socket, player]);
+
+    setSocket(socket);
+
+    return () => {
+      socket.close();
+    };
+  }, [user]);
 
   const handleUpdateTable = (action: Actions) => (table: Table) => {
     const position = userTables.get(table.id)?.currentPlayerPosition;
@@ -61,11 +85,11 @@ export const usePokerTable = (socket?: Socket, player?: Player) => {
     socket?.emit(Actions.GET_PLAYER_CARDS, tableId);
   };
 
-  const handleJoinTable = (tableId: string) => {
+  const joinTable = (tableId: string) => {
     socket?.emit(Actions.JOIN, { tableId, playerId: player?.id });
   };
 
-  const handleCreateTable = () => {
+  const createTable = () => {
     socket?.emit(Actions.CREATE_TABLE, player?.id);
   };
 
@@ -79,12 +103,42 @@ export const usePokerTable = (socket?: Socket, player?: Player) => {
     setUserCards(new Map(userCards.set(tableId, hand)));
   };
 
+  const bet = (tableId: string, amount: number) => {
+    socket?.emit(Actions.BET, { tableId, amount });
+  };
+  const call = (tableId: string) => {
+    socket?.emit(Actions.CALL, tableId);
+  };
+  const raise = (tableId: string, amount: number) => {
+    socket?.emit(Actions.RAISE, { tableId, amount });
+  };
+  const fold = (tableId: string) => {
+    socket?.emit(Actions.FOLD, tableId);
+  };
+  const check = (tableId: string) => {
+    socket?.emit(Actions.CHECK, tableId);
+  };
+  const getTable = () => {
+    socket?.emit(Actions.GET_TABLE);
+  };
+
+  const actions = {
+    bet,
+    call,
+    check,
+    fold,
+    raise,
+  };
+
   return {
+    socket,
+    player,
     userTables,
     userCards,
-    handleCreateTable,
+    createTable,
     handleLeave,
     tablesArray,
-    handleJoinTable,
+    joinTable,
+    actions,
   };
 };
