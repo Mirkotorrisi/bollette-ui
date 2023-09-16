@@ -30,11 +30,10 @@ export const usePokerTable = () => {
       },
     });
 
+    setSocket(socket);
+
     socket.on(Actions.SET_PLAYER, (player: Player) => {
       setPlayer(player);
-    });
-    socket.on(Actions.ALL_TABLES, (tables) => {
-      console.log(tables);
     });
     socket.on(Actions.ALL_TABLES, (tables) => {
       setTablesArray(tables);
@@ -50,12 +49,12 @@ export const usePokerTable = () => {
     socket.on(Actions.JOIN, handleUpdatePlayers);
     socket.on(Actions.LEAVE, handleUpdatePlayers);
     socket.on(Actions.GET_PLAYER_CARDS, getUserCards);
-    socket.on(Actions.ASK_FOR_CARDS, askForCards);
+    socket.on(Actions.ASK_FOR_CARDS, (tableId) =>
+      socket.emit(Actions.GET_PLAYER_CARDS, tableId)
+    );
     socket.on(Actions.GET_TABLE, (data) => {
       console.log(data);
     });
-
-    setSocket(socket);
 
     return () => {
       socket.close();
@@ -79,10 +78,6 @@ export const usePokerTable = () => {
     if (!player) return;
     socket?.emit(Actions.LEAVE, { tableId: id, playerId: player?.id });
     window?.close();
-  };
-
-  const askForCards = (tableId: string) => {
-    socket?.emit(Actions.GET_PLAYER_CARDS, tableId);
   };
 
   const joinTable = (tableId: string) => {
@@ -118,9 +113,6 @@ export const usePokerTable = () => {
   const check = (tableId: string) => {
     socket?.emit(Actions.CHECK, tableId);
   };
-  const getTable = () => {
-    socket?.emit(Actions.GET_TABLE);
-  };
 
   const actions = {
     bet,
@@ -131,7 +123,6 @@ export const usePokerTable = () => {
   };
 
   return {
-    socket,
     player,
     userTables,
     userCards,
