@@ -15,7 +15,7 @@ export const NavBar = () => {
     dispatch(logOut());
   };
   return (
-    <nav className="navbar flex justify-between w-full items-between flex-wrap bg-teal-500">
+    <nav className="navbar fixed lg:static z-10 flex justify-between w-full items-between flex-wrap bg-teal-500">
       <Link className="navbar__logo mx-6 flex items-center" to="/">
         <h1>
           B<i className="fas fa-futbol"></i>LLETTE
@@ -30,8 +30,8 @@ export const NavBar = () => {
         <i className="fas fa-bars"></i>
       </button>
       <div className="w-full block lg:w-auto">
-        <ul className="text-sm  flex items-between">
-          {((width < 720 && showMenu) || width > 720) && (
+        <ul className="text-sm  flex flex-col lg:flex-row items-between">
+          {((width < 1034 && showMenu) || width > 1034) && (
             <>
               {user.id ? (
                 <>
