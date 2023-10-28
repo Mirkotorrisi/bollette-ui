@@ -49,7 +49,7 @@ export const usePokerTable = () => {
   useEffect(() => {
     if (!user) return;
 
-    const socket = io(process.env.BASE_URL || "", {
+    const socket = io(process.env.REACT_APP_API_URL || "", {
       auth: {
         name: user.username,
       },

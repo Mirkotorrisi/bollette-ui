@@ -54,7 +54,7 @@ const setupAxiosInstance = ({
 
 export const setAxiosInstance = (dispatch: AppDispatch) => {
   baseInstance = setupAxiosInstance({
-    url: process.env.BASE_URL || "",
+    url: process.env.REACT_APP_API_URL || "",
     dispatch,
   });
 };
