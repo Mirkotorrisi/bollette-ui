@@ -20,10 +20,7 @@ export const routes = [
     path: "/register",
     component: Register,
   },
-  {
-    path: "/tickets",
-    component: UserTickets,
-  },
+
   {
     path: "/credits",
     component: Credits,
@@ -31,6 +28,13 @@ export const routes = [
   {
     path: "/aboutme",
     component: AboutMe,
+  },
+];
+
+export const protectedRoutes = [
+  {
+    path: "/tickets",
+    component: UserTickets,
   },
   {
     path: "/slot",

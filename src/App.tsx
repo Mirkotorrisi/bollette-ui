@@ -1,15 +1,29 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import useLocalStorage from "use-local-storage";
 
 import { NavBar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import { routes } from "./routes";
+import { protectedRoutes, routes } from "./routes";
 import Modal from "./components/Modal";
 import { selectLoader } from "./redux/loader";
 import { useSelector } from "react-redux";
 import { Loader } from "./components/Loader";
 import { useUserStorage } from "./utils/useUserStorage";
+import { selectUser } from "./redux/user";
+
+interface Props {
+  redirectPath?: string;
+  children?: JSX.Element;
+}
+const ProtectedRoute = ({
+  redirectPath = "/login",
+  children,
+}: Props): JSX.Element => {
+  const user = useSelector(selectUser);
+  if (!user.id) return <Navigate to={redirectPath} replace />;
+  return children ?? <Outlet />;
+};
 
 function App() {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -44,7 +58,13 @@ function App() {
           {routes.map(({ path, component }, i) => (
             <Route path={path} Component={component} key={i} />
           ))}
+          <Route element={<ProtectedRoute />}>
+            {protectedRoutes.map(({ component, path }) => (
+              <Route path={path} Component={component} key={path} />
+            ))}
+          </Route>
         </Routes>
+
         {/* <Navigate to="/not-found" replace={true} /> */}
       </div>
       <Modal />

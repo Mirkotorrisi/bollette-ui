@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { Socket, io } from "socket.io-client";
 import { Actions, Card, Player, Table } from "../types";
 import { useSelector } from "react-redux";
-import { rootUrl } from "../../../assets/res";
 import { selectUser } from "../../../redux/user";
 
 export const usePokerTable = () => {
@@ -50,7 +49,7 @@ export const usePokerTable = () => {
   useEffect(() => {
     if (!user) return;
 
-    const socket = io(rootUrl, {
+    const socket = io(process.env.BASE_URL || "", {
       auth: {
         name: user.username,
       },

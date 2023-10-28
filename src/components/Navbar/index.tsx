@@ -81,6 +81,14 @@ export const NavBar = () => {
                   Slot
                 </Link>
               </li>
+              <li className="navbar__item">
+                <Link
+                  to="/poker"
+                  className="navbar__item__link block p-4 lg:inline-block lg:mt-0 mr-4"
+                >
+                  Poker
+                </Link>
+              </li>
             </>
           )}
         </ul>
