@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import * as slotresources from "../../assets/slotresources";
 import { spinSlot } from "../../service";
 import "./index.scss";
+import { useAppDispatch } from "../../store";
+import { selectUser, updateAccountSum } from "../../redux/user";
+import { useSelector } from "react-redux";
 
 export const Slot = () => {
+  const dispatch = useAppDispatch();
+  const user = useSelector(selectUser);
   const { assets, background, height, numOfWheels } =
     slotresources.slotresources;
   const [wheels, setWheels] = useState(
@@ -11,14 +16,15 @@ export const Slot = () => {
       Math.floor(Math.random() * assets.length)
     )
   );
-  const [win, setwin] = useState<number | null>();
-  const [sum, setsum] = useState(0);
+  const [winAssetIndex, setWinAssetIndex] = useState<number | null>();
+  const [sum, setSum] = useState(0);
 
   const tz = Math.round(height / 2 / Math.tan(Math.PI / assets.length));
 
   const basicAngle = 360 / assets.length;
   const handleSpin = () => {
-    setwin(null);
+    dispatch(updateAccountSum(user.account_sum - 2));
+    setWinAssetIndex(null);
     let interval = setInterval(() => {
       setWheels((prev) => prev.map((i) => i + 1));
     }, 50);
@@ -27,8 +33,11 @@ export const Slot = () => {
         const res = await spinSlot(2, numOfWheels, assets.length);
         if (res) {
           setWheels(res.results);
-          res.duplicates.length && setwin(res.duplicates[0]);
-          res.sum && setsum(res.sum);
+          if (res.duplicates.length && res.sum) {
+            setWinAssetIndex(res.duplicates[0]);
+            setSum(res.sum);
+            dispatch(updateAccountSum(user.account_sum + res.sum));
+          }
         }
       } catch (error) {
         clearInterval(interval);
@@ -64,7 +73,7 @@ export const Slot = () => {
                 <img
                   src={"img/" + img.src}
                   className={`slot__wheel__img ${
-                    win === wheel ? "animate" : ""
+                    winAssetIndex === wheel ? "animate" : ""
                   }`}
                   alt="wheel_img"
                   style={{
@@ -78,8 +87,8 @@ export const Slot = () => {
         ))}
         <h2 className="slot__name">
           -
-          {(win || win === 0) &&
-            assets[win].src.split(".")[0] + " - You won " + sum + "$"}
+          {(winAssetIndex || winAssetIndex === 0) &&
+            assets[winAssetIndex].src.split(".")[0] + " - You won " + sum + "$"}
         </h2>
       </div>
     </div>
