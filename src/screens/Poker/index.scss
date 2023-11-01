@@ -1,6 +1,6 @@
 .table-picker {
-  box-shadow: inset -5px -5px 7px var(--primary-accent-400),
-    inset 2px 2px 2px var(--primary-accent-100);
+  box-shadow: inset -2px -2px 7px var(--primary-accent-400),
+    inset 1px 1px 1px var(--primary-accent-100);
   border: 1px solid var(--primary-accent-100);
   border-radius: 8px;
   max-width: 300px;
@@ -9,6 +9,33 @@
     span {
       color: var(--primary-accent);
     }
+  }
+  &__button {
+    border-radius: 10px;
+    border: 1px solid var(--font-primary);
+    color: var(--background);
+    font-weight: 500;
+    background-color: var(--primary-accent-100);
+    &:focus {
+      border-color: var(--primary-accent);
+      box-shadow: inset -5px -5px 7px var(--primary-accent-400),
+        inset 2px 2px 2px var(--primary-accent-100);
+    }
+  }
+}
+
+.table-tab {
+  box-shadow: inset 0px 0px 3px var(--font-primary),
+    inset 0px 0px 1px 0 var(--font-primary);
+  border: 1px solid var(--font-primary);
+  border-bottom: none;
+  border-radius: 12px 12px 0px 0px;
+  &.active {
+    box-shadow: inset -2px -2px 2px var(--primary-accent-400),
+      inset 0px 1px 5px 0 var(--primary-accent-100);
+    border-color: var(--primary-accent-100);
+    font-weight: 500;
+    color: var(--primary-accent);
   }
   &__button {
     border-radius: 10px;

@@ -31,9 +31,9 @@ export const Register = () => {
   };
 
   return (
-    <section className="login flex flex-col items-center justify-center">
+    <section className="login flex-1 flex flex-col items-center justify-center">
       <h1 className="login__title">Register</h1>
-      <div className="flex-grow py-16 ">
+      <div className="py-16 ">
         <form
           className="form flex flex-col p-10 items-center gap-4"
           onSubmit={handleSubmit(onSubmit)}

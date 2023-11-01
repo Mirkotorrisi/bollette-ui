@@ -12,7 +12,7 @@ export const BetList = () => {
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 640;
   return (
-    <section className="py-16">
+    <section className="w-full py-16">
       <div className="bet_component flex flex-wrap">
         <div className="flex flex-col ">
           <div className="league_buttons mb-4 lg:mb-0">

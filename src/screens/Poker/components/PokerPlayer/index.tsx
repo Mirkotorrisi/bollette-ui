@@ -11,9 +11,7 @@ interface Props {
 export const PokerPlayer = ({ player, index, userCards }: Props) => {
   return (
     <div
-      className={`player flex flex-col px-2 py-1 position${
-        player.position || index
-      }`}
+      className={`player flex flex-col p-1 position${player.position || index}`}
     >
       <div className="flex items-center gap-2">
         <img

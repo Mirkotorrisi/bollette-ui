@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { CHAMPIONSHIPS } from "../../../../consts";
 import { fetchBetList, Match } from "../../../../service";
 import { parseMinutes } from "./useParseDate";
+// import mock from "../../../../assets/mock";
 
 interface Props {
   championship: CHAMPIONSHIPS;

@@ -2,77 +2,77 @@
 
 .player {
   position: absolute;
+  background-color: var(--primary-accent-200);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  width: 20%;
+  box-shadow: 1px 1px 1px var(--font-primary),
+    inset 1px 1px 1px var(--secondary-accent);
+
   &__bet {
     position: absolute;
   }
   .dealer-token {
-    width: 50px;
-    height: 50px;
+    width: 20%;
+    aspect-ratio: 1/1;
     position: absolute;
     background: url(../../../../../public/img/dealer.png);
     background-size: contain;
+    background-repeat: no-repeat;
     top: 150%;
   }
 
   &.position0 {
-    left: 25%;
-    top: 10%;
+    left: 10vw;
+    top: 0;
     .player__bet {
-      left: 60%;
-      top: 150%;
+      left: 80%;
+      top: 220%;
     }
     .dealer-token {
     }
   }
 
   &.position1 {
-    left: 50%;
-    top: 10%;
+    left: 50vw;
+    top: 0;
     .player__bet {
-      left: 60%;
-      top: 150%;
+      top: 220%;
     }
   }
 
   &.position2 {
-    left: 75%;
-    top: 40%;
-
+    left: 60vw;
+    top: 12.5vw;
     .player__bet {
       left: -25%;
     }
   }
 
   &.position3 {
-    left: 50%;
-    top: 65%;
+    left: 50vw;
+    top: 25vw;
     .player__bet {
       top: -80%;
     }
   }
 
   &.position4 {
-    left: 25%;
-    top: 65%;
+    left: 10vw;
+    top: 25vw;
     .player__bet {
       top: -80%;
+      left: 80%;
     }
   }
   &.position5 {
     left: 0%;
-    top: 40%;
+    top: 12.5vw;
     .player__bet {
       left: 100%;
     }
   }
 
-  background-color: var(--primary-accent-200);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  width: 15rem;
-  height: 5rem;
-  box-shadow: 1px 1px 1px var(--font-primary),
-    inset 1px 1px 1px var(--secondary-accent);
   &__avatar {
     box-shadow: 2px 2px 2px var(--font-primary);
   }
@@ -94,9 +94,17 @@
   }
   &__card {
     background-size: 400%;
-    // background-repeat: no-repeat;
-    width: 2rem;
-    height: 4rem;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-size: contain;
+    width: 4rem;
+    height: 8rem;
+    left: 20%;
+
+    &:nth-child(2) {
+      left: 35%;
+      transform: rotate(20deg);
+    }
   }
   &__bet {
     span {

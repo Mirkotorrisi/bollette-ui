@@ -41,7 +41,7 @@ export const UserTickets = () => {
   }, [filterTickets]);
 
   return (
-    <section className="flex flex-col mb-8 items-center justify-center">
+    <section className="flex-1 flex flex-col mb-8 items-center justify-center">
       <h1 className="tickets__title">{user.username} Tickets</h1>
       <div className="filter_buttons">
         {filters.map((i: betStatus) => (

@@ -1,0 +1,12 @@
+.lobby {
+  border-right: 1px solid var(--primary-accent-100);
+  &__title {
+    font-size: 2em;
+    color: var(--primary-accent);
+    font-weight: var(--bold);
+  }
+  &__disclaimer {
+    font-size: 1.25em;
+    font-weight: var(--bold);
+  }
+}

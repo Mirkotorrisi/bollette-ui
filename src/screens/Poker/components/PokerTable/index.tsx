@@ -67,10 +67,10 @@ export const PokerTable = ({
   };
 
   return (
-    <div className="poker-table p-5">
+    <div className=" mx-auto w-full relative grid items-center poker-table p-5">
       <h3 className="table-id">{table?.id}</h3>
       <h2 className="pot">Pot: {table?.pot}$</h2>
-      {table?.players.map((p, index) => (
+      {table?.players?.map((p, index) => (
         <PokerPlayer
           player={p}
           key={p.id}
@@ -87,9 +87,7 @@ export const PokerTable = ({
           ></div>
         ))}
       </div>
-      {/* {table.currentHand?.currentRound} */}
-
-      <div className="flex gap-4 mt-auto actions">
+      <div className="mx-auto flex gap-4 mt-auto actions">
         {inGamePlayer?.isCurrentPlayer &&
           inGamePlayer?.availableChoices?.map((choice: CHOICE) =>
             [CHOICE.BET, CHOICE.RAISE].includes(choice) ? (

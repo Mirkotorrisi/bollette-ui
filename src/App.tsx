@@ -41,11 +41,11 @@ function App() {
 
   return (
     <div
-      className="main flex flex-col justify-between min-h-screen"
+      className="main flex flex-col justify-between min-h-screen h-full relative"
       data-theme={theme}
     >
       <NavBar />
-      <div className="lg:px-8">
+      <main className="lg:px-8 flex flex-1 ">
         {show && <Loader />}
         <button
           className="switch-theme px-1"
@@ -66,7 +66,7 @@ function App() {
         </Routes>
 
         {/* <Navigate to="/not-found" replace={true} /> */}
-      </div>
+      </main>
       <Modal />
       <Footer />
     </div>

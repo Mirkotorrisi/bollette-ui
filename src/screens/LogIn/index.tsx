@@ -20,9 +20,9 @@ export const LogIn = () => {
     dispatch(logInUser({ emailOrUsername, password }));
   };
   return (
-    <section className="login flex flex-col items-center justify-center">
+    <section className="login flex-1 flex flex-col items-center justify-center">
       <h1 className="login__title">Log in</h1>
-      <div className="flex-grow py-16">
+      <div className="py-16">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="form flex flex-col p-8  items-center gap-4"

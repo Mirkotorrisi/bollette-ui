@@ -1,21 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import { Socket, io } from "socket.io-client";
 import { Actions, Card, Player, Table } from "../types";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../../redux/user";
 
-export const usePokerTable = () => {
-  const user = useSelector(selectUser);
-  const [socket, setSocket] = useState<Socket | undefined>();
+export const usePokerTable = (
+  socket: Socket,
+  selectTable: (id: string) => void
+) => {
   const [player, setPlayer] = useState<Player>();
   const [userTables, setUserTables] = useState<Map<string, Table>>(
     new Map<string, Table>([])
   );
-
   const [userCards, setUserCards] = useState<Map<string, Card[]>>(
     new Map<string, Card[]>([])
   );
-
   const [tablesArray, setTablesArray] = useState<
     { id: string; players: number }[]
   >([]);
@@ -47,16 +44,6 @@ export const usePokerTable = () => {
   );
 
   useEffect(() => {
-    if (!user) return;
-
-    const socket = io(process.env.REACT_APP_API_URL || "", {
-      auth: {
-        name: user.username,
-      },
-    });
-
-    setSocket(socket);
-
     socket.on(Actions.SET_PLAYER, (player: Player) => {
       setPlayer(player);
     });
@@ -64,6 +51,9 @@ export const usePokerTable = () => {
       setTablesArray(tables);
     });
     socket.on(Actions.ALL_USER_TABLES, (userTables) => {
+      if (userTables?.length) {
+        selectTable(userTables[userTables.length - 1][0]);
+      }
       setUserTables(new Map(userTables));
     });
     socket.on(Actions.BET, handleUpdateTable(Actions.BET));
@@ -77,14 +67,27 @@ export const usePokerTable = () => {
     socket.on(Actions.ASK_FOR_CARDS, (tableId) =>
       socket.emit(Actions.GET_PLAYER_CARDS, tableId)
     );
-    socket.on(Actions.GET_TABLE, (data) => {
-      console.log(data);
-    });
+    // socket.on(Actions.GET_TABLE, (data) => {
+    //   console.log(data);
+    // });
 
     return () => {
-      socket.close();
+      [
+        Actions.BET,
+        Actions.FOLD,
+        Actions.CALL,
+        Actions.RAISE,
+        Actions.CHECK,
+        Actions.JOIN,
+        Actions.LEAVE,
+        Actions.GET_PLAYER_CARDS,
+        Actions.ASK_FOR_CARDS,
+        Actions.ALL_TABLES,
+        Actions.ALL_USER_TABLES,
+        Actions.SET_PLAYER,
+      ].forEach((action) => socket.off(action));
     };
-  }, [getUserCards, handleUpdatePlayers, handleUpdateTable, user]);
+  }, []);
 
   const handleLeave = (id: string) => {
     if (!player) return;
@@ -97,6 +100,7 @@ export const usePokerTable = () => {
   };
 
   const createTable = () => {
+    console.log(socket);
     socket?.emit(Actions.CREATE_TABLE, player?.id);
   };
 

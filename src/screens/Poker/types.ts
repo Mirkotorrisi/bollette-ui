@@ -97,3 +97,10 @@ export type ChioceObj = {
   label: string;
   action: (amt?: number) => void;
 };
+
+export type PokerState = {
+  player?: Player;
+  tables?: Table[];
+  userTables?: Map<string, Table>;
+  userCards?: Map<string, Card[]>;
+};
