@@ -1,5 +1,5 @@
 import React from "react";
-import { Player } from "../../types";
+import { Player, Table } from "../../types";
 import "./index.scss";
 
 interface Props {
@@ -7,8 +7,15 @@ interface Props {
   createTable?: VoidFunction;
   joinTable?: (id: string) => void;
   player?: Player;
+  userTablesKeys?: string[];
 }
-export const Lobby = ({ tables, createTable, joinTable, player }: Props) => {
+export const Lobby = ({
+  tables,
+  createTable,
+  joinTable,
+  player,
+  userTablesKeys,
+}: Props) => {
   return (
     <aside className="lobby flex flex-col gap-4 w-3/12 px-4 border-r h-full">
       <h2 className="lobby__title">Bollette Poker room</h2>
@@ -38,6 +45,7 @@ export const Lobby = ({ tables, createTable, joinTable, player }: Props) => {
           <button
             className="table-picker__button px-4 py-2"
             onClick={() => joinTable?.(t.id)}
+            disabled={userTablesKeys?.includes(t.id)}
           >
             Join
           </button>
