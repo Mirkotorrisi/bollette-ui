@@ -24,21 +24,20 @@
 }
 [data-theme="dark"] {
   --bolder: 700;
-  --bold: 500;
-  --background: #4b4b4b;
-  --primary-accent: #ff5100;
-  --primary-accent-100: #9b1e00;
-  --primary-accent-200: #c6280062;
-  --primary-accent-300: #ff613943;
-  --primary-accent-400: #c628003b;
-  --secondary-accent: #ffffff;
+  --background: #121212;
+  --primary-accent: #ff8e00;
+  --primary-accent-100: #ff8c00d7;
+  --primary-accent-200: #ff8c009f; /* Modificato per un aspetto più adatto al tema scuro */
+  --primary-accent-300: #ff8c005d; /* Cambiato a un altro colore per il tema scuro */
+  --primary-accent-400: #ff8c0030;
+  --secondary-accent: #121212;
   --red: #ff2200;
   --green: #3aae00;
-  --grey-100: #ababab;
-  --grey-200: #39393983;
-  --grey-300: #4646465d;
-  --grey-400: #4b3d3d;
-  --font-primary: #ffffff;
+  --grey-100: #a1a1a1;
+  --grey-200: #8c8c8c83;
+  --grey-300: #0000005e;
+  --grey-400: #1e1e1e;
+  --font-primary: #f0f0f0;
 }
 
 body {

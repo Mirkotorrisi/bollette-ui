@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { Loader } from "./components/Loader";
 import { useUserStorage } from "./utils/useUserStorage";
 import { selectUser } from "./redux/user";
+import "./index.scss";
 
 interface Props {
   redirectPath?: string;

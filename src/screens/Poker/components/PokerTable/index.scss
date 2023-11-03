@@ -15,13 +15,14 @@
 
 .community {
   position: absolute;
-  top: 40%;
-  left: 30%;
+  position: absolute;
+  top: 15vw;
+  left: 25vw;
   &__card {
     background-size: contain;
     background-repeat: no-repeat;
-    width: 10%;
-    height: 12%;
+    width: 5vw;
+    height: 6vw;
   }
 }
 

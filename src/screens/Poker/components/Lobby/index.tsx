@@ -1,5 +1,5 @@
 import React from "react";
-import { Player, Table } from "../../types";
+import { Player } from "../../types";
 import "./index.scss";
 
 interface Props {
