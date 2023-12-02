@@ -40,7 +40,7 @@ export const Lobby = ({
         >
           <p className="table-picker__label">
             Table <span>#{index + 1}</span> - players online:
-            <span>{t.players}</span>{" "}
+            <span>{t.players}</span>
           </p>
           <button
             className="table-picker__button px-4 py-2"

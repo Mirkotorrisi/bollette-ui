@@ -93,7 +93,6 @@ export const usePokerTable = (
   const handleLeave = (id: string) => {
     if (!player) return;
     socket?.emit(Actions.LEAVE, { tableId: id, playerId: player?.id });
-    window?.close();
   };
 
   const joinTable = (tableId: string) => {
@@ -101,7 +100,6 @@ export const usePokerTable = (
   };
 
   const createTable = () => {
-    console.log(socket);
     socket?.emit(Actions.CREATE_TABLE, player?.id);
   };
 
