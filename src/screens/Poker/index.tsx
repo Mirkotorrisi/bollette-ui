@@ -15,7 +15,7 @@ const Poker = () => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [socket]);
 
   return <PokerView socket={socket} />;
 };

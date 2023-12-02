@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Socket, io } from "socket.io-client";
+import { Socket } from "socket.io-client";
 import { Actions, Card, Player, Table } from "../types";
 
 export const usePokerTable = (
@@ -87,6 +87,7 @@ export const usePokerTable = (
         Actions.SET_PLAYER,
       ].forEach((action) => socket.off(action));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLeave = (id: string) => {
