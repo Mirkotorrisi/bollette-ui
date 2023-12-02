@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { useLocation, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import useLocalStorage from "use-local-storage";
 
 import { NavBar } from "./components/Navbar";
@@ -22,7 +22,9 @@ const ProtectedRoute = ({
   children,
 }: Props): JSX.Element => {
   const user = useSelector(selectUser);
-  if (!user.id) return <Navigate to={redirectPath} replace />;
+  const { pathname } = useLocation();
+  if (!user.id)
+    return <Navigate to={`${redirectPath}?redirect=${pathname}`} replace />;
   return children ?? <Outlet />;
 };
 

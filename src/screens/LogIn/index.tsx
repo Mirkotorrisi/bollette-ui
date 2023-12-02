@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { FieldValues, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { logInUser, selectUser } from "../../redux/user";
 import { useAppDispatch } from "../../store";
 import React from "react";
@@ -13,9 +13,12 @@ export const LogIn = () => {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { search } = useLocation();
+
   useEffect(() => {
-    if (user.id) navigate("/");
-  }, [user, navigate]);
+    const redirect = search?.split("redirect=")?.[1];
+    if (user.id) navigate(redirect ?? "/");
+  }, [search, user, navigate]);
   const onSubmit = async ({ emailOrUsername, password }: FieldValues) => {
     dispatch(logInUser({ emailOrUsername, password }));
   };
