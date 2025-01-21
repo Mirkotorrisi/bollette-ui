@@ -1,25 +1,34 @@
-import "./index.scss";
 import React, { useState } from "react";
-import { Table } from "./Table";
-import { Checkout } from "./Checkout";
-import { Ranking } from "./Ranking";
-import { markets } from "../../consts/markets";
 import { CHAMPIONSHIPS } from "../../consts";
-import useWindowDimensions from "../../utils/useWindowDimensions";
+import { markets } from "../../consts/markets";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { Checkout } from "./Checkout";
+import "./index.scss";
+import { Ranking } from "./Ranking";
+import { Table } from "./Table";
 
-export const BetList = () => {
+export const Home = () => {
   const [championship, setChampionship] = useState(CHAMPIONSHIPS.SERIE_A);
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 640;
   return (
-    <section className="w-full py-16">
-      <div className="bet_component flex flex-wrap">
-        <div className="flex flex-col ">
+    <section className="w-full py-16 flex">
+      {/* <div className="">
+        <div className="flex flex-col w-full lg:w-1/2">
+          <h2>AI Powered Bet Assistant</h2>
+          <p>
+            Place your bets effortlessly by chatting with us, just like you
+            would with a real betting operator.
+          </p>
+        </div>
+      </div> */}
+      <div className="bet_component w-full grid grid-cols-12">
+        <div className="flex flex-col col-span-2">
           <div className="league_buttons mb-4 lg:mb-0">
             <h2 className="mb-4 hidden lg:block league_buttons__title">
               Football leagues
             </h2>
-            <div className="flex lg:flex-col overflow-scroll checkout">
+            <div className="flex lg:flex-col overflow-scroll checkout fixed lg:relative top-[72px] lg:top-0">
               {markets.map(({ key, label, flag }) => (
                 <button
                   id={key}
@@ -34,11 +43,10 @@ export const BetList = () => {
               ))}
             </div>
           </div>
-          {!isSmallScreen && <Ranking />}
+          <Ranking />
         </div>
         <Table championship={championship} />
         <Checkout />
-        {isSmallScreen && <Ranking />}
       </div>
     </section>
   );

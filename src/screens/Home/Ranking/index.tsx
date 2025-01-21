@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { getRankingWins, getRankingBalance } from "../../../service";
+import React, { useEffect, useState } from "react";
+import { getRankingBalance, getRankingWins } from "../../../service";
 import "./index.scss";
 
 export const Ranking = () => {
@@ -26,9 +26,9 @@ export const Ranking = () => {
     fetchRanking();
   }, [ranktype, RANKING_TYPE.BALANCE]);
   return (
-    <div className="ranking mt-16 mx-auto lg:mx-0 order-8 lg:order-1">
+    <div className="ranking mt-16 mx-auto lg:mx-0 hidden lg:block ">
       <h2 className="ranking__title">Users ranking</h2>
-      <table className="bet_buttons">
+      <table className="bet_buttons w-full">
         <caption className="my-4">
           {[RANKING_TYPE.BALANCE, RANKING_TYPE.MAX_WIN].map((i) => (
             <button

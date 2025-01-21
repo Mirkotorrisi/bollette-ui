@@ -1,17 +1,17 @@
 import React from "react";
-import { useLocation, Navigate, Outlet, Route, Routes } from "react-router-dom";
-import useLocalStorage from "use-local-storage";
+import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 
-import { NavBar } from "./components/Navbar";
-import { Footer } from "./components/Footer";
-import { protectedRoutes, routes } from "./routes";
-import Modal from "./components/Modal";
-import { selectLoader } from "./redux/loader";
 import { useSelector } from "react-redux";
+import { Footer } from "./components/Footer";
 import { Loader } from "./components/Loader";
-import { useUserStorage } from "./utils/useUserStorage";
-import { selectUser } from "./redux/user";
+import Modal from "./components/Modal";
+import { NavBar } from "./components/Navbar";
+import { useTheme } from "./hooks/useTheme";
+import { useUserStorage } from "./hooks/useUserStorage";
 import "./index.scss";
+import { selectLoader } from "./redux/loader";
+import { selectUser } from "./redux/user";
+import { protectedRoutes, routes } from "./routes";
 
 interface Props {
   redirectPath?: string;
@@ -29,16 +29,8 @@ const ProtectedRoute = ({
 };
 
 function App() {
-  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const [theme, setTheme] = useLocalStorage(
-    "theme",
-    defaultDark ? "dark" : "light"
-  );
   const { show } = useSelector(selectLoader);
-  const isLight = theme === "light";
-  const handleButtonClick = () => {
-    setTheme(isLight ? "dark" : "light");
-  };
+  const { theme } = useTheme();
 
   useUserStorage();
 
@@ -50,13 +42,7 @@ function App() {
       <NavBar />
       <main className="lg:px-8 flex flex-1 ">
         {show && <Loader />}
-        <button
-          className="switch-theme px-1"
-          title={`turn ${isLight ? "off" : "on"} lights!`}
-          onClick={() => handleButtonClick()}
-        >
-          <i className={`fas fa-${isLight ? "moon" : "sun"}`}></i>
-        </button>
+
         <Routes>
           {routes.map(({ path, component }, i) => (
             <Route path={path} Component={component} key={i} />

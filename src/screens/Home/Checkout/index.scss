@@ -122,14 +122,3 @@
   color: var(--gre-100y);
   text-decoration: line-through;
 }
-@media (max-width: 1025px) {
-  .checkout {
-    width: 100vw;
-  }
-  .hide {
-    top: 90vh;
-  }
-  .show {
-    top: 0;
-  }
-}

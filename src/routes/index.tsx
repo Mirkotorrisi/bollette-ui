@@ -1,16 +1,16 @@
-import { BetList } from "../screens/BetList";
-import { LogIn } from "../screens/LogIn";
-import { Register } from "../screens/Register";
-import { UserTickets } from "../screens/UserTickets";
-import { Credits } from "../screens/Credits";
 import { AboutMe } from "../screens/AboutMe";
-import { Slot } from "../screens/Slot";
+import { Credits } from "../screens/Credits";
+import { Home } from "../screens/Home";
+import { LogIn } from "../screens/LogIn";
 import Poker from "../screens/Poker";
+import { Register } from "../screens/Register";
+import { Slot } from "../screens/Slot";
+import { UserTickets } from "../screens/UserTickets";
 
 export const routes = [
   {
     path: "/",
-    component: BetList,
+    component: Home,
   },
   {
     path: "/login",

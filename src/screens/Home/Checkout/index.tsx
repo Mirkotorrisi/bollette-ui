@@ -1,17 +1,17 @@
-import "./index.scss";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { submitCheckout } from "../../../service";
-import { updateAccountSum } from "../../../redux/user";
+import { showModal } from "../../../redux/modals";
 import {
-  selectTicket,
   clearTicket,
   removeBetFromTicket,
+  selectTicket,
   updateTicketOdds,
 } from "../../../redux/tickets";
+import { updateAccountSum } from "../../../redux/user";
+import { submitCheckout } from "../../../service";
 import { useAppDispatch } from "../../../store";
 import { parseDate } from "../../../utils/betStartParser";
-import { showModal } from "../../../redux/modals";
+import "./index.scss";
 
 export const Checkout = () => {
   const dispatch = useAppDispatch();
@@ -43,15 +43,16 @@ export const Checkout = () => {
     if (prevOdd) return prevOdd > odd ? "decrement_odd" : "increment_odd";
     return "";
   };
+  if (!ticket?.length) return null;
 
   return (
     <section
-      className={`checkout__container fixed lg:static flex-col ${
-        showTotalContainer ? "show" : "hide"
-      } ${ticket.length ? "" : "hidden lg:block"}`}
+      className={`checkout__container fixed lg:static flex-col col-span-3 ${
+        showTotalContainer ? "top-20" : "-bottom-1/2"
+      } `}
     >
       <h2 className="mb-4 checkout__title hidden lg:block">Your ticket</h2>
-      <div className="checkout p-8">
+      <div className="checkout max-lg:w-screen p-8">
         <button
           className="flex justify-between mb-4 w-full lg:hidden checkout__show-btn"
           onClick={() => setShowTotalContainer(!showTotalContainer)}

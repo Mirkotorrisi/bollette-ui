@@ -1,10 +1,10 @@
-import "./index.scss";
 import React, { useState } from "react";
-import { QuotaComponent } from "./QuotaComponent";
-import { Match } from "../../../service";
 import { CHAMPIONSHIPS, MARKETS } from "../../../consts";
+import { Match } from "../../../service";
+import { QuotaComponent } from "./QuotaComponent";
 import { TableHead } from "./TableHead";
 import { useQueryBetList } from "./hooks/useQueryBetList";
+import "./index.scss";
 
 interface Props {
   championship: CHAMPIONSHIPS;
@@ -15,7 +15,7 @@ export const Table = ({ championship }: Props) => {
   const list = useQueryBetList({ championship, delay: 600000 });
 
   return (
-    <div className="flex flex-grow flex-col">
+    <div className="flex flex-grow flex-col col-span-12 lg:col-span-7">
       <div className="table__header flex-col lg:flex-row px-8 mb-8 justify-between items-center">
         <h2 className="table__header__title mb-4">{championship}</h2>
         <div className="flex">

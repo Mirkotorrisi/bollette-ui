@@ -1,10 +1,11 @@
-import "./index.scss";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { logOut, selectUser } from "../../redux/user";
 import { useSelector } from "react-redux";
-import useWindowDimensions from "../../utils/useWindowDimensions";
+import { Link } from "react-router-dom";
+import { useTheme } from "../../hooks/useTheme";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { logOut, selectUser } from "../../redux/user";
 import { useAppDispatch } from "../../store";
+import "./index.scss";
 
 export const NavBar = () => {
   const user = useSelector(selectUser);
@@ -14,6 +15,9 @@ export const NavBar = () => {
   const handleLogOut = () => {
     dispatch(logOut());
   };
+
+  const { isLight, switchTheme } = useTheme();
+
   return (
     <nav className="navbar fixed lg:static z-10 flex justify-between w-full items-between flex-wrap bg-teal-500">
       <Link className="navbar__logo mx-6 flex items-center" to="/">
@@ -89,6 +93,13 @@ export const NavBar = () => {
                   Poker
                 </Link>
               </li>
+              <button
+                className="switch-theme px-1 my-auto mr-auto ml-4"
+                title={`turn ${isLight ? "off" : "on"} lights!`}
+                onClick={switchTheme}
+              >
+                <i className={`fas fa-${isLight ? "moon" : "sun"}`}></i>
+              </button>
             </>
           )}
         </ul>
