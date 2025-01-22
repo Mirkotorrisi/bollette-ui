@@ -15,7 +15,7 @@ export const Table = ({ championship }: Props) => {
   const list = useQueryBetList({ championship, delay: 600000 });
 
   return (
-    <div className="flex flex-grow flex-col col-span-12 lg:col-span-7">
+    <div className="flex flex-grow flex-col col-span-12 lg:col-span-7 ">
       <div className="table__header flex-col lg:flex-row px-8 mb-8 justify-between items-center">
         <h2 className="table__header__title mb-4">{championship}</h2>
         <div className="flex">

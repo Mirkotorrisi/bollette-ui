@@ -1,5 +1,5 @@
-import { RootState } from "./../store";
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "./../store";
 
 export interface Bet {
   id: string;
@@ -66,6 +66,13 @@ const ticketSlice = createSlice({
         1
       );
     },
+    setWholeTicket(state, action) {
+      state.ticket = action.payload;
+      state.multiplier = action.payload.reduce(
+        (acc: number, match: Bet) => (acc *= match.odd),
+        1
+      );
+    },
   },
 });
 export const selectTicket = (state: RootState) => state.ticket;
@@ -76,6 +83,7 @@ export const {
     addBetToTicket,
     removeBetFromTicket,
     updateTicketOdds,
+    setWholeTicket,
   },
   reducer: ticketReducer,
 } = ticketSlice;

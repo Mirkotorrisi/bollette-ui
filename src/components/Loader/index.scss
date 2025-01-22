@@ -1,8 +1,8 @@
 .lds-ring {
   display: inline-block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
   &__first {
     box-sizing: border-box;
     display: block;

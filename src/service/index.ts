@@ -1,3 +1,5 @@
+import axios from "axios";
+import { showModal } from "../redux/modals";
 import { Bet } from "../redux/tickets";
 import { CHAMPIONSHIPS } from "./../consts/index";
 import { getAxiosInstance } from "./getAxiosInstance";
@@ -154,4 +156,36 @@ export const getRankingBalance = async () => {
     url: `/ranking/`,
   });
   return res;
+};
+
+export const sendBolletteAgentPrompt = async (
+  input: string,
+  dispatch: Function,
+  session?: string
+) => {
+  try {
+    const res = await axios.request({
+      method: "post",
+      url: "/",
+      baseURL: process.env.REACT_APP_AGENT_API_URL,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        input,
+        session,
+      },
+    });
+    return res;
+  } catch (error: any) {
+    dispatch(
+      showModal({
+        show: true,
+        title: "Something went wrong",
+        error: error.response?.data?.message || error.response?.data?.error,
+        status: error.response?.data?.statusCode,
+      })
+    );
+    return error;
+  }
 };
