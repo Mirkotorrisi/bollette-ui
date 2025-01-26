@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Bet, setWholeTicket } from "../redux/tickets";
 import { sendBolletteAgentPrompt } from "../service";
 import { useAppDispatch } from "../store";
+import useCheckout from "./useCheckout";
 
 const useBetAssistant = () => {
   const [input, setInput] = useState("");
@@ -10,6 +11,7 @@ const useBetAssistant = () => {
   const [message, setMessage] = useState("");
 
   const dispatch = useAppDispatch();
+  const { handleSubmit: submitCheckout, setSum } = useCheckout();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -21,7 +23,10 @@ const useBetAssistant = () => {
     setIsLoading(false);
     if (res.data?.id) setSession(res.data.id);
     setInput("");
-    if (res.data?.payslip) {
+    if (res.data?.amount) {
+      setSum(res.data.amount);
+      submitCheckout();
+    } else if (res.data?.payslip) {
       const parsedResuls = res.data?.payslip?.map(
         (bet: Bet & { sign: string }) => ({
           ...bet,
