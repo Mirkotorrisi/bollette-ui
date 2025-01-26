@@ -1,4 +1,4 @@
-import React, { JSX } from "react";
+import React from "react";
 import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 
 import { useSelector } from "react-redux";
@@ -40,7 +40,7 @@ function App() {
       data-theme={theme}
     >
       <NavBar />
-      <main className="lg:px-8 flex flex-1 ">
+      <main className="lg:px-8 flex flex-1 w-full">
         {show && <Loader />}
 
         <Routes>
