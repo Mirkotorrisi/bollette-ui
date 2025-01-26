@@ -29,7 +29,7 @@ export const Checkout = () => {
       } `}
     >
       <p className="mb-4 checkout__title hidden lg:block">Your ticket</p>
-      <div className="checkout max-lg:w-screen p-8">
+      <div className="checkout w-screen lg:w-auto p-8">
         <button
           className="flex justify-between mb-4 w-full lg:hidden checkout__show-btn"
           onClick={() => setShowTotalContainer(!showTotalContainer)}

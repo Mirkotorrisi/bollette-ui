@@ -13,7 +13,7 @@ type Props = {
 
 const LeagueMenu = ({ markets, setChampionship, championship }: Props) => {
   return (
-    <div className="max-lg:w-screen league_buttons mb-4 lg:mb-0 sticky top-16 lg:top-0">
+    <div className="w-screen lg:w-auto league_buttons mb-4 lg:mb-0 sticky top-16 lg:top-0">
       <h2 className="mb-4 hidden lg:block league_buttons__title">
         Football leagues
       </h2>

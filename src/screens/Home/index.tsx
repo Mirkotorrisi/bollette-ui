@@ -15,7 +15,7 @@ export const Home = () => {
     <section className="w-full py-16 flex">
       <div className="bet_component w-full grid grid-cols-12 relative">
         <BetAssistant />
-        <div className="flex flex-col col-span-2 w-full lg:w-auto">
+        <div className="flex flex-col col-span-2 w-full lg:w-auto relative">
           <LeagueMenu
             markets={markets}
             setChampionship={setChampionship}

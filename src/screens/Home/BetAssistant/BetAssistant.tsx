@@ -21,7 +21,9 @@ const BetAssistant = () => {
       <p>When your bet is ready, try to ask AI to checkout your ticket.</p>
       <p>
         If you want to know more about how I built this assistant, click{" "}
-        <Link to={"/credits#bet-assistant"}>here</Link>
+        <Link to={"/credits#bet-assistant"} className="underline">
+          here
+        </Link>
       </p>
       <input
         type="text"
