@@ -5,6 +5,7 @@ import { markets } from "../../consts/markets";
 import useBetAssistant from "../../hooks/useBetAssistant";
 import { Checkout } from "./Checkout";
 import "./index.scss";
+import LeagueMenu from "./LeagueMenu/LeagueMenu";
 import { Ranking } from "./Ranking";
 import { Table } from "./Table";
 
@@ -16,7 +17,7 @@ export const Home = () => {
 
   return (
     <section className="w-full py-16 flex">
-      <div className="bet_component w-full grid grid-cols-12">
+      <div className="bet_component w-full grid grid-cols-12 relative">
         <div className="col-span-12 px-2 my-20 flex flex-col items-start gap-2 ">
           <h2 className="text-4xl warning">AI Powered Bet Assistant</h2>
           <p>
@@ -42,26 +43,12 @@ export const Home = () => {
           </div>
           <p className="text-sm text-gray-500 mt-2">{message}</p>
         </div>
-        <div className="flex flex-col col-span-2">
-          <div className="league_buttons mb-4 lg:mb-0">
-            <h2 className="mb-4 hidden lg:block league_buttons__title">
-              Football leagues
-            </h2>
-            <div className="flex lg:flex-col overflow-scroll checkout fixed lg:relative top-[72px] lg:top-0">
-              {markets.map(({ key, label, flag }) => (
-                <button
-                  id={key}
-                  key={key}
-                  className={`${flag} p-3 flex justify-between league_button${
-                    key === championship ? "--focused" : ""
-                  }`}
-                  onClick={() => setChampionship(key)}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
+        <div className="flex flex-col col-span-2 w-full lg:w-auto">
+          <LeagueMenu
+            markets={markets}
+            setChampionship={setChampionship}
+            championship={championship}
+          />
           <Ranking />
         </div>
         <Table championship={championship} />
