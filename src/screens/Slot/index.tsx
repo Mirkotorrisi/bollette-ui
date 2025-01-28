@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import * as slotresources from "../../assets/slotresources";
-import { spinSlot } from "../../service";
-import "./index.scss";
-import { useAppDispatch } from "../../store";
-import { selectUser, updateAccountSum } from "../../redux/user";
 import { useSelector } from "react-redux";
+import * as slotresources from "../../consts/slotresources";
+import { selectUser, updateAccountSum } from "../../redux/user";
+import { spinSlot } from "../../service";
+import { useAppDispatch } from "../../store";
+import "./index.scss";
 
 export const Slot = () => {
   const dispatch = useAppDispatch();

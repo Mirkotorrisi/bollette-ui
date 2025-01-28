@@ -1,10 +1,9 @@
-import "./index.scss";
-import { useCallback, useEffect, useState } from "react";
-import { getTickets } from "../../service";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { faClasses } from "../../assets/res";
+import { faClasses } from "../../consts/res";
 import { selectUser } from "../../redux/user";
-import React from "react";
+import { getTickets } from "../../service";
+import "./index.scss";
 
 type betStatus = "won" | "lost" | "ongoing";
 interface Ticket {
