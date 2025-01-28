@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
 import App from "./App";
+import "./index.css";
 import "./tailwind.generated.css";
 
 import { Provider } from "react-redux";
@@ -11,7 +11,9 @@ import store from "./store";
 
 setAxiosInstance(store.dispatch);
 
-const root = createRoot(document.getElementById("root"));
+const node = document.getElementById("root");
+if (!node) throw new Error("Root element not found");
+const root = createRoot(node);
 
 root.render(
   <React.StrictMode>

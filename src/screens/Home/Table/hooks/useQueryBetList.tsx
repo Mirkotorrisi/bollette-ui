@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 // import mock from "../../../../assets/mock";
 import { CHAMPIONSHIPS } from "../../../../consts";
 import { fetchBetList, Match } from "../../../../service";
@@ -29,7 +29,7 @@ export const useQueryBetList = ({ championship, delay }: Props) => {
     return () => clearInterval(interval);
   }, [updateList, delay]);
 
-  return list?.filter((match) => {
+  return list?.filter?.((match) => {
     const minutes = parseMinutes(match.start);
     return isNaN(+minutes) || +minutes < 95;
   });

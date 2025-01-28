@@ -1,11 +1,11 @@
-import "./index.scss";
 import { MARKETS } from "../../../../consts";
+import "./index.scss";
 
+import React from "react";
+import { Match, SIGN } from "../../../../service";
+import { useParseDate } from "../hooks/useParseDate";
 import { usePlaceBet } from "../hooks/usePlaceBet";
 import { BetButton } from "./BetButton";
-import { useParseDate } from "../hooks/useParseDate";
-import { Match, SIGN } from "../../../../service";
-import React from "react";
 
 interface Props {
   market: MARKETS;
@@ -48,6 +48,7 @@ export const QuotaComponent = ({ market, match, isEven }: Props) => {
       </td>
       {signs.map((sign, index) => (
         <BetButton
+          key={sign + index}
           sign={sign}
           index={index}
           odd={match.odds[sign]}

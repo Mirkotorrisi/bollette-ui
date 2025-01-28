@@ -50,7 +50,7 @@ export const Ranking = () => {
         </thead>
         <tbody>
           {ranking?.length &&
-            ranking?.map(({ username, account_sum, max_win }, index) => (
+            ranking?.map?.(({ username, account_sum, max_win }, index) => (
               <tr key={username + index}>
                 <td className="px-4">{username}</td>
                 <td className="px-4">

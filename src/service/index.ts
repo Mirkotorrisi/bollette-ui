@@ -167,7 +167,7 @@ export const sendBolletteAgentPrompt = async (
     const res = await axios.request({
       method: "post",
       url: "/",
-      baseURL: process.env.REACT_APP_AGENT_API_URL,
+      baseURL: import.meta.env.VITE_APP_AGENT_API_URL,
       headers: {
         "Content-Type": "application/json",
       },

@@ -1,7 +1,7 @@
-import { AppDispatch } from "../store";
 import axios, { AxiosInstance } from "axios";
-import { showModal } from "../redux/modals";
 import { hideLoader, showLoader } from "../redux/loader";
+import { showModal } from "../redux/modals";
+import { AppDispatch } from "../store";
 
 let baseInstance: AxiosInstance;
 
@@ -54,7 +54,7 @@ const setupAxiosInstance = ({
 
 export const setAxiosInstance = (dispatch: AppDispatch) => {
   baseInstance = setupAxiosInstance({
-    url: process.env.REACT_APP_API_URL || "",
+    url: import.meta.env.VITE_APP_API_URL || "",
     dispatch,
   });
 };
