@@ -22,9 +22,6 @@ export const Footer = () => (
         <a href="https://github.com/Mirkotorrisi">
           <i className="fab fa-github"></i>
         </a>
-        <a href="https://www.facebook.com/mirko.torrisi92/">
-          <i className="fab fa-facebook"></i>
-        </a>
         <a href="https://www.linkedin.com/in/mirko-torrisi/">
           <i className="fab fa-linkedin"></i>
         </a>
