@@ -1,5 +1,5 @@
 import React from "react";
-import { CHAMPIONSHIPS } from "../../../consts";
+import { CHAMPIONSHIPS } from "../../../consts/enums";
 
 type Props = {
   markets: {

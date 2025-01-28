@@ -1,4 +1,4 @@
-import { MARKETS } from "../../../../consts";
+import { MARKETS } from "../../../../consts/enums";
 import "./index.scss";
 
 import React from "react";

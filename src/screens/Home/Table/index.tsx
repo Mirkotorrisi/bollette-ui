@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CHAMPIONSHIPS, MARKETS } from "../../../consts";
+import { CHAMPIONSHIPS, MARKETS } from "../../../consts/enums";
 import { Match } from "../../../service";
 import { QuotaComponent } from "./QuotaComponent";
 import { TableHead } from "./TableHead";

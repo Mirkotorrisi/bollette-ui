@@ -1,4 +1,4 @@
-import { CHAMPIONSHIPS } from "./index";
+import { CHAMPIONSHIPS } from "./enums";
 
 export const markets = [
   {

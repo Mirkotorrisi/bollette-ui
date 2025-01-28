@@ -1,7 +1,7 @@
 import axios from "axios";
+import { CHAMPIONSHIPS } from "../consts/enums";
 import { showModal } from "../redux/modals";
 import { Bet } from "../redux/tickets";
-import { CHAMPIONSHIPS } from "./../consts/index";
 import { getAxiosInstance } from "./getAxiosInstance";
 
 export const placeBet = async (

@@ -1,5 +1,5 @@
 import React from "react";
-import { MARKETS } from "../../../../consts";
+import { MARKETS } from "../../../../consts/enums";
 import "./index.scss";
 interface Props {
   market: MARKETS;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CHAMPIONSHIPS } from "../../consts";
+import { CHAMPIONSHIPS } from "../../consts/enums";
 import { markets } from "../../consts/markets";
 import BetAssistant from "./BetAssistant/BetAssistant";
 import { Checkout } from "./Checkout";
