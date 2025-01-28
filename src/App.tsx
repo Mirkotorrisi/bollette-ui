@@ -15,12 +15,12 @@ import { protectedRoutes, routes } from "./routes";
 
 interface Props {
   redirectPath?: string;
-  children?: JSX.Element;
+  children?: React.ReactNode;
 }
 const ProtectedRoute = ({
   redirectPath = "/login",
   children,
-}: Props): JSX.Element => {
+}: Props): React.ReactNode => {
   const user = useSelector(selectUser);
   const { pathname } = useLocation();
   if (!user.id)
