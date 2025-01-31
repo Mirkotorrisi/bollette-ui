@@ -2,7 +2,6 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import "./tailwind.generated.css";
 
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";

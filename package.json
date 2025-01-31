@@ -6,6 +6,7 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^7.0.2",
     "@reduxjs/toolkit": "^2.5.0",
+    "@tailwindcss/vite": "^4.0.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
@@ -37,11 +38,7 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "build:tailwind": "postcss src/tailwind.css -o src/tailwind.generated.css",
-    "watch:tailwind": "postcss -w src/tailwind.css -o src/tailwind.generated.css",
-    "dev": "run-p watch:tailwind start",
-    "prebuild": "npm run build:tailwind"
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [
