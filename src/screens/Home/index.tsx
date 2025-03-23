@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { leagues } from "../../consts/entities";
 import { CHAMPIONSHIPS } from "../../consts/enums";
-import { markets } from "../../consts/markets";
 import BetAssistant from "./BetAssistant/BetAssistant";
 import { Checkout } from "./Checkout";
 import "./index.scss";
@@ -9,7 +9,9 @@ import { Ranking } from "./Ranking";
 import { Table } from "./Table";
 
 export const Home = () => {
-  const [championship, setChampionship] = useState(CHAMPIONSHIPS.SERIE_A);
+  const [championship, setChampionship] = useState(
+    CHAMPIONSHIPS.PREMIER_LEAGUE
+  );
 
   return (
     <section className="w-full py-16 flex">
@@ -17,7 +19,7 @@ export const Home = () => {
         <BetAssistant />
         <div className="flex flex-col col-span-2 w-full lg:w-auto relative">
           <LeagueMenu
-            markets={markets}
+            leagues={leagues}
             setChampionship={setChampionship}
             championship={championship}
           />

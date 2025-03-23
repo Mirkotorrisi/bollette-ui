@@ -1,6 +1,6 @@
-import { CHAMPIONSHIPS } from "./enums";
+import { CHAMPIONSHIPS, MARKETS, outcomes } from "./enums";
 
-export const markets = [
+export const leagues = [
   {
     key: CHAMPIONSHIPS.PREMIER_LEAGUE,
     label: "Premier League",
@@ -45,5 +45,23 @@ export const markets = [
     key: CHAMPIONSHIPS.EUROPA_LEAGUE,
     label: "Europa League",
     flag: "europaLeague",
+  },
+];
+
+export const markets = [
+  {
+    key: MARKETS.H2H,
+    label: "Head to head",
+    outcomes: outcomes[MARKETS.H2H],
+  },
+  {
+    key: MARKETS.TOTALS,
+    label: "Over/under 2.5",
+    outcomes: outcomes[MARKETS.TOTALS],
+  },
+  {
+    key: MARKETS.BOTH_TEAMS_TO_SCORE,
+    label: "Both teams to score",
+    outcomes: outcomes[MARKETS.BOTH_TEAMS_TO_SCORE],
   },
 ];

@@ -5,13 +5,15 @@
   }
 }
 .league_button {
-  border: 1px solid var(--primary-accent-100);
-  font-weight: var(--bold);
-  background-size: 25%;
-  min-width: 10em;
-  background-position: 100% 30%;
-  background-repeat: no-repeat;
-  white-space: nowrap;
+  & {
+    border: 1px solid var(--primary-accent-100);
+    font-weight: var(--bold);
+    background-size: 25%;
+    min-width: 10em;
+    background-position: 100% 30%;
+    background-repeat: no-repeat;
+    white-space: nowrap;
+  }
   &--focused {
     background-color: var(--primary-accent);
     background-size: 30%;

@@ -1,8 +1,8 @@
-import { MARKETS } from "../../../../consts/enums";
+import { MARKETS, outcomes } from "../../../../consts/enums";
 import "./index.scss";
 
 import React from "react";
-import { Match, SIGN } from "../../../../service";
+import { Match } from "../../../../service";
 import { useParseDate } from "../hooks/useParseDate";
 import { usePlaceBet } from "../hooks/usePlaceBet";
 import { BetButton } from "./BetButton";
@@ -14,10 +14,7 @@ interface Props {
 }
 
 export const QuotaComponent = ({ market, match, isEven }: Props) => {
-  const signs =
-    market === MARKETS.H2H
-      ? [SIGN.HOME, SIGN.DRAW, SIGN.VISITOR]
-      : [SIGN.OVER, SIGN.UNDER];
+  const signs = outcomes[market];
   const { submitOrRemoveBet, isSelected } = usePlaceBet(match);
   const { date, time, isLive } = useParseDate(match.start);
   return (

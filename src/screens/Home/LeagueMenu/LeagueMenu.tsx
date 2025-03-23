@@ -2,7 +2,7 @@ import React from "react";
 import { CHAMPIONSHIPS } from "../../../consts/enums";
 
 type Props = {
-  markets: {
+  leagues: {
     key: CHAMPIONSHIPS;
     label: string;
     flag: string;
@@ -11,14 +11,14 @@ type Props = {
   championship: string;
 };
 
-const LeagueMenu = ({ markets, setChampionship, championship }: Props) => {
+const LeagueMenu = ({ leagues, setChampionship, championship }: Props) => {
   return (
     <div className="w-screen lg:w-auto league_buttons mb-4 lg:mb-0 sticky top-16 lg:top-0">
       <h2 className="mb-4 hidden lg:block league_buttons__title">
         Football leagues
       </h2>
       <div className="w-full flex lg:flex-col overflow-scroll checkout  lg:relative ">
-        {markets.map(({ key, label, flag }) => (
+        {leagues.map(({ key, label, flag }) => (
           <button
             id={key}
             key={key}

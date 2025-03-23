@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CHAMPIONSHIPS } from "../consts/enums";
+import { CHAMPIONSHIPS, SIGN } from "../consts/enums";
 import { showModal } from "../redux/modals";
 import { Bet } from "../redux/tickets";
 import { getAxiosInstance } from "./getAxiosInstance";
@@ -32,14 +32,6 @@ export const removeBet = async (matchId: string, ticket_id: number) => {
   });
   return res;
 };
-
-export enum SIGN {
-  HOME = "home",
-  VISITOR = "away",
-  DRAW = "draw",
-  OVER = "over",
-  UNDER = "under",
-}
 
 export type Odds = {
   [key in SIGN]?: number;
