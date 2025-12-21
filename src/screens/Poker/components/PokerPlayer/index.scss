@@ -6,10 +6,15 @@
   backdrop-filter: blur(15px);
   border: 1px solid var(--primary-accent-300);
   border-radius: 15px;
-  width: 180px;
-  padding: 10px;
+  width: 220px;
+  padding: 12px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.5);
   transition: all 0.3s ease;
+
+  @media (max-width: 1024px) {
+    width: 130px;
+    padding: 8px;
+  }
 
   &.active-turn {
     border-color: var(--primary-accent);
@@ -27,10 +32,18 @@
     border-radius: 20px;
     border: 1px solid var(--primary-accent);
     
+    @media (max-width: 1024px) {
+        padding: 1px 6px;
+        gap: 2px;
+    }
+
     span {
       color: var(--primary-accent);
       font-weight: 800;
       font-size: 0.9rem;
+      @media (max-width: 1024px) {
+          font-size: 0.6rem;
+      }
     }
 
     &__chips {
@@ -39,6 +52,10 @@
       height: 1.5rem;
       background-size: contain;
       background-repeat: no-repeat;
+      @media (max-width: 1024px) {
+          width: 0.8rem;
+          height: 0.8rem;
+      }
     }
   }
 
@@ -50,15 +67,49 @@
     background-size: contain;
     background-repeat: no-repeat;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    @media (max-width: 1024px) {
+        width: 15px;
+        height: 15px;
+    }
   }
 
   // Adjusted positions for the new table
-  &.position0 { left: 15%; top: 10%; .player__bet { right: -60px; bottom: -20px; } .dealer-token { right: -40px; top: -10px; }}
-  &.position1 { left: 45%; top: 5%; .player__bet { bottom: -40px; left: 50%; transform: translateX(-50%); } .dealer-token { right: -30px; top: -10px; }}
-  &.position2 { right: 10%; top: 25%; .player__bet { left: -70px; top: 50%; } .dealer-token { left: -30px; top: -10px; }}
-  &.position3 { left: 65%; bottom: 10%; .player__bet { top: -40px; left: 50%; transform: translateX(-50%); } .dealer-token { left: -30px; bottom: -10px; }}
-  &.position4 { left: 15%; bottom: 10%; .player__bet { top: -40px; left: 50%; transform: translateX(-50%); } .dealer-token { right: -30px; bottom: -10px; }}
-  &.position5 { left: 5%; top: 25%; .player__bet { right: -70px; top: 50%; } .dealer-token { right: -30px; top: -10px; }}
+  &.position0 { 
+      left: 15%; top: 10%; 
+      .player__bet { right: -60px; bottom: -20px; } 
+      .dealer-token { right: -40px; top: -10px; }
+      @media (max-width: 1024px) { left: 5%; top: 5%; .player__bet { right: 0; bottom: -25px; } }
+  }
+  &.position1 { 
+      left: 45%; top: 5%; 
+      .player__bet { bottom: -40px; left: 50%; transform: translateX(-50%); } 
+      .dealer-token { right: -30px; top: -10px; }
+      @media (max-width: 1024px) { left: 50%; top: 2%; transform: translateX(-50%); }
+  }
+  &.position2 { 
+      right: 10%; top: 25%; 
+      .player__bet { left: -70px; top: 50%; } 
+      .dealer-token { left: -30px; top: -10px; }
+      @media (max-width: 1024px) { right: 5%; top: 20%; .player__bet { left: -20px; bottom: -25px; top: auto; } }
+  }
+  &.position3 { 
+      left: 65%; bottom: 10%; 
+      .player__bet { top: -40px; left: 50%; transform: translateX(-50%); } 
+      .dealer-token { left: -30px; bottom: -10px; }
+      @media (max-width: 1024px) { left: 60%; bottom: 15%; .player__bet { top: -25px; } }
+  }
+  &.position4 { 
+      left: 15%; bottom: 10%; 
+      .player__bet { top: -40px; left: 50%; transform: translateX(-50%); } 
+      .dealer-token { right: -30px; bottom: -10px; }
+      @media (max-width: 1024px) { left: 5%; bottom: 15%; .player__bet { top: -25px; } }
+  }
+  &.position5 { 
+      left: 5%; top: 25%; 
+      .player__bet { right: -70px; top: 50%; } 
+      .dealer-token { right: -30px; top: -10px; }
+      @media (max-width: 1024px) { left: 5%; top: 20%; .player__bet { right: -20px; bottom: -25px; top: auto; } }
+  }
 
   &__avatar {
     border: 2px solid rgba(255, 255, 255, 0.1);
@@ -75,21 +126,21 @@
   &__chips {
     color: var(--primary-accent);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin: 0;
   }
 
   &__cards-container {
-      margin-top: 10px;
-      height: 60px;
+      margin-top: 15px;
+      height: 90px;
       display: flex;
       justify-content: center;
       position: relative;
   }
 
   &__card {
-    width: 45px;
-    height: 65px;
+    width: 60px;
+    height: 85px;
     position: absolute;
     
     &:nth-child(1) {

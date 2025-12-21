@@ -38,9 +38,9 @@ export const usePokerTable = (
 
   const getUserCards = useCallback(
     ({ tableId, hand }: { tableId: string; hand: Card[] }) => {
-      setUserCards(new Map(userCards.set(tableId, hand)));
+      setUserCards((prev) => new Map(prev.set(tableId, hand)));
     },
-    [userCards]
+    []
   );
 
   useEffect(() => {
@@ -67,6 +67,7 @@ export const usePokerTable = (
     socket.on(Actions.ASK_FOR_CARDS, (tableId) =>
       socket.emit(Actions.GET_PLAYER_CARDS, tableId)
     );
+
     // socket.on(Actions.GET_TABLE, (data) => {
     //   console.log(data);
     // });

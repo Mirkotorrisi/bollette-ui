@@ -8,6 +8,7 @@ interface Props {
   joinTable?: (id: string) => void;
   player?: Player;
   userTablesKeys?: string[];
+  onClose?: VoidFunction;
 }
 export const Lobby = ({
   tables,
@@ -15,9 +16,17 @@ export const Lobby = ({
   joinTable,
   player,
   userTablesKeys,
+  onClose,
 }: Props) => {
   return (
-    <aside className="lobby flex flex-col gap-4 w-3/12 px-4 border-r h-full">
+    <aside className="lobby flex flex-col gap-4 w-full px-4 border-r h-full relative">
+      <button
+        className="lg:hidden absolute top-4 right-4 text-white text-2xl opacity-50 hover:opacity-100"
+        onClick={onClose}
+      >
+        ✕
+      </button>
+
       <h2 className="lobby__title">Bollette Poker</h2>
       {player && (
         <>

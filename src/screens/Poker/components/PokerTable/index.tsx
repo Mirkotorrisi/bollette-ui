@@ -2,6 +2,7 @@ import React from "react";
 import { Table, CHOICE, ChioceObj, Card } from "../../types";
 import { PokerPlayer } from "../PokerPlayer";
 import { Socket } from "socket.io-client";
+import { card_image } from "../../assets";
 import "./index.scss";
 import BetInput from "../BetInput";
 
@@ -82,11 +83,13 @@ export const PokerTable = ({
       <div className="flex justify-center items-center gap-3 community">
         {table.communityCards?.map((c, i) => (
           <div
-            className={`community__card ${c.suit.charAt(0)}${c.rank}`}
+            className="community__card front"
+            style={{ backgroundImage: `url(${card_image[c.suit + c.rank]})` }}
             key={c.suit.charAt(0) + c.rank + i}
           ></div>
         ))}
       </div>
+
       <div className="mx-auto flex gap-4 mt-auto actions">
         {inGamePlayer?.isCurrentPlayer &&
           inGamePlayer?.availableChoices?.map((choice: CHOICE) =>

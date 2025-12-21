@@ -1,6 +1,7 @@
 import React from "react";
-import "./index.scss";
 import { Card, Player } from "../../types";
+import { card_image } from "../../assets";
+import "./index.scss";
 
 interface Props {
   player: Player;
@@ -17,14 +18,15 @@ export const PokerPlayer = ({ player, index, userCards, isDealer }: Props) => {
     >
       <div className="flex items-center gap-3">
         <img
-          alt={`${player.name} profile pic`}
-          className="player__avatar rounded-full w-12 h-12"
-          src={`/img/${player.name.toLowerCase()}.webp`} // Assuming images exist or fallback to standard
+          alt={`${player.name} cat avatar`}
+          className="player__avatar rounded-full w-16 h-16 object-cover"
+          src={`https://cataas.com/cat?${player.id}`}
           onError={(e) => {
             (e.target as HTMLImageElement).src =
               "https://api.dicebear.com/7.x/avataaars/svg?seed=" + player.name;
           }}
         />
+
         <div className="flex flex-col">
           <h3 className="player__name">{player.name}</h3>
           <p className="player__chips">${player.chips}</p>
@@ -34,14 +36,21 @@ export const PokerPlayer = ({ player, index, userCards, isDealer }: Props) => {
       <div className="player__cards-container">
         {(userCards || player.hand)?.map((c, i) => (
           <div
-            className={`player__card ${c.suit.charAt(0)}${c.rank}`}
+            className="player__card front"
             key={player.id + i}
+            style={{ backgroundImage: `url(${card_image[c.suit + c.rank]})` }}
           ></div>
         ))}
         {!userCards && !player?.hand?.length && (
           <>
-            <div className={`player__card cover`}></div>
-            <div className={`player__card cover`}></div>
+            <div
+              className="player__card"
+              style={{ backgroundImage: `url(${card_image.cardBack})` }}
+            ></div>
+            <div
+              className="player__card"
+              style={{ backgroundImage: `url(${card_image.cardBack})` }}
+            ></div>
           </>
         )}
       </div>

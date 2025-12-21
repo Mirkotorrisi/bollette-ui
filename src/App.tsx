@@ -40,7 +40,7 @@ function App() {
       data-theme={theme}
     >
       <NavBar />
-      <main className="lg:px-8 flex flex-1 w-full">
+      <main className="flex flex-1 w-full">
         {show && <Loader />}
 
         <Routes>

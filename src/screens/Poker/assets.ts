@@ -1,3 +1,4 @@
+import cardBack from "../../assets/cards/cover.png";
 import spades14 from "../../assets/cards/ace_of_spades.png";
 import spades13 from "../../assets/cards/king_of_spades.png";
 import spades12 from "../../assets/cards/queen_of_spades.png";
@@ -52,6 +53,7 @@ import hearts3 from "../../assets/cards/3_of_hearts.png";
 import hearts2 from "../../assets/cards/2_of_hearts.png";
 
 export const card_image: { [key: string]: string } = {
+  cardBack,
   spades14,
   spades13,
   spades12,
