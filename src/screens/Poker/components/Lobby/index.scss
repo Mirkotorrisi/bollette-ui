@@ -1,12 +1,106 @@
 .lobby {
-  border-right: 1px solid var(--primary-accent-100);
+  background: #121212;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+  z-index: 100;
+
   &__title {
-    font-size: 2em;
-    color: var(--primary-accent);
-    font-weight: var(--bold);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #fff 0%, #888 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
   }
+
   &__disclaimer {
-    font-size: 1.25em;
-    font-weight: var(--bold);
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+
+    &.balance {
+        color: var(--primary-accent);
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+  }
+
+  .create-btn {
+    background: linear-gradient(135deg, var(--primary-accent) 0%, #b84100 100%);
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 81, 0, 0.4);
+    }
+  }
+
+  .table-list {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+  }
+
+  .table-picker {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--primary-accent-300);
+    }
+
+    &__label {
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0;
+
+      span {
+        color: var(--primary-accent);
+        margin: 0 5px;
+      }
+    }
+
+    &__button {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+
+      &:hover:not(:disabled) {
+          background: var(--primary-accent);
+          color: #fff;
+      }
+
+      &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+      }
+    }
   }
 }

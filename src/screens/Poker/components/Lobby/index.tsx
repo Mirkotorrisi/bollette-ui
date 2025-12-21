@@ -18,39 +18,44 @@ export const Lobby = ({
 }: Props) => {
   return (
     <aside className="lobby flex flex-col gap-4 w-3/12 px-4 border-r h-full">
-      <h2 className="lobby__title">Bollette Poker room</h2>
+      <h2 className="lobby__title">Bollette Poker</h2>
       {player && (
         <>
-          <h3 className="lobby__disclaimer">Welcome {player?.name}</h3>
-          <h3 className="lobby__disclaimer">
-            your balance is {player?.chips}$
+          <h3 className="lobby__disclaimer">Welcome back,</h3>
+          <h3 className="lobby__disclaimer text-white font-bold">
+            {player?.name}
+          </h3>
+          <h3 className="lobby__disclaimer balance">
+            Balance: ${player?.chips}
           </h3>
         </>
       )}
-      <button className="form__input px-2 py-4" onClick={createTable}>
-        Create a new table
+      <button className="create-btn" onClick={createTable}>
+        New Table
       </button>
-      {!!tables?.length && (
-        <h3 className="lobby__disclaimer">or join an open table</h3>
-      )}
-      {tables?.map((t, index) => (
-        <div
-          className="flex items-center justify-between table-picker p-2"
-          key={`table-picker${index}`}
-        >
-          <p className="table-picker__label">
-            Table <span>#{index + 1}</span> - players online:
-            <span>{t.players}</span>
-          </p>
-          <button
-            className="table-picker__button px-4 py-2"
-            onClick={() => joinTable?.(t.id)}
-            disabled={userTablesKeys?.includes(t.id)}
+      {!!tables?.length && <h3 className="lobby__disclaimer">Open Tables</h3>}
+      <div className="table-list">
+        {tables?.map((t, index) => (
+          <div
+            className="flex items-center justify-between table-picker p-2"
+            key={`table-picker${index}`}
           >
-            Join
-          </button>
-        </div>
-      ))}
+            <p className="table-picker__label">
+              Table <span>#{index + 1}</span>
+              <span className="text-[10px] block opacity-50">
+                {t.players}/6 players
+              </span>
+            </p>
+            <button
+              className="table-picker__button"
+              onClick={() => joinTable?.(t.id)}
+              disabled={userTablesKeys?.includes(t.id)}
+            >
+              {userTablesKeys?.includes(t.id) ? "Joined" : "Join"}
+            </button>
+          </div>
+        ))}
+      </div>
     </aside>
   );
 };

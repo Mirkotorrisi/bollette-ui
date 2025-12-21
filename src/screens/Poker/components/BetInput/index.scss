@@ -1,22 +1,45 @@
 .bet-input {
-  background-color: var(--background);
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.233);
+  background: rgba(40, 40, 40, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 10px;
+  border: 1px solid var(--primary-accent-300);
+  gap: 15px;
 }
+
 .amount_chip {
-  border: 1px solid var(--primary-accent);
-  font-weight: var(--bold);
-  color: var(--font-primary);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 700;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+
   &:hover {
     cursor: pointer;
+    background: var(--primary-accent);
+    color: #fff;
+    border-color: var(--primary-accent);
   }
 }
 
 .amount_input {
-  font-weight: var(--bolder);
-  border-radius: 10px;
+  background: transparent;
+  border: none;
+  font-weight: 800;
   color: var(--primary-accent);
   text-align: end;
-  font-size: 1.5em;
+  font-size: 1.5rem;
+  width: 100%;
+  outline: none;
+  font-family: 'Outfit', sans-serif;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }

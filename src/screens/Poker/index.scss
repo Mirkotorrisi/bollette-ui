@@ -1,129 +1,44 @@
-.table-picker {
-  box-shadow: inset -2px -2px 7px var(--primary-accent-400),
-    inset 1px 1px 1px var(--primary-accent-100);
-  border: 1px solid var(--primary-accent-100);
-  border-radius: 8px;
-  max-width: 300px;
-  &__label {
-    font-weight: 500;
-    span {
-      color: var(--primary-accent);
-    }
-  }
-  &__button {
-    border-radius: 10px;
-    border: 1px solid var(--font-primary);
-    color: var(--background);
-    font-weight: 500;
-    background-color: var(--primary-accent-100);
-    &:focus {
-      border-color: var(--primary-accent);
-      box-shadow: inset -5px -5px 7px var(--primary-accent-400),
-        inset 2px 2px 2px var(--primary-accent-100);
-    }
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Inter:wght@400;700&display=swap');
 
 .table-tab {
-  box-shadow: inset 0px 0px 3px var(--font-primary),
-    inset 0px 0px 1px 0 var(--font-primary);
-  border: 1px solid var(--font-primary);
-  border-bottom: none;
-  border-radius: 12px 12px 0px 0px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #aaa;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
   &.active {
-    box-shadow: inset -2px -2px 2px var(--primary-accent-400),
-      inset 0px 1px 5px 0 var(--primary-accent-100);
-    border-color: var(--primary-accent-100);
-    font-weight: 500;
-    color: var(--primary-accent);
-  }
-  &.alert {
-    -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
-    animation: heartbeat 1.5s ease-in-out infinite both;
-  }
-  &__button {
-    border-radius: 10px;
-    border: 1px solid var(--font-primary);
-    color: var(--background);
-    font-weight: 500;
-    background-color: var(--primary-accent-100);
-    &:focus {
-      border-color: var(--primary-accent);
-      box-shadow: inset -5px -5px 7px var(--primary-accent-400),
-        inset 2px 2px 2px var(--primary-accent-100);
+    background: var(--primary-accent);
+    color: #fff;
+    border-color: var(--primary-accent);
+    box-shadow: 0 5px 15px rgba(255, 81, 0, 0.3);
+    
+    span {
+        color: inherit !important;
+        opacity: 1 !important;
     }
+  }
+
+  &.alert {
+    animation: pulse-red 1s infinite alternate;
   }
 }
 
-@-webkit-keyframes heartbeat {
-  from {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-transform-origin: center center;
-    transform-origin: center center;
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-    background-color: transparent;
-  }
-  10% {
-    -webkit-transform: scale(0.91);
-    transform: scale(0.91);
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
-  }
-  17% {
-    -webkit-transform: scale(0.98);
-    transform: scale(0.98);
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-  }
-  33% {
-    -webkit-transform: scale(0.87);
-    transform: scale(0.87);
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
-  }
-  45% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-    background-color: var(--primary-accent);
-  }
+@keyframes pulse-red {
+    from { box-shadow: 0 0 5px rgba(255, 0, 0, 0.2); border-color: rgba(255, 0, 0, 0.5); }
+    to { box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); border-color: #ff0000; }
 }
-@keyframes heartbeat {
-  from {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-transform-origin: center center;
-    transform-origin: center center;
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-    background-color: transparent;
-  }
-  10% {
-    -webkit-transform: scale(0.91);
-    transform: scale(0.91);
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
-  }
-  17% {
-    -webkit-transform: scale(0.98);
-    transform: scale(0.98);
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-  }
-  33% {
-    -webkit-transform: scale(0.87);
-    transform: scale(0.87);
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
-  }
-  45% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-    background-color: var(--primary-accent);
-  }
+
+.poker-screen-container {
+    font-family: 'Outfit', sans-serif;
 }

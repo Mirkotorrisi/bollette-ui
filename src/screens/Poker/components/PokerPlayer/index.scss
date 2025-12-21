@@ -2,120 +2,119 @@
 
 .player {
   position: absolute;
-  background-color: var(--primary-accent-200);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  width: 20%;
-  box-shadow: 1px 1px 1px var(--font-primary),
-    inset 1px 1px 1px var(--secondary-accent);
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--primary-accent-300);
+  border-radius: 15px;
+  width: 180px;
+  padding: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+
+  &.active-turn {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 20px var(--primary-accent-400);
+    transform: scale(1.05);
+  }
 
   &__bet {
     position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--primary-accent);
+    
+    span {
+      color: var(--primary-accent);
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    &__chips {
+      background-image: url(../../../../../public/img/chips.png);
+      width: 1.5rem;
+      height: 1.5rem;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
   }
+
   .dealer-token {
-    width: 20%;
-    aspect-ratio: 1/1;
+    width: 30px;
+    height: 30px;
     position: absolute;
     background: url(../../../../../public/img/dealer.png);
     background-size: contain;
     background-repeat: no-repeat;
-    top: 150%;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
   }
 
-  &.position0 {
-    left: 10vw;
-    top: 0;
-    .player__bet {
-      left: 80%;
-      top: 120%;
-    }
-  }
-
-  &.position1 {
-    left: 50vw;
-    top: 0;
-    .player__bet {
-      top: 80%;
-      left: -20%;
-    }
-  }
-
-  &.position2 {
-    left: 60vw;
-    top: 12.5vw;
-    .player__bet {
-      left: -25%;
-    }
-  }
-
-  &.position3 {
-    left: 50vw;
-    top: 25vw;
-    .player__bet {
-      top: -80%;
-    }
-  }
-
-  &.position4 {
-    left: 10vw;
-    top: 25vw;
-    .player__bet {
-      top: -80%;
-      left: 80%;
-    }
-  }
-  &.position5 {
-    left: 0%;
-    top: 12.5vw;
-    .player__bet {
-      left: 100%;
-    }
-  }
+  // Adjusted positions for the new table
+  &.position0 { left: 15%; top: 10%; .player__bet { right: -60px; bottom: -20px; } .dealer-token { right: -40px; top: -10px; }}
+  &.position1 { left: 45%; top: 5%; .player__bet { bottom: -40px; left: 50%; transform: translateX(-50%); } .dealer-token { right: -30px; top: -10px; }}
+  &.position2 { right: 10%; top: 25%; .player__bet { left: -70px; top: 50%; } .dealer-token { left: -30px; top: -10px; }}
+  &.position3 { left: 65%; bottom: 10%; .player__bet { top: -40px; left: 50%; transform: translateX(-50%); } .dealer-token { left: -30px; bottom: -10px; }}
+  &.position4 { left: 15%; bottom: 10%; .player__bet { top: -40px; left: 50%; transform: translateX(-50%); } .dealer-token { right: -30px; bottom: -10px; }}
+  &.position5 { left: 5%; top: 25%; .player__bet { right: -70px; top: 50%; } .dealer-token { right: -30px; top: -10px; }}
 
   &__avatar {
-    box-shadow: 2px 2px 2px var(--font-primary);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   }
+
   &__name {
-    color: var(--secondary-accent);
-    font-weight: 700;
-    font-size: 1.25rem;
-  }
-  &__chips {
-    color: var(--secondary-accent);
+    color: #fff;
     font-weight: 700;
     font-size: 1rem;
+    margin: 0;
   }
-  &__action {
-    color: var(--primary-accent);
-    text-shadow: var(--font-primary);
-    font-weight: 900;
-    font-size: 2rem;
-  }
-  &__card {
-    background-size: 400%;
-    background-repeat: no-repeat;
-    position: absolute;
-    background-size: contain;
-    width: 4rem;
-    height: 8rem;
-    left: 20%;
 
+  &__chips {
+    color: var(--primary-accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  &__cards-container {
+      margin-top: 10px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+  }
+
+  &__card {
+    width: 45px;
+    height: 65px;
+    position: absolute;
+    
+    &:nth-child(1) {
+      left: 30%;
+      transform: rotate(-10deg);
+    }
     &:nth-child(2) {
-      left: 35%;
-      transform: rotate(20deg);
+      left: 45%;
+      transform: rotate(10deg);
     }
   }
-  &__bet {
-    span {
-      color: var(--secondary-accent);
-      font-weight: 900;
-      font-size: 1.25rem;
-    }
-    &__chips {
-      background-image: url(../../../../../public/img/chips.png);
-      width: 2rem;
-      height: 3rem;
-      background-size: contain;
-    }
+
+  &__action {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-accent);
+    color: #fff;
+    padding: 2px 15px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 5;
   }
 }
