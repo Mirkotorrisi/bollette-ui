@@ -18,38 +18,42 @@
 
   &.active-turn {
     border-color: var(--primary-accent);
-    box-shadow: 0 0 20px var(--primary-accent-400);
-    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--primary-accent-400);
+    scale: 1.08;
+    z-index: 50;
   }
 
   &__bet {
     position: absolute;
     display: flex;
     align-items: center;
-    gap: 5px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 2px 10px;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 4px 12px;
     border-radius: 20px;
     border: 1px solid var(--primary-accent);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    z-index: 10;
     
     @media (max-width: 1024px) {
-        padding: 1px 6px;
-        gap: 2px;
+        padding: 2px 8px;
+        gap: 4px;
     }
 
     span {
-      color: var(--primary-accent);
-      font-weight: 800;
-      font-size: 0.9rem;
+      color: #fff;
+      font-weight: 900;
+      font-size: 1rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
       @media (max-width: 1024px) {
-          font-size: 0.6rem;
+          font-size: 0.7rem;
       }
     }
 
     &__chips {
       background-image: url(../../../../../public/img/chips.png);
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.2rem;
+      height: 1.2rem;
       background-size: contain;
       background-repeat: no-repeat;
       @media (max-width: 1024px) {
@@ -60,55 +64,56 @@
   }
 
   .dealer-token {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     position: absolute;
     background: url(../../../../../public/img/dealer.png);
     background-size: contain;
     background-repeat: no-repeat;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    z-index: 11;
     @media (max-width: 1024px) {
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
     }
   }
 
-  // Adjusted positions for the new table
+  // Optimized Symmetrical Positions
   &.position0 { 
-      left: 15%; top: 10%; 
-      .player__bet { right: -60px; bottom: -20px; } 
-      .dealer-token { right: -40px; top: -10px; }
-      @media (max-width: 1024px) { left: 5%; top: 5%; .player__bet { right: 0; bottom: -25px; } }
+      left: 10%; top: 12%; 
+      .player__bet { right: -70px; bottom: -10px; } 
+      .dealer-token { right: -25px; top: -15px; }
+      @media (max-width: 1024px) { left: 5%; top: 8%; .player__bet { right: 0; bottom: -30px; } }
   }
   &.position1 { 
-      left: 45%; top: 5%; 
-      .player__bet { bottom: -40px; left: 50%; transform: translateX(-50%); } 
-      .dealer-token { right: -30px; top: -10px; }
-      @media (max-width: 1024px) { left: 50%; top: 2%; transform: translateX(-50%); }
+      left: 50%; top: 4%; transform: translateX(-50%);
+      .player__bet { bottom: -50px; left: 50%; transform: translateX(-50%); } 
+      .dealer-token { right: -45px; top: 0px; }
+      @media (max-width: 1024px) { left: 50%; top: 2%; transform: translateX(-50%); .player__bet { bottom: -35px; } }
   }
   &.position2 { 
-      right: 10%; top: 25%; 
-      .player__bet { left: -70px; top: 50%; } 
-      .dealer-token { left: -30px; top: -10px; }
-      @media (max-width: 1024px) { right: 5%; top: 20%; .player__bet { left: -20px; bottom: -25px; top: auto; } }
+      right: 10%; left: auto; top: 12%; 
+      .player__bet { left: -70px; bottom: -10px; } 
+      .dealer-token { left: -25px; top: -15px; }
+      @media (max-width: 1024px) { right: 5%; top: 8%; .player__bet { left: 0; bottom: -30px; } }
   }
   &.position3 { 
-      left: 65%; bottom: 10%; 
-      .player__bet { top: -40px; left: 50%; transform: translateX(-50%); } 
-      .dealer-token { left: -30px; bottom: -10px; }
-      @media (max-width: 1024px) { left: 60%; bottom: 15%; .player__bet { top: -25px; } }
+      right: 10%; top: auto; bottom: 18%; left: auto;
+      .player__bet { left: -70px; top: 10px; } 
+      .dealer-token { left: -25px; bottom: -15px; }
+      @media (max-width: 1024px) { right: 5%; bottom: 20%; .player__bet { left: 0; top: -30px; } }
   }
   &.position4 { 
-      left: 15%; bottom: 10%; 
-      .player__bet { top: -40px; left: 50%; transform: translateX(-50%); } 
-      .dealer-token { right: -30px; bottom: -10px; }
-      @media (max-width: 1024px) { left: 5%; bottom: 15%; .player__bet { top: -25px; } }
+      left: 50%; top: auto; bottom: 5%; transform: translateX(-50%);
+      .player__bet { top: -60px; left: 50%; transform: translateX(-50%); } 
+      .dealer-token { right: -45px; bottom: 0; }
+      @media (max-width: 1024px) { left: 50%; bottom: 18%; transform: translateX(-50%); .player__bet { top: -35px; } }
   }
   &.position5 { 
-      left: 5%; top: 25%; 
-      .player__bet { right: -70px; top: 50%; } 
-      .dealer-token { right: -30px; top: -10px; }
-      @media (max-width: 1024px) { left: 5%; top: 20%; .player__bet { right: -20px; bottom: -25px; top: auto; } }
+      left: 10%; top: auto; bottom: 18%; 
+      .player__bet { right: -70px; top: 10px; } 
+      .dealer-token { right: -25px; bottom: -15px; }
+      @media (max-width: 1024px) { left: 5%; bottom: 20%; .player__bet { right: 0; top: -30px; } }
   }
 
   &__avatar {

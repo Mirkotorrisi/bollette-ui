@@ -19,21 +19,26 @@ export const usePokerTable = (
 
   const handleUpdateTable = useCallback(
     (action: Actions) => (table: Table) => {
-      const position = userTables.get(table.id)?.currentPlayerPosition;
-      if (position !== undefined && table.players[position]) {
-        table.players[position].lastAction = action;
-      }
-      setUserTables(new Map(userTables.set(table.id, table)));
+      setUserTables((prev) => {
+        const position = prev.get(table.id)?.currentPlayerPosition;
+        if (position !== undefined && table.players[position]) {
+          table.players[position].lastAction = action;
+        }
+        return new Map(prev.set(table.id, table));
+      });
     },
-    [userTables]
+    []
   );
 
   const handleUpdatePlayers = useCallback(
     (table: Table, playerId: string) => {
-      if (playerId === player?.id) return;
-      handleUpdateTable(Actions.JOIN)(table);
+      setPlayer((currentPlayer) => {
+        if (playerId === currentPlayer?.id) return currentPlayer;
+        handleUpdateTable(Actions.JOIN)(table);
+        return currentPlayer;
+      });
     },
-    [handleUpdateTable, player?.id]
+    [handleUpdateTable]
   );
 
   const getUserCards = useCallback(
@@ -44,6 +49,14 @@ export const usePokerTable = (
   );
 
   useEffect(() => {
+    if (player?.id) {
+      userTables.forEach((_, tableId) => {
+        socket.emit(Actions.GET_PLAYER_CARDS, tableId);
+      });
+    }
+  }, [player?.id, userTables.size, socket]);
+
+  useEffect(() => {
     socket.on(Actions.SET_PLAYER, (player: Player) => {
       setPlayer(player);
     });
@@ -51,10 +64,10 @@ export const usePokerTable = (
       setTablesArray(tables);
     });
     socket.on(Actions.ALL_USER_TABLES, (userTables) => {
+      setUserTables(new Map(userTables));
       if (userTables?.length) {
         selectTable(userTables[userTables.length - 1][0]);
       }
-      setUserTables(new Map(userTables));
     });
     socket.on(Actions.BET, handleUpdateTable(Actions.BET));
     socket.on(Actions.FOLD, handleUpdateTable(Actions.FOLD));
@@ -67,10 +80,6 @@ export const usePokerTable = (
     socket.on(Actions.ASK_FOR_CARDS, (tableId) =>
       socket.emit(Actions.GET_PLAYER_CARDS, tableId)
     );
-
-    // socket.on(Actions.GET_TABLE, (data) => {
-    //   console.log(data);
-    // });
 
     return () => {
       [
@@ -88,8 +97,13 @@ export const usePokerTable = (
         Actions.SET_PLAYER,
       ].forEach((action) => socket.off(action));
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [
+    socket,
+    handleUpdateTable,
+    handleUpdatePlayers,
+    getUserCards,
+    selectTable,
+  ]);
 
   const handleLeave = (id: string) => {
     if (!player) return;
