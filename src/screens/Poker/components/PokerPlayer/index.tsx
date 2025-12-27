@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Player } from "../../types";
 import { card_image } from "../../assets";
+import { motion, AnimatePresence } from "framer-motion";
 import "./index.scss";
 
 interface Props {
@@ -17,11 +18,17 @@ export const PokerPlayer = ({
   isDealer,
   showHand,
 }: Props) => {
+  const pos = player.position ?? index;
+  const isFolded = player.state === "FOLD" || player.isFolded;
+
+  // Logic to determine what to show based on hand visibility and fold state
+  const shouldShowCards = !isFolded;
+
   return (
     <div
-      className={`player flex flex-col p-1 position${
-        player.position || index
-      } ${player.isCurrentPlayer ? "active-turn" : ""}`}
+      className={`player flex flex-col p-1 position${pos} ${
+        player.isCurrentPlayer ? "active-turn" : ""
+      } ${isFolded ? "folded" : ""}`}
     >
       <div className="flex items-center gap-3">
         <img
@@ -41,36 +48,100 @@ export const PokerPlayer = ({
       </div>
 
       <div className="player__cards-container">
-        {(userCards || (showHand ? player.hand : undefined))?.map((c, i) => (
-          <div
-            className="player__card front"
-            key={player.id + (c.suit + c.rank) + i}
-            style={{ backgroundImage: `url(${card_image[c.suit + c.rank]})` }}
-          ></div>
-        ))}
-        {!userCards && (!showHand || !player?.hand?.length) && (
-          <>
-            <div
-              className="player__card"
-              style={{ backgroundImage: `url(${card_image.cardBack})` }}
-            ></div>
-            <div
-              className="player__card"
-              style={{ backgroundImage: `url(${card_image.cardBack})` }}
-            ></div>
-          </>
-        )}
+        <AnimatePresence mode="popLayout">
+          {shouldShowCards && (
+            <>
+              {userCards ? (
+                <>
+                  {userCards.map((c, i) => (
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                        y: -20,
+                        rotate: i === 0 ? -10 : 10,
+                        scale: 0.5,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                        rotate: i === 0 ? -10 : 10,
+                        scale: 1,
+                      }}
+                      exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20,
+                      }}
+                      className="player__card front"
+                      key={player.id + (c.suit + c.rank) + i}
+                      style={{
+                        backgroundImage: `url(${card_image[c.suit + c.rank]})`,
+                      }}
+                    />
+                  ))}
+                </>
+              ) : (
+                <>
+                  <motion.div
+                    key={player.id + "-back-0"}
+                    initial={{ opacity: 0, y: -20, rotate: -10, scale: 0.5 }}
+                    animate={{ opacity: 1, y: 0, rotate: -10, scale: 1 }}
+                    exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                    className="player__card"
+                    style={{ backgroundImage: `url(${card_image.cardBack})` }}
+                  />
+                  <motion.div
+                    key={player.id + "-back-1"}
+                    initial={{ opacity: 0, y: -20, rotate: 10, scale: 0.5 }}
+                    animate={{ opacity: 1, y: 0, rotate: 10, scale: 1 }}
+                    exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
+                    transition={{ type: "tween", duration: 0.25 }}
+                    className="player__card"
+                    style={{ backgroundImage: `url(${card_image.cardBack})` }}
+                  />
+                </>
+              )}
+            </>
+          )}
+        </AnimatePresence>
       </div>
 
       {player.lastAction && (
         <div className="player__action">{player.lastAction}</div>
       )}
 
-      {!!player.bet && (
-        <div className="player__bet">
-          <div className="player__bet__chips" /> <span>${player.bet}</span>
-        </div>
-      )}
+      <AnimatePresence>
+        {!!player.bet && (
+          <motion.div
+            key={`bet-${player.id}`}
+            layout
+            initial={{ opacity: 0, scale: 0, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{
+              opacity: 0,
+              scale: 0.2,
+              filter: "brightness(2)",
+              y: pos < 3 ? 300 : -300,
+              x:
+                pos === 0 || pos === 5
+                  ? 400
+                  : pos === 2 || pos === 3
+                  ? -400
+                  : 0,
+            }}
+            transition={{
+              opacity: { duration: 0.2 },
+              layout: { duration: 0.8, ease: "backIn" },
+              default: { duration: 0.8, ease: "backIn" },
+            }}
+            className="player__bet"
+          >
+            <div className="player__bet__chips" /> <span>${player.bet}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {isDealer && <div className="dealer-token" />}
     </div>

@@ -3,8 +3,11 @@ import { Table, CHOICE, ChioceObj, Card } from "../../types";
 import { PokerPlayer } from "../PokerPlayer";
 import { Socket } from "socket.io-client";
 import { card_image } from "../../assets";
+import { motion, AnimatePresence } from "framer-motion";
 import "./index.scss";
 import BetInput from "../BetInput";
+import mock from "../../../../assets/mock";
+import { mockPlayers } from "../../mockplayer";
 
 type PlayerAction = (id: string) => void;
 type PlayerActionWithAmount = (id: string, amt: number) => void;
@@ -70,7 +73,23 @@ export const PokerTable = ({
   return (
     <div className=" mx-auto w-full relative grid items-center poker-table p-5">
       <h3 className="table-id">{table?.id}</h3>
-      <h2 className="pot">Pot: {table?.pot}$</h2>
+      <motion.h2
+        key={table?.pot}
+        initial={{
+          scale: 1.3,
+          filter: "brightness(2)",
+          textShadow: "0 0 20px rgba(255,255,255,0.8)",
+        }}
+        animate={{
+          scale: 1,
+          filter: "brightness(1)",
+          textShadow: "0 0 0px rgba(255,255,255,0)",
+        }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="pot"
+      >
+        {table?.pot}$
+      </motion.h2>
       {table?.players?.map((p, index) => (
         <PokerPlayer
           player={p}
@@ -82,14 +101,27 @@ export const PokerTable = ({
         />
       ))}
       <div className="flex justify-center items-center gap-3 community">
-        {table.currentRound !== "PRE_FLOP" &&
-          table.communityCards?.map((c, i) => (
-            <div
-              className="community__card front"
-              style={{ backgroundImage: `url(${card_image[c.suit + c.rank]})` }}
-              key={c.suit.charAt(0) + c.rank + i}
-            ></div>
-          ))}
+        <AnimatePresence mode="popLayout">
+          {table.currentRound !== "PRE_FLOP" &&
+            table.communityCards?.map((c, i) => (
+              <motion.div
+                initial={{ opacity: 0, y: -50, rotateY: 90, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, rotateY: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
+                  delay: i * 0.1,
+                }}
+                className="community__card front"
+                style={{
+                  backgroundImage: `url(${card_image[c.suit + c.rank]})`,
+                }}
+                key={c.suit + c.rank + i}
+              />
+            ))}
+        </AnimatePresence>
       </div>
 
       <div className="mx-auto flex gap-4 mt-auto actions">

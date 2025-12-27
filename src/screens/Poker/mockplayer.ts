@@ -1,0 +1,48 @@
+import { CHOICE, Player } from "./types";
+
+export const mockPlayers: Player[] = [
+  {
+    id: "3",
+    name: "Charlie",
+    chips: 1000,
+    bet: 50,
+    isCurrentPlayer: false,
+    isDealer: false,
+    availableChoices: [CHOICE.CALL, CHOICE.RAISE, CHOICE.FOLD],
+    state: "active",
+    position: 2,
+  },
+  {
+    id: "4",
+    name: "David",
+    chips: 1000,
+    bet: 50,
+    isCurrentPlayer: false,
+    isDealer: false,
+    availableChoices: [CHOICE.CALL, CHOICE.RAISE, CHOICE.FOLD],
+    state: "active",
+    position: 3,
+  },
+  {
+    id: "5",
+    name: "Eve",
+    chips: 1000,
+    bet: 50,
+    isCurrentPlayer: false,
+    isDealer: false,
+    availableChoices: [CHOICE.CALL, CHOICE.RAISE, CHOICE.FOLD],
+    state: "active",
+    position: 4,
+  },
+  {
+    id: "6",
+    name: "Frank",
+    chips: 1000,
+    bet: 50,
+    isCurrentPlayer: false,
+    isDealer: false,
+    availableChoices: [CHOICE.CALL, CHOICE.RAISE, CHOICE.FOLD],
+    state: "active",
+    position: 5,
+  },
+];

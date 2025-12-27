@@ -80,25 +80,25 @@
 
   // Optimized Symmetrical Positions
   &.position0 { 
-      left: 10%; top: 12%; 
+      left: 5%; top: -5%; 
       .player__bet { right: -70px; bottom: -10px; } 
       .dealer-token { right: -25px; top: -15px; }
       @media (max-width: 1024px) { left: 5%; top: 8%; .player__bet { right: 0; bottom: -30px; } }
   }
   &.position1 { 
-      left: 50%; top: 4%; transform: translateX(-50%);
+      left: 50%; top: -5%; transform: translateX(-50%);
       .player__bet { bottom: -50px; left: 50%; transform: translateX(-50%); } 
       .dealer-token { right: -45px; top: 0px; }
       @media (max-width: 1024px) { left: 50%; top: 2%; transform: translateX(-50%); .player__bet { bottom: -35px; } }
   }
   &.position2 { 
-      right: 10%; left: auto; top: 12%; 
+      right: 5%; left: auto; top: -5%; 
       .player__bet { left: -70px; bottom: -10px; } 
       .dealer-token { left: -25px; top: -15px; }
       @media (max-width: 1024px) { right: 5%; top: 8%; .player__bet { left: 0; bottom: -30px; } }
   }
   &.position3 { 
-      right: 10%; top: auto; bottom: 18%; left: auto;
+      right: 5%; top: auto; bottom: 18%; left: auto;
       .player__bet { left: -70px; top: 10px; } 
       .dealer-token { left: -25px; bottom: -15px; }
       @media (max-width: 1024px) { right: 5%; bottom: 20%; .player__bet { left: 0; top: -30px; } }
@@ -110,7 +110,7 @@
       @media (max-width: 1024px) { left: 50%; bottom: 18%; transform: translateX(-50%); .player__bet { top: -35px; } }
   }
   &.position5 { 
-      left: 10%; top: auto; bottom: 18%; 
+      left: 5%; top: auto; bottom: 18%; 
       .player__bet { right: -70px; top: 10px; } 
       .dealer-token { right: -25px; bottom: -15px; }
       @media (max-width: 1024px) { left: 5%; bottom: 20%; .player__bet { right: 0; top: -30px; } }
@@ -160,12 +160,12 @@
 
   &__action {
     position: absolute;
-    top: -30px;
+    top: -0.75rem;
     left: 50%;
     transform: translateX(-50%);
     background: var(--primary-accent);
     color: #fff;
-    padding: 2px 15px;
+    padding: 2px 1rem;
     border-radius: 10px;
     font-size: 0.8rem;
     font-weight: 900;

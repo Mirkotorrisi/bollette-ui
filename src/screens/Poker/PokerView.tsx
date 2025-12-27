@@ -31,27 +31,25 @@ export const PokerView = ({ socket }: Props) => {
 
   return (
     <section className="flex-1 flex bg-[#0a0a0a] overflow-hidden poker-screen-container relative">
-      <div
-        className={`
+      {showLobby && (
+        <div
+          className={`
         fixed inset-0 z-[100] lg:relative lg:inset-auto lg:z-0
         transition-transform duration-300 ease-in-out
-        ${
-          showLobby
-            ? "translate-x-0"
-            : "-translate-x-full lg:translate-x-0 lg:w-0 lg:opacity-0"
-        }
+        translate-x-0
         w-full lg:w-3/12 h-full
       `}
-      >
-        <Lobby
-          tables={tablesArray}
-          player={player}
-          joinTable={joinTable}
-          createTable={createTable}
-          userTablesKeys={userTableKeys}
-          onClose={() => setShowLobby(false)}
-        />
-      </div>
+        >
+          <Lobby
+            tables={tablesArray}
+            player={player}
+            joinTable={joinTable}
+            createTable={createTable}
+            userTablesKeys={userTableKeys}
+            onClose={() => setShowLobby(false)}
+          />
+        </div>
+      )}
 
       <div
         className={`table_window flex-1 h-full flex flex-col relative bg-[#0a0a0a] py-10 
