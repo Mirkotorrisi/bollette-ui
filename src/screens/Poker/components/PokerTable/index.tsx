@@ -78,16 +78,18 @@ export const PokerTable = ({
           index={index}
           isDealer={p.position === table.dealerPosition}
           userCards={p.id === playerId ? userCards : undefined}
+          showHand={table.isHandOver || table.currentRound === "SHOWDOWN"}
         />
       ))}
       <div className="flex justify-center items-center gap-3 community">
-        {table.communityCards?.map((c, i) => (
-          <div
-            className="community__card front"
-            style={{ backgroundImage: `url(${card_image[c.suit + c.rank]})` }}
-            key={c.suit.charAt(0) + c.rank + i}
-          ></div>
-        ))}
+        {table.currentRound !== "PRE_FLOP" &&
+          table.communityCards?.map((c, i) => (
+            <div
+              className="community__card front"
+              style={{ backgroundImage: `url(${card_image[c.suit + c.rank]})` }}
+              key={c.suit.charAt(0) + c.rank + i}
+            ></div>
+          ))}
       </div>
 
       <div className="mx-auto flex gap-4 mt-auto actions">

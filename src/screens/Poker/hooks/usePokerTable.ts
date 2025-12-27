@@ -18,16 +18,39 @@ export const usePokerTable = (
   >([]);
 
   const handleUpdateTable = useCallback(
-    (action: Actions) => (table: Table) => {
+    (action?: Actions) => (table: Table) => {
       setUserTables((prev) => {
-        const position = prev.get(table.id)?.currentPlayerPosition;
-        if (position !== undefined && table.players[position]) {
-          table.players[position].lastAction = action;
+        const nextMap = new Map(prev);
+        const prevTable = prev.get(table.id);
+        const updatedTable = { ...table };
+
+        // Detection of new hand: if isHandOver transitions from true to false
+        if (prevTable?.isHandOver && !table.isHandOver) {
+          setUserCards((prevCards) => {
+            const nextCards = new Map(prevCards);
+            nextCards.delete(table.id);
+            return nextCards;
+          });
+          // Request fresh cards for the new hand
+          socket.emit(Actions.GET_PLAYER_CARDS, table.id);
         }
-        return new Map(prev.set(table.id, table));
+
+        if (action) {
+          const position = prevTable?.currentPlayerPosition;
+          if (position !== undefined && updatedTable.players[position]) {
+            updatedTable.players = [...updatedTable.players];
+            updatedTable.players[position] = {
+              ...updatedTable.players[position],
+              lastAction: action,
+            };
+          }
+        }
+
+        nextMap.set(table.id, updatedTable);
+        return nextMap;
       });
     },
-    []
+    [socket]
   );
 
   const handleUpdatePlayers = useCallback(
@@ -43,7 +66,11 @@ export const usePokerTable = (
 
   const getUserCards = useCallback(
     ({ tableId, hand }: { tableId: string; hand: Card[] }) => {
-      setUserCards((prev) => new Map(prev.set(tableId, hand)));
+      setUserCards((prev) => {
+        const nextMap = new Map(prev);
+        nextMap.set(tableId, hand);
+        return nextMap;
+      });
     },
     []
   );
@@ -76,13 +103,32 @@ export const usePokerTable = (
     socket.on(Actions.CHECK, handleUpdateTable(Actions.CHECK));
     socket.on(Actions.JOIN, handleUpdatePlayers);
     socket.on(Actions.LEAVE, handleUpdatePlayers);
+    socket.on(Actions.GET_TABLE, handleUpdateTable());
     socket.on(Actions.GET_PLAYER_CARDS, getUserCards);
-    socket.on(Actions.ASK_FOR_CARDS, (tableId) =>
-      socket.emit(Actions.GET_PLAYER_CARDS, tableId)
-    );
+    socket.on(Actions.ASK_FOR_CARDS, (tableId) => {
+      setUserCards((prev) => {
+        const next = new Map(prev);
+        next.delete(tableId);
+        return next;
+      });
+      setUserTables((prev) => {
+        const next = new Map(prev);
+        const table = next.get(tableId);
+        if (table) {
+          next.set(tableId, {
+            ...table,
+            players: table.players.map((p) => ({ ...p, hand: [] })),
+            communityCards: [],
+          });
+        }
+        return next;
+      });
+      socket.emit(Actions.GET_PLAYER_CARDS, tableId);
+    });
 
     return () => {
       [
+        Actions.GET_TABLE,
         Actions.BET,
         Actions.FOLD,
         Actions.CALL,

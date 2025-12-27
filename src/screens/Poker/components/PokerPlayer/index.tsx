@@ -8,8 +8,15 @@ interface Props {
   index: number;
   isDealer: boolean;
   userCards?: Card[];
+  showHand?: boolean;
 }
-export const PokerPlayer = ({ player, index, userCards, isDealer }: Props) => {
+export const PokerPlayer = ({
+  player,
+  index,
+  userCards,
+  isDealer,
+  showHand,
+}: Props) => {
   return (
     <div
       className={`player flex flex-col p-1 position${
@@ -34,14 +41,14 @@ export const PokerPlayer = ({ player, index, userCards, isDealer }: Props) => {
       </div>
 
       <div className="player__cards-container">
-        {(userCards || player.hand)?.map((c, i) => (
+        {(userCards || (showHand ? player.hand : undefined))?.map((c, i) => (
           <div
             className="player__card front"
-            key={player.id + i}
+            key={player.id + (c.suit + c.rank) + i}
             style={{ backgroundImage: `url(${card_image[c.suit + c.rank]})` }}
           ></div>
         ))}
-        {!userCards && !player?.hand?.length && (
+        {!userCards && (!showHand || !player?.hand?.length) && (
           <>
             <div
               className="player__card"
