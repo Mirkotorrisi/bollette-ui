@@ -25,6 +25,7 @@ export const PokerView = ({ socket }: Props) => {
     userTables,
     userCards,
     actions,
+    spawnBot,
   } = usePokerTable(socket, selectTable);
   const table = userTables.get(selectedTable || "");
   const userTableKeys = Array.from(userTables.keys());
@@ -47,6 +48,7 @@ export const PokerView = ({ socket }: Props) => {
             createTable={createTable}
             userTablesKeys={userTableKeys}
             onClose={() => setShowLobby(false)}
+            spawnBot={spawnBot}
           />
         </div>
       )}

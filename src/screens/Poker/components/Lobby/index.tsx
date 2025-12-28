@@ -9,6 +9,7 @@ interface Props {
   player?: Player;
   userTablesKeys?: string[];
   onClose?: VoidFunction;
+  spawnBot?: (id: string) => void;
 }
 export const Lobby = ({
   tables,
@@ -17,6 +18,7 @@ export const Lobby = ({
   player,
   userTablesKeys,
   onClose,
+  spawnBot,
 }: Props) => {
   return (
     <aside className="lobby flex flex-col gap-4 w-full px-4 border-r h-full relative">
@@ -61,6 +63,12 @@ export const Lobby = ({
               disabled={userTablesKeys?.includes(t.id)}
             >
               {userTablesKeys?.includes(t.id) ? "Joined" : "Join"}
+            </button>
+            <button
+              className="table-picker__button"
+              onClick={() => spawnBot?.(t.id)}
+            >
+              Spawn Bot
             </button>
           </div>
         ))}

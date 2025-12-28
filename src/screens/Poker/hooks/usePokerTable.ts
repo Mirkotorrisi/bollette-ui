@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { Actions, Card, Player, Table } from "../types";
+import { getAxiosInstance } from "../../../service/getAxiosInstance";
 
 export const usePokerTable = (
   socket: Socket,
@@ -164,6 +165,13 @@ export const usePokerTable = (
     socket?.emit(Actions.CREATE_TABLE, player?.id);
   };
 
+  const spawnBot = useCallback(
+    async (tableId: string) => {
+      await getAxiosInstance().post(`/bots/join/${tableId}`);
+    },
+    [socket]
+  );
+
   const bet = (tableId: string, amount: number) => {
     socket?.emit(Actions.BET, { tableId, amount });
   };
@@ -197,5 +205,6 @@ export const usePokerTable = (
     tablesArray,
     joinTable,
     actions,
+    spawnBot,
   };
 };
