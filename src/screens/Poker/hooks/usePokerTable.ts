@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Socket } from "socket.io-client";
 import { Actions, Card, Player, Table } from "../types";
 import { getAxiosInstance } from "../../../service/getAxiosInstance";
@@ -126,6 +126,7 @@ export const usePokerTable = (
       });
       socket.emit(Actions.GET_PLAYER_CARDS, tableId);
     });
+    socket.on(Actions.SHOWDOWN, handleUpdateTable(Actions.SHOWDOWN));
 
     return () => {
       [
@@ -142,6 +143,7 @@ export const usePokerTable = (
         Actions.ALL_TABLES,
         Actions.ALL_USER_TABLES,
         Actions.SET_PLAYER,
+        Actions.SHOWDOWN,
       ].forEach((action) => socket.off(action));
     };
   }, [
@@ -152,49 +154,70 @@ export const usePokerTable = (
     selectTable,
   ]);
 
-  const handleLeave = (id: string) => {
-    if (!player) return;
-    socket?.emit(Actions.LEAVE, { tableId: id, playerId: player?.id });
-  };
+  const handleLeave = useCallback(
+    (id: string) => {
+      if (!player) return;
+      socket?.emit(Actions.LEAVE, { tableId: id, playerId: player?.id });
+    },
+    [player, socket]
+  );
 
-  const joinTable = (tableId: string) => {
-    socket?.emit(Actions.JOIN, { tableId, playerId: player?.id });
-  };
+  const joinTable = useCallback(
+    (tableId: string) => {
+      socket?.emit(Actions.JOIN, { tableId, playerId: player?.id });
+    },
+    [player, socket]
+  );
 
-  const createTable = () => {
+  const createTable = useCallback(() => {
     socket?.emit(Actions.CREATE_TABLE, player?.id);
-  };
+  }, [player, socket]);
 
-  const spawnBot = useCallback(
-    async (tableId: string) => {
-      await getAxiosInstance().post(`/bots/join/${tableId}`);
+  const spawnBot = useCallback(async (tableId: string) => {
+    await getAxiosInstance().post(`/bots/join/${tableId}`);
+  }, []);
+
+  const bet = useCallback(
+    (tableId: string, amount: number) => {
+      socket?.emit(Actions.BET, { tableId, amount });
+    },
+    [socket]
+  );
+  const call = useCallback(
+    (tableId: string) => {
+      socket?.emit(Actions.CALL, tableId);
+    },
+    [socket]
+  );
+  const raise = useCallback(
+    (tableId: string, amount: number) => {
+      socket?.emit(Actions.RAISE, { tableId, amount });
+    },
+    [socket]
+  );
+  const fold = useCallback(
+    (tableId: string) => {
+      socket?.emit(Actions.FOLD, tableId);
+    },
+    [socket]
+  );
+  const check = useCallback(
+    (tableId: string) => {
+      socket?.emit(Actions.CHECK, tableId);
     },
     [socket]
   );
 
-  const bet = (tableId: string, amount: number) => {
-    socket?.emit(Actions.BET, { tableId, amount });
-  };
-  const call = (tableId: string) => {
-    socket?.emit(Actions.CALL, tableId);
-  };
-  const raise = (tableId: string, amount: number) => {
-    socket?.emit(Actions.RAISE, { tableId, amount });
-  };
-  const fold = (tableId: string) => {
-    socket?.emit(Actions.FOLD, tableId);
-  };
-  const check = (tableId: string) => {
-    socket?.emit(Actions.CHECK, tableId);
-  };
-
-  const actions = {
-    bet,
-    call,
-    check,
-    fold,
-    raise,
-  };
+  const actions = useMemo(
+    () => ({
+      bet,
+      call,
+      check,
+      fold,
+      raise,
+    }),
+    [bet, call, check, fold, raise]
+  );
 
   return {
     player,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Socket } from "socket.io-client";
 import { usePokerTable } from "./hooks/usePokerTable";
 import { Lobby } from "./components/Lobby";
@@ -11,10 +11,10 @@ export const PokerView = ({ socket }: Props) => {
   const [selectedTable, setSelectedTable] = useState<string | null>(null);
   const [showLobby, setShowLobby] = useState(window.innerWidth > 1024);
 
-  const selectTable = (id: string) => {
+  const selectTable = useCallback((id: string) => {
     setSelectedTable(id);
     if (window.innerWidth <= 1024) setShowLobby(false);
-  };
+  }, []);
 
   const {
     player,

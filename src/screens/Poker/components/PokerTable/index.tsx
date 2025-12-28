@@ -6,8 +6,6 @@ import { card_image } from "../../assets";
 import { motion, AnimatePresence } from "framer-motion";
 import "./index.scss";
 import BetInput from "../BetInput";
-import mock from "../../../../assets/mock";
-import { mockPlayers } from "../../mockplayer";
 
 type PlayerAction = (id: string) => void;
 type PlayerActionWithAmount = (id: string, amt: number) => void;
@@ -96,8 +94,7 @@ export const PokerTable = ({
           key={p.id}
           index={index}
           isDealer={p.position === table.dealerPosition}
-          userCards={p.id === playerId ? userCards : undefined}
-          showHand={table.isHandOver || table.currentRound === "SHOWDOWN"}
+          cards={p.id === playerId ? userCards : p.hand}
         />
       ))}
       <div className="flex justify-center items-center gap-3 community">

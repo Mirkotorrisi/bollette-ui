@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Player } from "../../types";
+import { Card, CHOICE, Player } from "../../types";
 import { card_image } from "../../assets";
 import { motion, AnimatePresence } from "framer-motion";
 import "./index.scss";
@@ -8,27 +8,19 @@ interface Props {
   player: Player;
   index: number;
   isDealer: boolean;
-  userCards?: Card[];
-  showHand?: boolean;
+  cards?: Card[];
 }
-export const PokerPlayer = ({
-  player,
-  index,
-  userCards,
-  isDealer,
-  showHand,
-}: Props) => {
+export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
   const pos = player.position ?? index;
-  const isFolded = player.state === "FOLD" || player.isFolded;
 
-  // Logic to determine what to show based on hand visibility and fold state
-  const shouldShowCards = !isFolded;
+  const showCards =
+    ![CHOICE.FOLD, "WAITING"].includes(player.state) && !player.isFolded;
 
   return (
     <div
       className={`player flex flex-col p-1 position${pos} ${
         player.isCurrentPlayer ? "active-turn" : ""
-      } ${isFolded ? "folded" : ""}`}
+      } ${showCards ? "" : "folded"}`}
     >
       <div className="flex items-center gap-3">
         <img
@@ -46,67 +38,64 @@ export const PokerPlayer = ({
           <p className="player__chips">${player.chips}</p>
         </div>
       </div>
-
-      <div className="player__cards-container">
-        <AnimatePresence mode="popLayout">
-          {shouldShowCards && (
-            <>
-              {userCards ? (
-                <>
-                  {userCards.map((c, i) => (
-                    <motion.div
-                      initial={{
-                        opacity: 0,
-                        y: -20,
-                        rotate: i === 0 ? -10 : 10,
-                        scale: 0.5,
-                      }}
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                        rotate: i === 0 ? -10 : 10,
-                        scale: 1,
-                      }}
-                      exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20,
-                      }}
-                      className="player__card front"
-                      key={player.id + (c.suit + c.rank) + i}
-                      style={{
-                        backgroundImage: `url(${card_image[c.suit + c.rank]})`,
-                      }}
-                    />
-                  ))}
-                </>
-              ) : (
-                <>
+      {showCards && (
+        <div className="player__cards-container">
+          <AnimatePresence mode="popLayout">
+            {cards?.length ? (
+              <>
+                {cards.map((c, i) => (
                   <motion.div
-                    key={player.id + "-back-0"}
-                    initial={{ opacity: 0, y: -20, rotate: -10, scale: 0.5 }}
-                    animate={{ opacity: 1, y: 0, rotate: -10, scale: 1 }}
+                    initial={{
+                      opacity: 0,
+                      y: -20,
+                      rotate: i === 0 ? -10 : 10,
+                      scale: 0.5,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      rotate: i === 0 ? -10 : 10,
+                      scale: 1,
+                    }}
                     exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                    className="player__card"
-                    style={{ backgroundImage: `url(${card_image.cardBack})` }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 20,
+                    }}
+                    className="player__card front"
+                    key={player.id + (c.suit + c.rank) + i}
+                    style={{
+                      backgroundImage: `url(${card_image[c.suit + c.rank]})`,
+                    }}
                   />
-                  <motion.div
-                    key={player.id + "-back-1"}
-                    initial={{ opacity: 0, y: -20, rotate: 10, scale: 0.5 }}
-                    animate={{ opacity: 1, y: 0, rotate: 10, scale: 1 }}
-                    exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
-                    transition={{ type: "tween", duration: 0.25 }}
-                    className="player__card"
-                    style={{ backgroundImage: `url(${card_image.cardBack})` }}
-                  />
-                </>
-              )}
-            </>
-          )}
-        </AnimatePresence>
-      </div>
+                ))}
+              </>
+            ) : (
+              <>
+                <motion.div
+                  key={player.id + "-back-0"}
+                  initial={{ opacity: 0, y: -20, rotate: -10, scale: 0.5 }}
+                  animate={{ opacity: 1, y: 0, rotate: -10, scale: 1 }}
+                  exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  className="player__card"
+                  style={{ backgroundImage: `url(${card_image.cardBack})` }}
+                />
+                <motion.div
+                  key={player.id + "-back-1"}
+                  initial={{ opacity: 0, y: -20, rotate: 10, scale: 0.5 }}
+                  animate={{ opacity: 1, y: 0, rotate: 10, scale: 1 }}
+                  exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
+                  transition={{ type: "tween", duration: 0.25 }}
+                  className="player__card"
+                  style={{ backgroundImage: `url(${card_image.cardBack})` }}
+                />
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
 
       {player.lastAction && (
         <div className="player__action">{player.lastAction}</div>
