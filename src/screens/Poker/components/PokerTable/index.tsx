@@ -1,6 +1,7 @@
 import React from "react";
 import { Table, CHOICE, ChioceObj, Card } from "../../types";
 import { PokerPlayer } from "../PokerPlayer";
+import { GameLogs } from "../GameLogs";
 import { Socket } from "socket.io-client";
 import { card_image } from "../../assets";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,6 +16,7 @@ interface Props {
   socket?: Socket;
   playerId?: string;
   userCards?: Card[];
+  gameLogs?: string[];
   bet: PlayerActionWithAmount;
   call: PlayerAction;
   check: PlayerAction;
@@ -26,6 +28,7 @@ export const PokerTable = ({
   playerId,
   handleLeave,
   userCards,
+  gameLogs,
   bet,
   call,
   check,
@@ -71,6 +74,7 @@ export const PokerTable = ({
   return (
     <div className=" mx-auto w-full relative grid items-center poker-table p-5">
       <h3 className="table-id">{table?.id}</h3>
+      {gameLogs && gameLogs.length > 0 && <GameLogs logs={gameLogs} />}
       <motion.h2
         key={table?.pot}
         initial={{
