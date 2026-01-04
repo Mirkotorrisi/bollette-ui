@@ -15,6 +15,7 @@ export enum Actions {
   ALL_USER_TABLES = "allUserTables",
   ASK_FOR_CARDS = "askForCards",
   SHOWDOWN = "showdown",
+  GAME_LOG = "gameLog",
 }
 
 export interface Player {

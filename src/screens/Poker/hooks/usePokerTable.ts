@@ -17,6 +17,9 @@ export const usePokerTable = (
   const [tablesArray, setTablesArray] = useState<
     { id: string; players: number }[]
   >([]);
+  const [gameLogs, setGameLogs] = useState<Map<string, string[]>>(
+    new Map<string, string[]>([])
+  );
 
   const handleUpdateTable = useCallback(
     (action?: Actions) => (table: Table) => {
@@ -76,6 +79,17 @@ export const usePokerTable = (
     []
   );
 
+  const handleGameLog = useCallback(
+    ({ tableId, logs }: { tableId: string; logs: string[] }) => {
+      setGameLogs((prev) => {
+        const nextMap = new Map(prev);
+        nextMap.set(tableId, logs);
+        return nextMap;
+      });
+    },
+    []
+  );
+
   useEffect(() => {
     if (player?.id) {
       userTables.forEach((_, tableId) => {
@@ -127,6 +141,7 @@ export const usePokerTable = (
       socket.emit(Actions.GET_PLAYER_CARDS, tableId);
     });
     socket.on(Actions.SHOWDOWN, handleUpdateTable(Actions.SHOWDOWN));
+    socket.on(Actions.GAME_LOG, handleGameLog);
 
     return () => {
       [
@@ -144,6 +159,7 @@ export const usePokerTable = (
         Actions.ALL_USER_TABLES,
         Actions.SET_PLAYER,
         Actions.SHOWDOWN,
+        Actions.GAME_LOG,
       ].forEach((action) => socket.off(action));
     };
   }, [
@@ -151,6 +167,7 @@ export const usePokerTable = (
     handleUpdateTable,
     handleUpdatePlayers,
     getUserCards,
+    handleGameLog,
     selectTable,
   ]);
 
@@ -223,6 +240,7 @@ export const usePokerTable = (
     player,
     userTables,
     userCards,
+    gameLogs,
     createTable,
     handleLeave,
     tablesArray,

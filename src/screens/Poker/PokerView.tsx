@@ -24,6 +24,7 @@ export const PokerView = ({ socket }: Props) => {
     handleLeave,
     userTables,
     userCards,
+    gameLogs,
     actions,
     spawnBot,
   } = usePokerTable(socket, selectTable);
@@ -64,6 +65,7 @@ export const PokerView = ({ socket }: Props) => {
               table={table}
               playerId={player?.id}
               userCards={userCards.get(table.id)}
+              gameLogs={gameLogs.get(table.id)}
               handleLeave={handleLeave}
               {...actions}
             />
