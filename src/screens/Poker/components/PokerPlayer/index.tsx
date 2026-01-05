@@ -69,6 +69,8 @@ export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
                       className="player__card player__card--desktop front"
                       style={{
                         backgroundImage: `url(${card_image[c.suit + c.rank]})`,
+                        left: i === 0 ? '30%' : '45%',
+                        transform: `rotate(${i === 0 ? -10 : 10}deg)`,
                       }}
                     />
                     {/* Mobile: simplified card */}
@@ -92,6 +94,9 @@ export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
                         damping: 20,
                       }}
                       className="player__card--mobile-wrapper"
+                      style={{
+                        left: i === 0 ? '30%' : '45%',
+                      }}
                     >
                       <MobileCard card={c} className="player__card--mobile" />
                     </motion.div>

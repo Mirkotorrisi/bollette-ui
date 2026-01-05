@@ -11,13 +11,13 @@ interface CardProps {
 // Convert rank number to display value
 const getRankDisplay = (rank: Rank): string => {
   switch (rank) {
-    case 11:
+    case Rank.Jack:
       return "J";
-    case 12:
+    case Rank.Queen:
       return "Q";
-    case 13:
+    case Rank.King:
       return "K";
-    case 14:
+    case Rank.Ace:
       return "A";
     default:
       return rank.toString();
