@@ -141,6 +141,11 @@
       display: flex;
       justify-content: center;
       position: relative;
+
+      @media (max-width: 1024px) {
+        height: 50px;
+        margin-top: 8px;
+      }
   }
 
   &__card {
@@ -155,6 +160,32 @@
     &:nth-child(2) {
       left: 45%;
       transform: rotate(10deg);
+    }
+
+    // Desktop-only full card display
+    &--desktop {
+      @media (max-width: 1024px) {
+        display: none;
+      }
+    }
+
+    // Mobile card wrapper for positioning
+    &--mobile-wrapper {
+      position: absolute;
+      display: none;
+
+      @media (max-width: 1024px) {
+        display: block;
+        width: 35px;
+        height: 48px;
+      }
+
+      &:nth-child(1) {
+        left: 30%;
+      }
+      &:nth-child(2) {
+        left: 45%;
+      }
     }
   }
 

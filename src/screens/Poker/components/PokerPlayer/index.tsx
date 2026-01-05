@@ -1,14 +1,15 @@
 import React from "react";
-import { Card, CHOICE, Player } from "../../types";
+import { Card as CardType, CHOICE, Player } from "../../types";
 import { card_image } from "../../assets";
 import { motion, AnimatePresence } from "framer-motion";
+import { Card as MobileCard } from "../Card";
 import "./index.scss";
 
 interface Props {
   player: Player;
   index: number;
   isDealer: boolean;
-  cards?: Card[];
+  cards?: CardType[];
 }
 export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
   const pos = player.position ?? index;
@@ -44,31 +45,57 @@ export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
             {cards?.length ? (
               <>
                 {cards.map((c, i) => (
-                  <motion.div
-                    initial={{
-                      opacity: 0,
-                      y: -20,
-                      rotate: i === 0 ? -10 : 10,
-                      scale: 0.5,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                      rotate: i === 0 ? -10 : 10,
-                      scale: 1,
-                    }}
-                    exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 20,
-                    }}
-                    className="player__card front"
-                    key={player.id + (c.suit + c.rank) + i}
-                    style={{
-                      backgroundImage: `url(${card_image[c.suit + c.rank]})`,
-                    }}
-                  />
+                  <React.Fragment key={player.id + (c.suit + c.rank) + i}>
+                    {/* Desktop: full card image */}
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                        y: -20,
+                        rotate: i === 0 ? -10 : 10,
+                        scale: 0.5,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                        rotate: i === 0 ? -10 : 10,
+                        scale: 1,
+                      }}
+                      exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20,
+                      }}
+                      className="player__card player__card--desktop front"
+                      style={{
+                        backgroundImage: `url(${card_image[c.suit + c.rank]})`,
+                      }}
+                    />
+                    {/* Mobile: simplified card */}
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                        y: -20,
+                        rotate: i === 0 ? -10 : 10,
+                        scale: 0.5,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                        rotate: i === 0 ? -10 : 10,
+                        scale: 1,
+                      }}
+                      exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20,
+                      }}
+                      className="player__card--mobile-wrapper"
+                    >
+                      <MobileCard card={c} className="player__card--mobile" />
+                    </motion.div>
+                  </React.Fragment>
                 ))}
               </>
             ) : (
