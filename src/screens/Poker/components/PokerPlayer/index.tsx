@@ -62,6 +62,7 @@ export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
                     },
                     exit: { opacity: 0, y: 120, rotate: 30, scale: 0.5 },
                     transition: {
+                      // as const is needed for TypeScript to narrow the type to literal
                       type: "spring" as const,
                       stiffness: 260,
                       damping: 20,

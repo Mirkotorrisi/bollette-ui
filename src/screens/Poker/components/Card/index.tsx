@@ -20,6 +20,7 @@ const getRankDisplay = (rank: Rank): string => {
     case Rank.Ace:
       return "A";
     default:
+      // Numeric ranks (2-10) are displayed as-is
       return rank.toString();
   }
 };
