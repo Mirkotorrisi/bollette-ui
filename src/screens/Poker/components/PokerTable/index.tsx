@@ -1,10 +1,11 @@
 import React from "react";
-import { Table, CHOICE, ChioceObj, Card } from "../../types";
+import { Table, CHOICE, ChioceObj, Card as CardType } from "../../types";
 import { PokerPlayer } from "../PokerPlayer";
 import { GameLogs } from "../GameLogs";
 import { Socket } from "socket.io-client";
 import { card_image } from "../../assets";
 import { motion, AnimatePresence } from "framer-motion";
+import { Card as MobileCard } from "../Card";
 import "./index.scss";
 import BetInput from "../BetInput";
 
@@ -15,7 +16,7 @@ interface Props {
   handleLeave: (id: string) => void;
   socket?: Socket;
   playerId?: string;
-  userCards?: Card[];
+  userCards?: CardType[];
   gameLogs?: string[];
   bet: PlayerActionWithAmount;
   call: PlayerAction;
@@ -101,26 +102,47 @@ export const PokerTable = ({
           cards={p.id === playerId ? userCards : p.hand}
         />
       ))}
-      <div className="flex justify-center items-center gap-3 community">
+      <div className="flex justify-center items-center gap-1 lg:gap-4 community">
         <AnimatePresence mode="popLayout">
           {table.currentRound !== "PRE_FLOP" &&
             table.communityCards?.map((c, i) => (
-              <motion.div
-                initial={{ opacity: 0, y: -50, rotateY: 90, scale: 0.8 }}
-                animate={{ opacity: 1, y: 0, rotateY: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20,
-                  delay: i * 0.1,
-                }}
-                className="community__card front"
-                style={{
-                  backgroundImage: `url(${card_image[c.suit + c.rank]})`,
-                }}
-                key={c.suit + c.rank + i}
-              />
+              <React.Fragment key={c.suit + c.rank + i}>
+                {/* Desktop: full card image */}
+                <motion.div
+                  initial={{ opacity: 0, y: -50, rotateY: 90, scale: 0.8 }}
+                  animate={{ opacity: 1, y: 0, rotateY: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                    delay: i * 0.1,
+                  }}
+                  className="community__card hidden lg:block front"
+                  style={{
+                    backgroundImage: `url(${card_image[c.suit + c.rank]})`,
+                  }}
+                />
+                {/* Mobile: simplified card */}
+                <motion.div
+                  initial={{ opacity: 0, y: -50, rotateY: 90, scale: 0.8 }}
+                  animate={{ opacity: 1, y: 0, rotateY: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                    delay: i * 0.1,
+                  }}
+                  className="block lg:hidden"
+                  style={{
+                    width: '12vw',
+                    height: '17vw',
+                  }}
+                >
+                  <MobileCard card={c} />
+                </motion.div>
+              </React.Fragment>
             ))}
         </AnimatePresence>
       </div>

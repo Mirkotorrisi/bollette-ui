@@ -141,21 +141,17 @@
       display: flex;
       justify-content: center;
       position: relative;
+
+      @media (max-width: 1024px) {
+        height: 50px;
+        margin-top: 8px;
+      }
   }
 
   &__card {
     width: 60px;
     height: 85px;
     position: absolute;
-    
-    &:nth-child(1) {
-      left: 30%;
-      transform: rotate(-10deg);
-    }
-    &:nth-child(2) {
-      left: 45%;
-      transform: rotate(10deg);
-    }
   }
 
   &__action {
