@@ -52,7 +52,7 @@ export const Card = ({ card, className = "", style }: CardProps) => {
 
   return (
     <div 
-      className={`bg-white rounded-md shadow-lg border border-black border-opacity-10 flex items-start justify-start p-1 relative lg:hidden ${className}`} 
+      className={`bg-white rounded-md shadow-lg border border-black border-opacity-10 flex items-start justify-start p-1 relative ${className}`} 
       style={style}
     >
       <div className="flex flex-col items-center gap-0.5">
