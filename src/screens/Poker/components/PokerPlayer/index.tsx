@@ -44,64 +44,54 @@ export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
           <AnimatePresence mode="popLayout">
             {cards?.length ? (
               <>
-                {cards.map((c, i) => (
-                  <React.Fragment key={player.id + (c.suit + c.rank) + i}>
-                    {/* Desktop: full card image */}
-                    <motion.div
-                      initial={{
-                        opacity: 0,
-                        y: -20,
-                        rotate: i === 0 ? -10 : 10,
-                        scale: 0.5,
-                      }}
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                        rotate: i === 0 ? -10 : 10,
-                        scale: 1,
-                      }}
-                      exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20,
-                      }}
-                      className="player__card player__card--desktop front"
-                      style={{
-                        backgroundImage: `url(${card_image[c.suit + c.rank]})`,
-                        left: i === 0 ? '30%' : '45%',
-                        transform: `rotate(${i === 0 ? -10 : 10}deg)`,
-                      }}
-                    />
-                    {/* Mobile: simplified card */}
-                    <motion.div
-                      initial={{
-                        opacity: 0,
-                        y: -20,
-                        rotate: i === 0 ? -10 : 10,
-                        scale: 0.5,
-                      }}
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                        rotate: i === 0 ? -10 : 10,
-                        scale: 1,
-                      }}
-                      exit={{ opacity: 0, y: 120, rotate: 30, scale: 0.5 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20,
-                      }}
-                      className="player__card--mobile-wrapper"
-                      style={{
-                        left: i === 0 ? '30%' : '45%',
-                      }}
-                    >
-                      <MobileCard card={c} className="player__card--mobile" />
-                    </motion.div>
-                  </React.Fragment>
-                ))}
+                {cards.map((c, i) => {
+                  const rotation = i === 0 ? -10 : 10;
+                  const leftPosition = i === 0 ? '30%' : '45%';
+                  const cardAnimation = {
+                    initial: {
+                      opacity: 0,
+                      y: -20,
+                      rotate: rotation,
+                      scale: 0.5,
+                    },
+                    animate: {
+                      opacity: 1,
+                      y: 0,
+                      rotate: rotation,
+                      scale: 1,
+                    },
+                    exit: { opacity: 0, y: 120, rotate: 30, scale: 0.5 },
+                    transition: {
+                      type: "spring" as const,
+                      stiffness: 260,
+                      damping: 20,
+                    },
+                  };
+
+                  return (
+                    <React.Fragment key={player.id + (c.suit + c.rank) + i}>
+                      {/* Desktop: full card image */}
+                      <motion.div
+                        {...cardAnimation}
+                        className="player__card player__card--desktop front"
+                        style={{
+                          backgroundImage: `url(${card_image[c.suit + c.rank]})`,
+                          left: leftPosition,
+                        }}
+                      />
+                      {/* Mobile: simplified card */}
+                      <motion.div
+                        {...cardAnimation}
+                        className="player__card--mobile-wrapper"
+                        style={{
+                          left: leftPosition,
+                        }}
+                      >
+                        <MobileCard card={c} className="player__card--mobile" />
+                      </motion.div>
+                    </React.Fragment>
+                  );
+                })}
               </>
             ) : (
               <>
