@@ -74,7 +74,7 @@ export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
                       {/* Desktop: full card image */}
                       <motion.div
                         {...cardAnimation}
-                        className="player__card player__card--desktop front"
+                        className="player__card hidden lg:block front"
                         style={{
                           backgroundImage: `url(${card_image[c.suit + c.rank]})`,
                           left: leftPosition,
@@ -83,12 +83,14 @@ export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
                       {/* Mobile: simplified card */}
                       <motion.div
                         {...cardAnimation}
-                        className="player__card--mobile-wrapper"
+                        className="absolute block lg:hidden"
                         style={{
                           left: leftPosition,
+                          width: '35px',
+                          height: '48px',
                         }}
                       >
-                        <MobileCard card={c} className="player__card--mobile" />
+                        <MobileCard card={c} />
                       </motion.div>
                     </React.Fragment>
                   );

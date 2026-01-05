@@ -102,7 +102,7 @@ export const PokerTable = ({
           cards={p.id === playerId ? userCards : p.hand}
         />
       ))}
-      <div className="flex justify-center items-center gap-3 community">
+      <div className="flex justify-center items-center gap-1 lg:gap-4 community">
         <AnimatePresence mode="popLayout">
           {table.currentRound !== "PRE_FLOP" &&
             table.communityCards?.map((c, i) => (
@@ -118,7 +118,7 @@ export const PokerTable = ({
                     damping: 20,
                     delay: i * 0.1,
                   }}
-                  className="community__card community__card--desktop front"
+                  className="community__card hidden lg:block front"
                   style={{
                     backgroundImage: `url(${card_image[c.suit + c.rank]})`,
                   }}
@@ -134,9 +134,13 @@ export const PokerTable = ({
                     damping: 20,
                     delay: i * 0.1,
                   }}
-                  className="community__card--mobile-wrapper"
+                  className="block lg:hidden"
+                  style={{
+                    width: '12vw',
+                    height: '17vw',
+                  }}
                 >
-                  <MobileCard card={c} className="community__card--mobile" />
+                  <MobileCard card={c} />
                 </motion.div>
               </React.Fragment>
             ))}

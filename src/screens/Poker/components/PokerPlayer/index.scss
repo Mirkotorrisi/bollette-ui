@@ -152,25 +152,6 @@
     width: 60px;
     height: 85px;
     position: absolute;
-
-    // Desktop-only full card display
-    &--desktop {
-      @media (max-width: 1024px) {
-        display: none;
-      }
-    }
-
-    // Mobile card wrapper for positioning
-    &--mobile-wrapper {
-      position: absolute;
-      display: none;
-
-      @media (max-width: 1024px) {
-        display: block;
-        width: 35px;
-        height: 48px;
-      }
-    }
   }
 
   &__action {

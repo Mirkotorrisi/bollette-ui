@@ -1,6 +1,5 @@
 import React from "react";
 import { Card as CardType, Rank, Suit } from "../../types";
-import "./index.scss";
 
 interface CardProps {
   card: CardType;
@@ -52,12 +51,15 @@ export const Card = ({ card, className = "", style }: CardProps) => {
   const suitColor = getSuitColor(card.suit);
 
   return (
-    <div className={`mobile-card ${className}`} style={style}>
-      <div className="mobile-card__content">
-        <div className="mobile-card__rank" style={{ color: suitColor }}>
+    <div 
+      className={`bg-white rounded-md shadow-lg border border-black border-opacity-10 flex items-start justify-start p-1 relative lg:hidden ${className}`} 
+      style={style}
+    >
+      <div className="flex flex-col items-center gap-0.5">
+        <div className="text-xl font-black leading-none font-sans" style={{ color: suitColor }}>
           {rankDisplay}
         </div>
-        <div className="mobile-card__suit" style={{ color: suitColor }}>
+        <div className="text-base leading-none" style={{ color: suitColor }}>
           {suitSymbol}
         </div>
       </div>
