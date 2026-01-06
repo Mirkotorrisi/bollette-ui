@@ -19,7 +19,7 @@ export const NavBar = () => {
   const { isLight, switchTheme } = useTheme();
 
   return (
-    <nav className="navbar fixed lg:static z-10 flex justify-between w-full items-between flex-wrap bg-teal-500">
+    <nav className="navbar z-10 flex justify-between w-full items-between flex-wrap bg-teal-500">
       <Link className="navbar__logo mx-6 flex items-center" to="/">
         <h1>
           B<i className="fas fa-futbol"></i>LLETTE

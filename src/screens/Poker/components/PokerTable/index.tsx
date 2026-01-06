@@ -73,8 +73,14 @@ export const PokerTable = ({
   };
 
   return (
-    <div className=" mx-auto w-full relative grid items-center poker-table p-5">
+    <div className="mx-auto w-full relative grid items-center poker-table lg:p-5">
       <h3 className="table-id">{table?.id}</h3>
+      <button
+        className="form__input leave-table px-2 py-4 absolute right-2 top-0 z-50"
+        onClick={leaveTable}
+      >
+        Leave Table
+      </button>
       {gameLogs && gameLogs.length > 0 && <GameLogs logs={gameLogs} />}
       <motion.h2
         key={table?.pot}
@@ -135,10 +141,6 @@ export const PokerTable = ({
                     delay: i * 0.1,
                   }}
                   className="block lg:hidden"
-                  style={{
-                    width: '12vw',
-                    height: '17vw',
-                  }}
                 >
                   <MobileCard card={c} />
                 </motion.div>
@@ -147,7 +149,7 @@ export const PokerTable = ({
         </AnimatePresence>
       </div>
 
-      <div className="mx-auto flex gap-4 mt-auto actions">
+      <div className="gap-4 actions w-full z-50">
         {inGamePlayer?.isCurrentPlayer &&
           inGamePlayer?.availableChoices?.map((choice: CHOICE) =>
             [CHOICE.BET, CHOICE.RAISE].includes(choice) ? (
@@ -160,7 +162,7 @@ export const PokerTable = ({
               />
             ) : (
               <button
-                className="form__input px-2 py-4"
+                className="form__input px-2 py-4 my-auto"
                 onClick={() => choices[choice].action()}
                 key={choice}
               >
@@ -168,12 +170,6 @@ export const PokerTable = ({
               </button>
             )
           )}
-        <button
-          className="form__input leave-table px-2 py-4"
-          onClick={leaveTable}
-        >
-          Leave Table
-        </button>
       </div>
     </div>
   );

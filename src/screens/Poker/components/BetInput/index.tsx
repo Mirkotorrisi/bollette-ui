@@ -32,23 +32,26 @@ const BetInput = ({ choice, pot, minimum, maximum }: Props) => {
   return (
     <div className="flex bet-input">
       <button
-        className="form__input px-2 py-4"
+        className="form__input px-2 py-1 lg:py-4"
         onClick={() => choice.action(amount)}
       >
         {choice.label}
       </button>
-      <div className="flex flex-col">
+      <div className="flex lg:flex-col">
         <div className="gap-2 flex justify-between">
           {chips.map((c) => (
             <span
-              className="amount_chip px-2 py-1"
+              className="amount_chip px-2 py-1 my-auto"
               onClick={() => setAmount(Math.floor(c.value * pot))}
               key={c.value}
             >
               {c.label}
             </span>
           ))}
-          <span className="amount_chip" onClick={() => setAmount(maximum)}>
+          <span
+            className="amount_chip my-auto"
+            onClick={() => setAmount(maximum)}
+          >
             All in
           </span>
         </div>

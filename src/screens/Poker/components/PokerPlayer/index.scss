@@ -2,25 +2,28 @@
 
 .player {
   position: absolute;
-  background: rgba(20, 20, 20, 0.7);
-  backdrop-filter: blur(15px);
-  border: 1px solid var(--primary-accent-300);
-  border-radius: 15px;
-  width: 220px;
-  padding: 12px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+
   transition: all 0.3s ease;
 
-  @media (max-width: 1024px) {
-    width: 130px;
-    padding: 8px;
-  }
-
-  &.active-turn {
+  &.active-turn &__info {
     border-color: var(--primary-accent);
     box-shadow: 0 0 25px var(--primary-accent-400);
     scale: 1.08;
     z-index: 50;
+  }
+
+  &__info {
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--primary-accent-300);
+    border-radius: 15px;
+    width: 220px;
+    padding: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    @media (max-width: 1024px) {
+      width: 130px;
+      padding: 8px;
+    }
   }
 
   &__bet {
@@ -32,21 +35,21 @@
     padding: 4px 12px;
     border-radius: 20px;
     border: 1px solid var(--primary-accent);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     z-index: 10;
-    
+
     @media (max-width: 1024px) {
-        padding: 2px 8px;
-        gap: 4px;
+      padding: 2px 8px;
+      gap: 4px;
     }
 
     span {
       color: #fff;
       font-weight: 900;
       font-size: 1rem;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
       @media (max-width: 1024px) {
-          font-size: 0.7rem;
+        font-size: 0.7rem;
       }
     }
 
@@ -57,8 +60,8 @@
       background-size: contain;
       background-repeat: no-repeat;
       @media (max-width: 1024px) {
-          width: 0.8rem;
-          height: 0.8rem;
+        width: 0.8rem;
+        height: 0.8rem;
       }
     }
   }
@@ -70,61 +73,157 @@
     background: url(../../../../../public/img/dealer.png);
     background-size: contain;
     background-repeat: no-repeat;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
     z-index: 11;
     @media (max-width: 1024px) {
-        width: 20px;
-        height: 20px;
+      width: 20px;
+      height: 20px;
     }
   }
 
   // Optimized Symmetrical Positions
-  &.position0 { 
-      left: 5%; top: -5%; 
-      .player__bet { right: -70px; bottom: -10px; } 
-      .dealer-token { right: -25px; top: -15px; }
-      @media (max-width: 1024px) { left: 5%; top: 8%; .player__bet { right: 0; bottom: -30px; } }
+  &.position0 {
+    left: 5%;
+    top: -5%;
+    .player__bet {
+      right: -70px;
+      bottom: -10px;
+    }
+    .dealer-token {
+      right: -25px;
+      top: -15px;
+    }
+    @media (max-width: 1024px) {
+      left: 0%;
+      top: 8%;
+      .player__bet {
+        right: 0;
+        bottom: -24px;
+      }
+    }
   }
-  &.position1 { 
-      left: 50%; top: -5%; transform: translateX(-50%);
-      .player__bet { bottom: -50px; left: 50%; transform: translateX(-50%); } 
-      .dealer-token { right: -45px; top: 0px; }
-      @media (max-width: 1024px) { left: 50%; top: 2%; transform: translateX(-50%); .player__bet { bottom: -35px; } }
+  &.position1 {
+    left: 50%;
+    top: -5%;
+    transform: translateX(-50%);
+    .player__bet {
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dealer-token {
+      right: -45px;
+      top: 0px;
+    }
+    @media (max-width: 1024px) {
+      left: 50%;
+      top: 0%;
+      transform: translateX(-50%);
+      .player__bet {
+        bottom: -24px;
+      }
+    }
   }
-  &.position2 { 
-      right: 5%; left: auto; top: -5%; 
-      .player__bet { left: -70px; bottom: -10px; } 
-      .dealer-token { left: -25px; top: -15px; }
-      @media (max-width: 1024px) { right: 5%; top: 8%; .player__bet { left: 0; bottom: -30px; } }
+  &.position2 {
+    right: 5%;
+    left: auto;
+    top: -5%;
+    .player__bet {
+      left: -70px;
+      bottom: -10px;
+    }
+    .dealer-token {
+      left: -25px;
+      top: -15px;
+    }
+    @media (max-width: 1024px) {
+      right: 5%;
+      top: 8%;
+      .player__bet {
+        left: 0;
+        bottom: -24px;
+      }
+    }
   }
-  &.position3 { 
-      right: 5%; top: auto; bottom: 18%; left: auto;
-      .player__bet { left: -70px; top: 10px; } 
-      .dealer-token { left: -25px; bottom: -15px; }
-      @media (max-width: 1024px) { right: 5%; bottom: 20%; .player__bet { left: 0; top: -30px; } }
+  &.position3 {
+    right: 5%;
+    top: auto;
+    bottom: 18%;
+    left: auto;
+    .player__bet {
+      left: -70px;
+      top: 10px;
+    }
+    .dealer-token {
+      left: -25px;
+      bottom: -15px;
+    }
+    @media (max-width: 1024px) {
+      right: 5%;
+      bottom: 20%;
+      .player__bet {
+        left: 0;
+        top: -24px;
+      }
+    }
   }
-  &.position4 { 
-      left: 50%; top: auto; bottom: 5%; transform: translateX(-50%);
-      .player__bet { top: -60px; left: 50%; transform: translateX(-50%); } 
-      .dealer-token { right: -45px; bottom: 0; }
-      @media (max-width: 1024px) { left: 50%; bottom: 18%; transform: translateX(-50%); .player__bet { top: -35px; } }
+  &.position4 {
+    left: 50%;
+    top: auto;
+    bottom: 5%;
+    transform: translateX(-50%);
+    .player__bet {
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dealer-token {
+      right: -45px;
+      bottom: 0;
+    }
+    @media (max-width: 1024px) {
+      left: 50%;
+      bottom: 18%;
+      transform: translateX(-50%);
+      .player__bet {
+        top: -35px;
+      }
+    }
   }
-  &.position5 { 
-      left: 5%; top: auto; bottom: 18%; 
-      .player__bet { right: -70px; top: 10px; } 
-      .dealer-token { right: -25px; bottom: -15px; }
-      @media (max-width: 1024px) { left: 5%; bottom: 20%; .player__bet { right: 0; top: -30px; } }
+  &.position5 {
+    left: 5%;
+    top: auto;
+    bottom: 18%;
+    .player__bet {
+      right: -70px;
+      top: 10px;
+    }
+    .dealer-token {
+      right: -25px;
+      bottom: -15px;
+    }
+    @media (max-width: 1024px) {
+      left: 5%;
+      bottom: 20%;
+      .player__bet {
+        right: 0;
+        top: -24px;
+      }
+    }
   }
 
   &__avatar {
     border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
 
   &__name {
     color: #fff;
     font-weight: 700;
     font-size: 1rem;
+    @media (max-width: 1024px) {
+      font-size: 0.7rem;
+    }
     margin: 0;
   }
 
@@ -132,20 +231,23 @@
     color: var(--primary-accent);
     font-weight: 600;
     font-size: 1rem;
+    @media (max-width: 1024px) {
+      font-size: 0.7rem;
+    }
     margin: 0;
   }
 
   &__cards-container {
-      margin-top: 15px;
-      height: 90px;
-      display: flex;
-      justify-content: center;
-      position: relative;
+    margin-top: 15px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    position: relative;
 
-      @media (max-width: 1024px) {
-        height: 50px;
-        margin-top: 8px;
-      }
+    @media (max-width: 1024px) {
+      height: 40px;
+      margin-top: 8px;
+    }
   }
 
   &__card {
@@ -166,7 +268,7 @@
     font-size: 0.8rem;
     font-weight: 900;
     text-transform: uppercase;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     z-index: 5;
   }
 }

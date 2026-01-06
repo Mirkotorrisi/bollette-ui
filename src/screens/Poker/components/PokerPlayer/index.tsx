@@ -2,7 +2,7 @@ import React from "react";
 import { Card as CardType, CHOICE, Player } from "../../types";
 import { card_image } from "../../assets";
 import { motion, AnimatePresence } from "framer-motion";
-import { Card as MobileCard } from "../Card";
+import { Card as CardComponent } from "../Card";
 import "./index.scss";
 
 interface Props {
@@ -19,14 +19,14 @@ export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
 
   return (
     <div
-      className={`player flex flex-col p-1 position${pos} ${
+      className={`player flex lg:flex-col p-1 position${pos} ${
         player.isCurrentPlayer ? "active-turn" : ""
       } ${showCards ? "" : "folded"}`}
     >
-      <div className="flex items-center gap-3">
+      <div className="player__info flex items-center gap-3 z-50">
         <img
           alt={`${player.name} cat avatar`}
-          className="player__avatar rounded-full w-16 h-16 object-cover"
+          className="player__avatar rounded-full w-10 h-10 lg:w-16 lg:h-16 object-cover"
           src={`https://cataas.com/cat?${player.id}`}
           onError={(e) => {
             (e.target as HTMLImageElement).src =
@@ -40,13 +40,13 @@ export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
         </div>
       </div>
       {showCards && (
-        <div className="player__cards-container">
+        <div className="player__cards-container relative">
           <AnimatePresence mode="popLayout">
             {cards?.length ? (
               <>
                 {cards.map((c, i) => {
                   const rotation = i === 0 ? -10 : 10;
-                  const leftPosition = i === 0 ? '30%' : '45%';
+                  const leftPosition = i === 0 ? "30%" : "65%";
                   const cardAnimation = {
                     initial: {
                       opacity: 0,
@@ -76,21 +76,20 @@ export const PokerPlayer = ({ player, index, cards, isDealer }: Props) => {
                         {...cardAnimation}
                         className="player__card hidden lg:block front"
                         style={{
-                          backgroundImage: `url(${card_image[c.suit + c.rank]})`,
+                          backgroundImage: `url(${
+                            card_image[c.suit + c.rank]
+                          })`,
                           left: leftPosition,
                         }}
                       />
                       {/* Mobile: simplified card */}
                       <motion.div
                         {...cardAnimation}
-                        className="absolute block lg:hidden"
-                        style={{
-                          left: leftPosition,
-                          width: '35px',
-                          height: '48px',
-                        }}
+                        className={`absolute block lg:hidden ${
+                          i === 0 ? "left-0" : "left-10"
+                        }`}
                       >
-                        <MobileCard card={c} />
+                        <CardComponent card={c} />
                       </motion.div>
                     </React.Fragment>
                   );
